@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/assets/images/coveragefit-mark.svg" />
+  <title>Your CoverageFit Snapshot</title>
+  <meta name="description" content="A simple, personal starting point for your coverage review." />
+  <link rel="stylesheet" href="/assets/css/pvx-experience-foundation.css" />
+  <link rel="stylesheet" href="/assets/css/pvx-snapshot-journey.css" />
+  <link rel="stylesheet" href="/assets/css/pvx-snapshot-results.css" />
+  <link rel="stylesheet" href="/assets/css/pvx-checkpoint.css" />
+  <link rel="stylesheet" href="/assets/css/pvx-progressive-snapshot.css" />
+</head>
+<body data-pvx-snapshot>
+  <a class="pvx-skip-link" href="#pvxSnapshotMain">Skip to your Snapshot</a>
+  <header class="pvx-header"><div class="pvx-header__inner"><a class="pvx-brand" href="/" aria-label="CoverageFit home"><img src="/assets/images/coveragefit-logo.svg" alt="CoverageFit" width="292" height="68" /></a><span class="pvx-entry-time">Your coverage starting point</span></div></header>
+  <main class="pvx-snapshot-main" id="pvxSnapshotMain">
+    <section class="pvx-progressive-snapshot__hero" aria-labelledby="pvxSnapshotTitle">
+      <span class="pvx-kicker">Your CoverageFit Snapshot</span>
+      <h1 id="pvxSnapshotTitle"><span id="pvxSnapshotCountTitle">Things worth reviewing</span></h1>
+      <p id="pvxSnapshotSummary">Built from the answers you shared—without assuming anything about your current policy.</p>
+      <div class="pvx-progressive-snapshot__context" id="pvxSnapshotContext" hidden>
+        <span id="pvxSnapshotContextLabel">What shaped this result</span>
+        <strong id="pvxSnapshotWhy"></strong>
+      </div>
+    </section>
+
+    <section class="pvx-progressive-snapshot__topics" id="pvxSnapshotContent" aria-labelledby="pvxSnapshotTopicsTitle" aria-live="polite">
+      <h2 id="pvxSnapshotTopicsTitle" class="pvx-visually-hidden">Things worth reviewing</h2>
+      <div id="pvxSnapshotTopics"></div>
+      <div class="pvx-progressive-snapshot__empty" id="pvxSnapshotEmpty" hidden>
+        <h2>A little more detail will make this useful.</h2>
+        <p>Your answers are saved on this device. You can add context or ask Dylan to help you choose where to begin.</p>
+      </div>
+    </section>
+
+    <section class="pvx-progressive-snapshot__actions" aria-labelledby="pvxSnapshotActionsTitle">
+      <span class="pvx-kicker">Your next step</span>
+      <h2 id="pvxSnapshotActionsTitle">What would you like to do next?</h2>
+      <div class="pvx-progressive-snapshot__primary-actions">
+        <button class="pvx-button pvx-button--primary" id="pvxContinueWithoutSave" type="button">Continue toward a quote</button>
+        <button class="pvx-button pvx-progressive-snapshot__review" id="pvxReviewWithDylan" type="button">Review this with Dylan</button>
+      </div>
+      <div class="pvx-progressive-snapshot__secondary-actions">
+        <form id="pvxCheckpointForm"><button type="submit">Save for later</button></form>
+        <a href="/pvx/refine/">Keep exploring</a>
+      </div>
+      <p class="pvx-checkpoint-status" id="pvxContinueStatus" role="status"></p>
+      <p class="pvx-checkpoint-status pvx-progressive-snapshot__save-status" id="pvxCheckpointStatus" role="status"></p>
+      <div class="pvx-share-actions" id="pvxShareActions" hidden>
+        <button id="pvxPrintSnapshot" type="button">Print / Save PDF</button>
+        <a id="pvxEmailSnapshot" href="#">Email link</a>
+        <a id="pvxSmsSnapshot" href="#">Text link</a>
+        <button id="pvxCopySnapshot" type="button">Copy secure link</button>
+        <a id="pvxContinueJourney" href="/pvx/continue/" hidden>Continue securely</a>
+      </div>
+    </section>
+
+    <section class="pvx-checkpoint pvx-progressive-snapshot__contact" id="pvxContactRequest" aria-labelledby="pvxContactRequestTitle" hidden>
+      <span class="pvx-kicker">Review it together</span>
+      <h2 id="pvxContactRequestTitle" tabindex="-1">How should Dylan follow up?</h2>
+      <p>Choose one way to connect. If you choose a call, you can select an exact callback time after sending the request.</p>
+      <form class="pvx-checkpoint-form" id="pvxContactRequestForm">
+        <input type="hidden" name="contactPurpose" value="snapshot_explanation" />
+        <label class="pvx-checkpoint-wide">Anything you want Dylan to focus on? <span>(optional)</span><input name="contactQuestion" maxlength="600" placeholder="For example, the first item in my Snapshot" /></label>
+        <label>Name<input name="name" autocomplete="name" maxlength="160" required /></label>
+        <label>How should Dylan reach you?<select name="preferredMethod" required><option value="">Choose one</option><option value="call">Call</option><option value="text">Text</option><option value="email">Email</option></select></label>
+        <label>Mobile<input name="mobile" type="tel" autocomplete="tel" maxlength="40" /></label>
+        <label>Email<input name="email" type="email" autocomplete="email" maxlength="254" /></label>
+        <label class="pvx-checkpoint-wide">Best time or time window<input name="bestTime" maxlength="120" placeholder="For example, Tuesday afternoon" required /></label>
+        <label class="pvx-consent-line pvx-checkpoint-wide"><input name="contactConsent" type="checkbox" required /><span>I want Dylan to contact me through the one method I selected.</span></label>
+        <label class="pvx-consent-line pvx-checkpoint-wide"><input name="smsConsent" type="checkbox" /><span>If I selected text, I agree to receive messages about this request. Message and data rates may apply.</span></label>
+        <div class="pvx-checkpoint-actions"><button class="pvx-button pvx-button--primary" type="submit">Send my request</button></div>
+        <p class="pvx-checkpoint-status" id="pvxContactStatus" role="status"></p>
+      </form>
+    </section>
+
+    <p class="pvx-snapshot-disclosure">This Snapshot reflects only what you told us. It is not a review of your current policy, a coverage recommendation, an eligibility decision, or a quote.</p>
+  </main>
+  <script defer src="/assets/js/pvx-consumer-events.js"></script>
+  <script defer src="/assets/js/pvx-host-aware.js"></script>
+  <script defer src="/assets/js/pvx-review-topic-engine.js"></script>
+  <script defer src="/assets/js/pvx-why-now.js"></script>
+  <script defer src="/assets/js/pvx-trigger-narrative.js"></script>
+  <script defer src="/assets/js/pvx-snapshot-model.js"></script>
+  <script defer src="/assets/js/pvx-snapshot-view.js"></script>
+  <script defer src="/assets/js/attribution.js"></script>
+  <script defer src="/assets/js/pvx-checkpoint.js"></script>
+  <script defer src="/assets/js/pvx-checkpoint-view.js"></script>
+  <script defer src="/assets/js/pvx-simple-snapshot-actions.js"></script>
+  <script defer src="/assets/js/pvx-followup-preferences.js"></script>
+  <script defer src="/assets/js/pvx-callback-continuity.js?v=CF-CALLBACK-WEB-1.0"></script>
+</body>
+</html>

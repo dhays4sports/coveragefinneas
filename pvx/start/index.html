@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#f6faf8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" href="/assets/images/coveragefit-mark.svg" />
+    <title>Start Your CoverageFit Snapshot</title>
+    <meta name="description" content="A few easy questions can show what may be worth reviewing." />
+    <link rel="stylesheet" href="/assets/css/pvx-experience-foundation.css" />
+    <link rel="stylesheet" href="/assets/css/pvx-snapshot-journey.css" />
+  </head>
+  <body data-pvx-start data-feature-flag="cf_pvx_consumer_experience">
+    <a class="pvx-skip-link" href="#pvxStartMain">Skip to the current step</a>
+    <header class="pvx-header"><div class="pvx-header__inner"><a class="pvx-brand" href="/" aria-label="CoverageFit home"><img src="/assets/images/coveragefit-logo.svg" alt="CoverageFit" width="292" height="68" /></a><span class="pvx-entry-time">About 3 minutes to your first Snapshot</span></div></header>
+    <main class="pvx-main" id="pvxStartMain" tabindex="-1">
+      <section class="pvx-shell pvx-entry-shell" aria-labelledby="pvxEntryTitle">
+        <div id="pvxEntryWelcome">
+          <span class="pvx-kicker">A clearer place to start</span>
+          <h1 id="pvxEntryTitle">See what may be worth reviewing.</h1>
+          <p>Answer a few easy questions and get a personal CoverageFit Snapshot before deciding whether to share your contact information.</p>
+          <ul class="pvx-entry-promises"><li>No policy needed</li><li>No technical questions yet</li><li>“Not sure” is always okay</li></ul>
+          <button class="pvx-button pvx-button--primary pvx-entry-primary" id="pvxEntryBegin" type="button">Let’s get started</button>
+        </div>
+        <div id="pvxAddressStep" hidden>
+          <span class="pvx-kicker">Your home</span>
+          <h1 id="pvxAddressTitle">Which home are we reviewing?</h1>
+          <p id="pvxAddressIntro">Connect one address. We’ll save technical home details for later.</p>
+          <div class="pvx-known-address" id="pvxKnownAddress" hidden><span>We already have</span><strong id="pvxKnownAddressLabel"></strong><div><button class="pvx-button pvx-button--primary" id="pvxConfirmKnown" type="button">Yes, that’s the home</button><button class="pvx-button pvx-button--quiet" id="pvxEditKnown" type="button">Use a different address</button></div></div>
+          <form id="pvxAddressForm" novalidate>
+            <label class="pvx-field"><span>Street address</span><input name="line1" autocomplete="street-address" maxlength="120" required /></label>
+            <div class="pvx-field-grid"><label class="pvx-field"><span>City</span><input name="city" autocomplete="address-level2" maxlength="80" required /></label><label class="pvx-field"><span>State</span><input name="state" autocomplete="address-level1" maxlength="2" value="CA" required /></label></div>
+            <label class="pvx-field"><span>ZIP code</span><input name="postalCode" autocomplete="postal-code" inputmode="numeric" maxlength="10" pattern="[0-9]{5}(-[0-9]{4})?" required /></label>
+            <p class="pvx-validation" id="pvxAddressError" role="alert" hidden></p>
+            <div class="pvx-actions"><button class="pvx-button pvx-button--quiet" id="pvxEntryBack" type="button">Back</button><button class="pvx-button pvx-button--primary" type="submit">Confirm home</button></div>
+          </form>
+        </div>
+        <div class="pvx-entry-complete" id="pvxEntryComplete" hidden>
+          <span class="pvx-entry-check" aria-hidden="true">✓</span><span class="pvx-kicker">Home connected</span><h1>That’s all we need to begin.</h1><p id="pvxEntryCompleteAddress"></p><p class="pvx-entry-boundary">Year built, square footage, roof, foundation, pool, and other technical details remain optional until after your first Snapshot.</p><a class="pvx-button pvx-button--primary" href="/pvx/discovery/">Continue to your questions</a>
+        </div>
+        <p class="pvx-boundary-copy">Your answers do not evaluate your current policy or determine carrier eligibility.</p>
+        <div class="pvx-live" id="pvxEntryLive" aria-live="polite" aria-atomic="true"></div>
+      </section>
+    </main>
+    <footer class="pvx-footer"><span>Value before contact</span><span>No account required</span><span>Private by design</span></footer>
+    <script defer src="/assets/js/pvx-consumer-events.js"></script>
+    <script defer src="/assets/js/pvx-host-aware.js"></script>
+    <script defer src="/assets/js/attribution.js"></script>
+    <script defer src="/assets/js/pvx-journey-contract.js"></script>
+    <script defer src="/assets/js/pvx-entry.js"></script>
+  </body>
+</html>

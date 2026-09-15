@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#f6faf8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>CoverageFit Progressive Experience Preview</title>
+    <meta
+      name="description"
+      content="Internal preview of the CoverageFit progressive-value customer experience."
+    />
+    <link rel="icon" href="/assets/images/coveragefit-mark.svg" />
+    <link rel="stylesheet" href="/assets/css/pvx-experience-foundation.css" />
+  </head>
+  <body data-pvx-route="foundation-preview" data-feature-flag="cf_pvx_consumer_experience">
+    <a class="pvx-skip-link" href="#pvxMain">Skip to the current question</a>
+
+    <div class="pvx-flag-boundary" id="pvxFlagBoundary" hidden>
+      <main class="pvx-boundary-card">
+        <img src="/assets/images/coveragefit-logo.svg" alt="CoverageFit" width="292" height="68" />
+        <span>Internal preview</span>
+        <h1>This experience is not enabled.</h1>
+        <p>The current CoverageFit assessment remains unchanged and available.</p>
+        <a class="pvx-button pvx-button--primary" href="/assessment/">Open current assessment</a>
+      </main>
+    </div>
+
+    <div class="pvx-app" id="pvxApp" hidden>
+      <header class="pvx-header">
+        <div class="pvx-header__inner">
+          <a class="pvx-brand" href="/" aria-label="CoverageFit home">
+            <img src="/assets/images/coveragefit-logo.svg" alt="CoverageFit" width="292" height="68" />
+          </a>
+          <button class="pvx-save" id="pvxSaveExit" type="button">Save &amp; exit</button>
+        </div>
+      </header>
+
+      <div class="pvx-stagebar" aria-label="Journey progress">
+        <div class="pvx-stagebar__inner">
+          <div class="pvx-stagebar__copy">
+            <span id="pvxStageLabel">Your goals</span>
+            <strong id="pvxProgressText">Getting started</strong>
+          </div>
+          <div
+            class="pvx-progress"
+            role="progressbar"
+            aria-label="Your progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="pvxProgress"
+          >
+            <span id="pvxProgressBar"></span>
+          </div>
+        </div>
+      </div>
+
+      <main class="pvx-main" id="pvxMain" tabindex="-1">
+        <section class="pvx-shell" aria-labelledby="pvxQuestionTitle">
+          <div class="pvx-resume-note" id="pvxResumeNote" role="status" hidden>
+            <span>Welcome back</span>
+            <strong>Your progress was restored on this device.</strong>
+            <button type="button" id="pvxStartOver">Start over</button>
+          </div>
+
+          <div class="pvx-transition" id="pvxTransition" aria-hidden="true" hidden>
+            <span aria-hidden="true">✓</span>
+            <p id="pvxTransitionMessage">Got it.</p>
+          </div>
+
+          <div class="pvx-loading" id="pvxLoading" role="status" aria-live="polite" hidden>
+            <div class="pvx-loading__mark" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <h1>Putting your answers together</h1>
+            <p>This is a lightweight preview transition—not a simulated analysis.</p>
+          </div>
+
+          <div class="pvx-error" id="pvxError" role="alert" hidden>
+            <span aria-hidden="true">!</span>
+            <h1>We couldn’t load this step.</h1>
+            <p>Your saved answers are still here. Try the step again.</p>
+            <button class="pvx-button pvx-button--primary" id="pvxRetry" type="button">Try again</button>
+          </div>
+
+          <div class="pvx-complete" id="pvxComplete" hidden>
+            <span class="pvx-kicker">Foundation preview complete</span>
+            <h1>Your answers are ready.</h1>
+            <p>
+              This sample proves the interaction shell only. Discovery insights, review topics,
+              reports, and lead checkpoints enter in the next PVX sprints.
+            </p>
+            <div class="pvx-complete__facts" id="pvxCompleteFacts"></div>
+            <button class="pvx-button pvx-button--secondary" id="pvxRetake" type="button">Retake preview</button>
+          </div>
+
+          <div class="pvx-question" id="pvxQuestion">
+            <div class="pvx-question__heading">
+              <span class="pvx-kicker" id="pvxQuestionKicker">A quick start</span>
+              <h1 id="pvxQuestionTitle">What’s bringing you here today?</h1>
+              <p id="pvxQuestionDescription"></p>
+            </div>
+
+            <button
+              class="pvx-help-toggle"
+              id="pvxHelpToggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="pvxHelp"
+            >
+              Why we ask
+            </button>
+            <div class="pvx-help" id="pvxHelp" hidden></div>
+
+            <form id="pvxForm" novalidate>
+              <div class="pvx-control" id="pvxControl"></div>
+              <p class="pvx-validation" id="pvxValidation" role="alert" hidden></p>
+              <div class="pvx-actions">
+                <button class="pvx-button pvx-button--quiet" id="pvxBack" type="button">Back</button>
+                <button class="pvx-button pvx-button--primary" id="pvxContinue" type="submit">Continue</button>
+              </div>
+            </form>
+          </div>
+
+          <p class="pvx-boundary-copy">
+            This preview does not evaluate your policy, determine eligibility, or recommend coverage.
+          </p>
+          <div class="pvx-live" id="pvxLive" aria-live="polite" aria-atomic="true"></div>
+        </section>
+      </main>
+
+      <footer class="pvx-footer">
+        <span>Private by design</span>
+        <span>No account required</span>
+        <span>Not sure is always okay</span>
+      </footer>
+    </div>
+
+    <dialog class="pvx-dialog" id="pvxSaveDialog" aria-labelledby="pvxSaveTitle">
+      <div class="pvx-dialog__card">
+        <span class="pvx-kicker">Progress saved</span>
+        <h2 id="pvxSaveTitle">Come back when you’re ready.</h2>
+        <p>This device will return you to this exact step for seven days.</p>
+        <div class="pvx-dialog__actions">
+          <button class="pvx-button pvx-button--primary" id="pvxKeepGoing" type="button">Keep going</button>
+          <a class="pvx-button pvx-button--quiet" href="/">Exit preview</a>
+        </div>
+      </div>
+    </dialog>
+
+    <script defer src="/assets/js/pvx-experience-foundation.js"></script>
+  </body>
+</html>

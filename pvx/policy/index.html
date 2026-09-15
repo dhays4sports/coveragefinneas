@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/assets/images/coveragefit-mark.svg" />
+  <title>Add Current Policy Details | CoverageFit</title>
+  <meta name="description" content="Add a few current-policy details to create an evidence-based Review Readiness result." />
+  <link rel="stylesheet" href="/assets/css/pvx-experience-foundation.css" />
+  <link rel="stylesheet" href="/assets/css/pvx-home-profile.css" />
+  <link rel="stylesheet" href="/assets/css/pvx-policy-review.css" />
+</head>
+<body>
+  <a class="pvx-skip-link" href="#pvxPolicyMain">Skip to current-policy review</a>
+  <header class="pvx-header"><div class="pvx-header__inner"><a class="pvx-brand" href="/" aria-label="CoverageFit home"><img src="/assets/images/coveragefit-logo.svg" alt="CoverageFit" width="292" height="68" /></a><span class="pvx-entry-time">About 2 minutes manually</span></div></header>
+  <main class="pvx-policy" id="pvxPolicyMain">
+    <section class="pvx-policy__intro">
+      <span class="pvx-kicker">Make your Snapshot more useful</span>
+      <h1>Add your current policy starting point</h1>
+      <p>Choose five quick questions or upload your declarations. A readiness result is created only from policy information you provide—not from assumptions about your coverage.</p>
+    </section>
+    <section class="pvx-policy__choices" id="pvxPolicyChoices" aria-labelledby="pvxPolicyChoiceTitle">
+      <h2 id="pvxPolicyChoiceTitle">How would you like to continue?</h2>
+      <button class="pvx-policy-choice" id="pvxPolicyManualChoice" type="button"><strong>Answer 5 policy questions</strong><span>Fastest way to see your Review Readiness now</span></button>
+      <button class="pvx-policy-choice" id="pvxPolicyUploadChoice" type="button"><strong>Upload declarations or policy photos</strong><span>Private files; details still need confirmation</span></button>
+      <a class="pvx-policy-choice" id="pvxPolicyDylanChoice" href="/pvx/snapshot/#pvxContactRequest"><strong>Review this with Dylan</strong><span>Ask for help instead of entering it yourself</span></a>
+    </section>
+    <section class="pvx-policy__panel" id="pvxPolicyManualPanel" hidden aria-labelledby="pvxPolicyManualTitle">
+      <button class="pvx-policy__back" type="button" data-policy-back>← Change method</button>
+      <span class="pvx-kicker">Current-policy questions</span>
+      <h2 id="pvxPolicyManualTitle" tabindex="-1">Confirm what you know</h2>
+      <p>“I don’t know” is useful. It identifies exactly what to verify.</p>
+      <form id="pvxPolicyManualForm"><div id="pvxPolicyQuestions"></div><button class="pvx-button pvx-button--primary" type="submit">Show my Review Readiness</button><p id="pvxPolicyManualStatus" role="status"></p></form>
+    </section>
+    <section class="pvx-policy__panel" id="pvxPolicyUploadPanel" hidden aria-labelledby="pvxPolicyUploadTitle">
+      <button class="pvx-policy__back" type="button" data-policy-back>← Change method</button>
+      <span class="pvx-kicker">Private document intake</span>
+      <h2 id="pvxPolicyUploadTitle" tabindex="-1">Upload your policy files</h2>
+      <p>PDF, JPEG, or PNG. A readiness result will not appear until the identified details are confirmed.</p>
+      <form id="pvxPolicyUpload"><label for="pvxPolicyFiles"><strong>Declarations or policy photos</strong></label><input id="pvxPolicyFiles" name="policyFiles" type="file" accept="application/pdf,image/jpeg,image/png" multiple required /><button class="pvx-button pvx-button--primary" type="submit">Upload privately</button><p id="pvxPolicyStatus" role="status"></p></form>
+    </section>
+    <section class="pvx-policy__result" id="pvxPolicyResult" hidden aria-labelledby="pvxPolicyResultTitle">
+      <span class="pvx-kicker">Evidence-based result</span>
+      <div class="pvx-policy__score"><span id="pvxPolicyScore">—</span><small>Review Readiness</small></div>
+      <h2 id="pvxPolicyResultTitle">Your current-policy starting point</h2>
+      <p id="pvxPolicyBand"></p>
+      <h3>What to review first</h3>
+      <div id="pvxPolicyPriorities"></div>
+      <div class="pvx-policy__actions"><button class="pvx-button pvx-button--primary" id="pvxPolicyQuote" type="button">Continue toward a quote</button><a class="pvx-button" id="pvxPolicyReviewDylan" href="/pvx/snapshot/#pvxContactRequest">Review this with Dylan</a></div>
+      <p id="pvxPolicyResultStatus" role="status"></p>
+      <p class="pvx-policy__disclosure">Review Readiness measures how clearly these topics are understood or identified for review. It is not a coverage-adequacy determination, recommendation, eligibility decision, or quote.</p>
+    </section>
+  </main>
+  <script defer src="/assets/js/pvx-consumer-events.js"></script>
+  <script defer src="/assets/js/pvx-host-aware.js"></script>
+  <script defer src="/assets/js/protection-score.js"></script>
+  <script defer src="/home/assessment-config.js"></script>
+  <script defer src="/assets/js/pvx-policy-profile-contract.js"></script>
+  <script defer src="/assets/js/pvx-policy-scored-review.js"></script>
+  <script defer src="/assets/js/pvx-policy-intake.js"></script>
+  <script defer src="/assets/js/pvx-policy-intake-view.js"></script>
+</body>
+</html>

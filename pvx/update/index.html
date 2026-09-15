@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="icon" href="/assets/images/coveragefit-mark.svg"/>
+  <title>Update your CoverageFit</title>
+  <link rel="stylesheet" href="/assets/css/pvx-experience-foundation.css"/>
+  <link rel="stylesheet" href="/assets/css/pvx-continuation.css"/>
+</head>
+<body>
+  <main class="pvx-shell">
+    <span class="pvx-kicker">Pick up where you left off</span>
+    <h1>What brings you back today?</h1>
+    <p>Choose one reason. We will keep your existing answers and return you to the precise unfinished point.</p>
+    <form id="pvxReentryForm">
+      <fieldset>
+        <legend class="sr-only">Choose why you are returning</legend>
+        <label><input type="radio" name="reasonKey" value="renewal_approaching"/>My renewal is approaching.</label>
+        <label><input type="radio" name="reasonKey" value="premium_changed"/>My premium changed.</label>
+        <label><input type="radio" name="reasonKey" value="considering_comparison"/>I’m considering a comparison.</label>
+        <label><input type="radio" name="reasonKey" value="ready_to_continue"/>I’m ready to continue.</label>
+      </fieldset>
+      <label>In your words (optional)<textarea name="exactWords" maxlength="500"></textarea></label>
+      <button class="pvx-button pvx-button--primary" type="submit">Use this update</button>
+      <p id="pvxReentryStatus" role="status"></p>
+    </form>
+    <section id="pvxReentryResult" hidden aria-live="polite">
+      <h2>What this changed</h2>
+      <p id="pvxReentryDelta"></p>
+      <p id="pvxReentryRefresh" hidden>You can optionally update your current pace. Your previous expression remains in history unless you replace it.</p>
+      <p id="pvxReentryScope" hidden>Because you chose a comparison, you may optionally clarify what kind of change you would consider. It is not required.</p>
+      <p><a id="pvxReentryProgress" class="pvx-button" href="/pvx/progress/">Review and update my next step</a></p>
+      <p><a id="pvxReentryContinue" class="pvx-button pvx-button--primary" href="/pvx/continue/">Continue from where I stopped</a></p>
+    </section>
+    <details>
+      <summary>Report a different life or home change</summary>
+      <form id="pvxLifeEventForm">
+        <fieldset>
+          <legend class="sr-only">Choose one life change</legend>
+          <label><input type="radio" name="eventKey" value="moved_or_buying"/>I moved or am buying a home.</label>
+          <label><input type="radio" name="eventKey" value="renovated"/>I renovated or added to the home.</label>
+          <label><input type="radio" name="eventKey" value="another_property"/>I bought another property.</label>
+          <label><input type="radio" name="eventKey" value="household_driver"/>I added or removed a household driver.</label>
+          <label><input type="radio" name="eventKey" value="vehicle"/>I bought or replaced a vehicle.</label>
+          <label><input type="radio" name="eventKey" value="insurance_changed"/>My renewal or insurance situation changed.</label>
+          <label><input type="radio" name="eventKey" value="other"/>Something else changed.</label>
+        </fieldset>
+        <label>In your words (optional)<textarea name="exactWords" maxlength="500"></textarea></label>
+        <button class="pvx-button" type="submit">Continue</button>
+        <p id="pvxLifeEventStatus" role="status"></p>
+      </form>
+    </details>
+    <p>This update will not silently replace a verified fact, create a recommendation, create a lead or request contact.</p>
+  </main>
+  <script defer src="/assets/js/pvx-life-event-view.js"></script>
+</body>
+</html>
