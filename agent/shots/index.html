@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Today’s Shots · 408FARMERS</title>
+<link rel="stylesheet" href="/assets/css/shots-board.css">
+</head>
+<body>
+<main class="shots-shell">
+  <header class="shots-header">
+    <div>
+      <span class="shots-kicker">408FARMERS · SMALL BALL</span>
+      <h1>Today’s Shots</h1>
+      <p id="shotsDate">Loading the board…</p><p class="shots-operating-note">Start at the left. Work the highest-value possession first; everything else is supporting context.</p>
+    </div>
+    <div class="shots-clock"><strong id="shotsClock">--:--</strong><span>Pacific</span></div>
+  </header>
+
+  <section class="shots-connect" id="shotsConnect" hidden>
+    <form id="shotsConnectForm">
+      <div><strong>Connect the producer desk</strong><p>Use the same secure access key as CoverageFit Agent Workspace.</p></div>
+      <input id="shotsToken" type="password" autocomplete="current-password" placeholder="Producer inbox access key" minlength="24" required>
+      <button type="submit">Connect</button>
+    </form>
+  </section>
+
+  <section class="shots-scorebar" aria-label="Monthly premium progress">
+    <div class="shots-score-card shots-score-card--premium"><span>Verified premium · MTD</span><strong id="shotsPremium">—</strong><small id="shotsPremiumNote">Verified written premium only</small></div>
+    <div class="shots-score-card"><span>Monthly target</span><strong id="shotsTarget">—</strong><small id="shotsRemaining">Set target in CoverageFit configuration</small></div>
+    <div class="shots-score-card"><span>Needed / business day</span><strong id="shotsDaily">—</strong><small id="shotsBusinessDays">—</small></div>
+    <div class="shots-score-card shots-score-card--next"><span>Next up</span><strong id="shotsNextName">—</strong><small id="shotsNextTime">No linked appointment ahead</small></div>
+  </section>
+
+  <section class="shots-grid">
+    <article class="shots-lane shots-lane--closing">
+      <header><div><span class="shots-lane-icon">🎯</span><h2>Closing Lane</h2></div><strong id="shotsClosingCount">0</strong></header>
+      <p class="shots-lane-copy">Delivered recommendations, explicit asks, decisions and bind work.</p>
+      <div class="shots-cards" id="shotsClosing"></div>
+    </article>
+    <article class="shots-lane shots-lane--shoot">
+      <header><div><span class="shots-lane-icon">🔥</span><h2>Shoot Now</h2></div><strong id="shotsShootCount">0</strong></header>
+      <p class="shots-lane-copy">High-fit, high-intent, high-value possessions that are not already in the closing lane.</p>
+      <div class="shots-cards" id="shotsShoot"></div>
+    </article>
+    <article class="shots-lane shots-lane--quick">
+      <header><div><span class="shots-lane-icon">⚡</span><h2>Quick Plays</h2></div><strong id="shotsQuickCount">0</strong></header>
+      <p class="shots-lane-copy">Fast plays worth taking before they become heavier producer work.</p>
+      <div class="shots-cards" id="shotsQuick"></div>
+    </article>
+  </section>
+
+  <section class="shots-bottom">
+    <article class="shots-appointments">
+      <header><h2>Today’s Appointments</h2><strong id="shotsAppointmentCount">0</strong></header>
+      <div id="shotsAppointments" class="shots-appointment-list"></div>
+    </article>
+    <article class="shots-due">
+      <header><h2>Other Due Actions</h2><strong id="shotsDueCount">0</strong></header>
+      <div id="shotsDue" class="shots-due-list"></div>
+    </article>
+  </section>
+
+  <footer class="shots-footer">
+    <p id="shotsStatus">Read-only priority board · Call/text links open your device and never mark contact automatically.</p>
+    <div><a href="/agent/workspace/">Open Agent Workspace</a><button id="shotsRefresh" type="button">Refresh</button></div>
+  </footer>
+</main>
+<script type="module" src="/assets/js/shots-board.mjs"></script>
+</body>
+</html>

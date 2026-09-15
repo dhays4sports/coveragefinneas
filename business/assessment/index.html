@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0b2f57"><title>CoverageFit Business Protection Review</title><meta name="description" content="Build your personalized Protection Snapshot in about three minutes."><link rel="icon" href="/assets/images/coveragefit-mark.svg"><link rel="stylesheet" href="/assets/css/coveragefit.css"><link rel="stylesheet" href="/assets/css/pilot.css"><link rel="stylesheet" href="/assets/css/journey-timeline.css"><link rel="stylesheet" href="/assets/css/report-generation.css"><link rel="stylesheet" href="/assets/css/trigger-illustrations.css"><link rel="stylesheet" href="/assets/css/business-profile.css">
+</head><body class="assessment-shell" data-assessment-route="pilot" data-journey-step="1"><header class="assessment-top"><div class="wrap assessment-top-inner"><a href="/"><img src="/assets/images/coveragefit-logo-board.png" alt="CoverageFit"></a><div class="assessment-presented"><span>Presented by</span><strong data-producer-name>Dylan Haysbert</strong></div></div></header><main class="assessment-main"><div class="business-journey" id="businessJourney" aria-label="Business coverage review progress"><div class="journey-step is-complete" data-stage="profile"><span>1</span><strong>Business Profile</strong></div><div class="journey-step is-active" data-stage="industry"><span>2</span><strong>Industry Review</strong></div><div class="journey-step" data-stage="coverage"><span>3</span><strong>Current Coverage</strong></div><div class="journey-step" data-stage="snapshot"><span>4</span><strong>Snapshot</strong></div><div class="journey-step" data-stage="contact"><span>5</span><strong>Contact Review</strong></div></div>
+<section class="cf-trigger-visual" data-cf-assessment-visual style="max-width:260px">
+  <img data-trigger-illustration src="/assets/illustrations/default.svg" alt="Protection review illustration">
+</section>
+<div class="wrap"><div class="assessment-intro"><span class="eyebrow-chip">CoverageFit Business</span><h1 data-trigger-assessment-title>Let's build your Business Protection Snapshot.</h1><p data-trigger-assessment-copy>Each question teaches one useful concept. You do not need your policy in front of you, and “not sure” is always a valid answer.</p></div><div class="tool-card pilot-tool"><div id="quiz"><div class="progress-meta"><span id="stepLabel"></span><span id="timeRemaining">About 3 minutes remaining</span></div><div class="progress"><div class="progress-bar" id="progressBar"></div></div><div class="question"><span class="question-kicker" id="questionKicker">What this helps you understand</span><h2 id="questionTitle"></h2><p id="questionHelp"></p><div class="answers" id="answers"></div></div><div class="actions"><button class="btn ghost" id="backBtn" type="button">← Back</button><button class="btn primary" id="nextBtn" type="button" disabled>Continue My Review</button></div><p class="disclaimer">Educational use only. CoverageFit is not a quote, insurance advice, or a coverage determination.</p></div><div class="early-insight" id="earlyInsight" hidden>
+      <span class="eyebrow-chip">One thing we've already noticed</span>
+      <h2 id="earlyInsightTitle">Your answers are already creating useful context.</h2>
+      <p id="earlyInsightCopy">CoverageFit is beginning to identify the questions most worth bringing into your Protection Review.</p>
+      <div class="early-insight-note">You are not being graded. This is about understanding what is worth confirming.</div>
+      <button class="btn primary" id="continueInsight" type="button">Continue My Review</button>
+    </div><div class="result" id="result" role="region" aria-labelledby="resultTitle">
+  <div class="contact-review-shell">
+    <div class="contact-review-heading">
+      <div class="contact-ready-mark" aria-hidden="true">✓</div>
+      <span class="eyebrow-chip">Your review is complete</span>
+      <h2 id="resultTitle" tabindex="-1">Your Business Protection Snapshot is ready.</h2>
+      <p id="resultCopy"></p>
+      <div class="completion-checklist" aria-label="Completed review sections">
+        <span><i>✓</i> Business Profile</span><span><i>✓</i> Preparedness Score</span><span><i>✓</i> Personalized Recommendations</span>
+      </div>
+    </div>
+    <div class="snapshot-preview" aria-label="Snapshot preview">
+      <div><span>Positive starting point</span><strong id="strongestPreview"></strong></div>
+      <div><span>First discussion priority</span><strong id="priorityPreview"></strong></div>
+    </div>
+    <div class="capture">
+      <div><span class="eyebrow">Almost done</span><h3>Where should we send your Protection Snapshot?</h3><p>Your information helps <span data-producer-first-name>Dylan</span> prepare for a focused, more productive Business Protection Review.</p></div>
+      <form id="captureForm" action="https://formspree.io/f/mvzlgagr" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New CoverageFit Business Protection Review"><input type="hidden" name="source" value="CoverageFit Business"><input type="hidden" name="trigger" value=""><input type="hidden" name="score" id="captureScore"><input type="hidden" name="risk_areas" id="captureRisks"><input type="hidden" name="priority" id="capturePriority"><input type="hidden" name="report_payload" id="capturePayload">
+        <div class="field-row"><label for="firstName">First name<input type="text" name="first_name" id="firstName" required autocomplete="given-name" placeholder="First name"></label><label for="businessName">Business name<input type="text" name="business_name" id="businessName" autocomplete="organization" placeholder="Business name"></label></div>
+        <div class="field-row"><label for="email">Email<input type="email" name="email" id="email" required autocomplete="email" placeholder="Email address"></label><label for="phone">Phone<input type="tel" name="phone" id="phone" autocomplete="tel" placeholder="Phone number"></label></div>
+        <div class="field-row"><label for="propertyField">Business ZIP<input type="text" name="business_zip" id="propertyField" inputmode="numeric" autocomplete="postal-code" placeholder="Business ZIP code"></label><label for="businessType">Business type<select name="business_type" id="businessType"><option value="">Select one</option><option>Professional or consulting</option><option>Contractor or trades</option><option>Retail or storefront</option><option>Restaurant or food service</option><option>Education, childcare, or nonprofit</option><option>Mobile or home-based service</option><option>Property owner or landlord</option><option>Technology or online business</option><option>Other</option></select></label></div>
+        <button class="btn primary full" type="submit">Generate My Protection Snapshot</button>
+        <p id="contactConsent">By submitting, you agree that the licensed insurance professional shown on this page may contact you about your assessment. No purchase is required.</p>
+      </form>
+    </div>
+    <div class="contact-review-footer"><span class="privacy-lock">▣ Your information is used only for your coverage review.</span><button class="btn ghost" id="restartBtn" type="button">Retake review</button></div>
+    <p class="disclaimer">Your Protection Snapshot is directional and educational. Actual coverage is governed by the issued policy.</p>
+  </div>
+</div><div id="gapGrid" hidden></div><div id="scoreCircle" hidden><span id="scoreNumber">0</span></div></div></div></main><script src="/assets/js/attribution.js"></script><script src="/assets/js/producer-config.js"></script><script src="/assets/js/producer-branding.js"></script><script src="/assets/js/analytics.js"></script><script src="/assets/js/protection-score.js"></script><script src="/business/assessment-config.js"></script><script src="/assets/js/advisory-discovery-contract.js"></script><script src="/assets/js/trigger-context.js"></script><script src="/assets/js/report-generation.js"></script><script src="/assets/js/business-industry-modules.js"></script><script src="/assets/js/business-shared-questions.js"></script><script src="/assets/js/business-assessment-profile.js"></script><script src="/assets/js/assessment-engine.js"></script><script src="/assets/js/journey-timeline.js"></script><script src="/assets/js/trigger-illustrations.js"></script><script src="/assets/js/business-production-ui.js"></script>
+</body></html>

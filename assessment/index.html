@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0b2f57" />
+    <title>CoverageFit Home Protection Review</title>
+    <meta
+      name="description"
+      content="Build your personalized Protection Snapshot in about five minutes."
+    />
+    <link rel="icon" href="/assets/images/coveragefit-mark.svg" />
+    <link rel="stylesheet" href="/assets/css/coveragefit.css" />
+    <link rel="stylesheet" href="/assets/css/pilot.css" />
+    <link rel="stylesheet" href="/assets/css/journey-timeline.css" />
+    <link rel="stylesheet" href="/assets/css/report-generation.css" />
+    <link rel="stylesheet" href="/assets/css/trigger-illustrations.css" />
+    <link rel="stylesheet" href="/assets/css/property-confirmation.css" />
+    <link rel="stylesheet" href="/assets/css/advisory-opening.css" />
+    <link rel="stylesheet" href="/assets/css/advisory-relationship.css" />
+    <link rel="stylesheet" href="/assets/css/advisory-lifestyle.css" />
+    <link rel="stylesheet" href="/assets/css/advisory-progressive-branching.css" />
+    <link rel="stylesheet" href="/assets/css/advisory-outcome.css" />
+    <link rel="stylesheet" href="/assets/css/advisory-assessment-orchestration.css" />
+    <link rel="stylesheet" href="/assets/css/advisory-customer-reaction.css" />
+    <link
+      rel="stylesheet"
+      href="/assets/css/professional-intent-continuity.css"
+    />
+    <link rel="stylesheet" href="/assets/css/home-mobile-certification.css" />
+  </head>
+  <body
+    class="assessment-shell"
+    data-assessment-route="pilot"
+    data-journey-step="1"
+  >
+    <a class="cf-skip-link" href="#main-content">Skip to assessment</a>
+    <header class="assessment-top">
+      <div class="wrap assessment-top-inner">
+        <a class="assessment-brand" href="/" aria-label="CoverageFit home"
+          ><img
+            src="/assets/images/coveragefit-logo.svg"
+            alt="CoverageFit"
+            width="292"
+            height="68"
+            decoding="async"
+            fetchpriority="high"
+        /></a>
+        <div class="assessment-top-actions">
+          <div class="assessment-presented">
+            <span>Presented by</span
+            ><strong data-producer-name>Dylan Haysbert</strong>
+          </div>
+          <button class="assessment-save-exit" id="saveExitBtn" type="button">
+            Save &amp; Exit
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="assessment-main" id="main-content" tabindex="-1">
+      <section
+        class="cf-trigger-visual"
+        data-cf-assessment-visual
+        style="max-width: 260px"
+      >
+        <img
+          data-trigger-illustration
+          src="/assets/illustrations/default.svg"
+          alt="Protection review illustration"
+          width="260"
+          height="160"
+          decoding="async"
+        />
+      </section>
+      <script defer src="/assets/js/home-intent-reception.js"></script>
+      <div class="wrap">
+        <div class="assessment-intro">
+          <span class="eyebrow-chip">CoverageFit Home</span>
+          <h1 data-trigger-assessment-title>
+            Let's build your Protection Snapshot.
+          </h1>
+          <p data-trigger-assessment-copy>
+            Most people finish in about five minutes. See what appears to be
+            working and which questions may deserve a closer look—you do not
+            need your policy, and “not sure” is always valid.
+          </p>
+        </div>
+        <div class="tool-card pilot-tool">
+          <section
+            class="property-confirmation"
+            data-property-confirmation
+            aria-labelledby="propertyConfirmTitle"
+          >
+            <div class="property-confirmation-head">
+              <div>
+                <span class="eyebrow-chip">First, confirm your property</span>
+                <h2 id="propertyConfirmTitle">
+                  Make sure we have the right home.
+                </h2>
+                <p>
+                  Your address is required. Extra home details are optional and
+                  only help personalize the questions that follow.
+                </p>
+              </div>
+              <span class="property-badge">About 1 minute</span>
+            </div>
+            <p class="property-found" id="propertyFoundNote" hidden></p>
+            <form id="propertyConfirmationForm">
+              <section
+                class="property-quick-confirm"
+                id="propertyQuickConfirm"
+                hidden
+                aria-labelledby="propertyQuickTitle"
+              >
+                <span class="eyebrow-chip"
+                  >408FARMERS information connected</span
+                >
+                <h3 id="propertyQuickTitle">
+                  Is this the home you want to review?
+                </h3>
+                <strong id="propertyQuickAddress"></strong>
+                <p>
+                  Confirm the address once, or edit it before continuing.
+                  Optional home details can still be added.
+                </p>
+                <div class="property-quick-actions">
+                  <button
+                    class="btn primary"
+                    id="propertyQuickConfirmBtn"
+                    type="button"
+                  >
+                    Yes, Start My Review</button
+                  ><button
+                    class="text-action"
+                    id="propertyQuickEditBtn"
+                    type="button"
+                  >
+                    Edit address or add details
+                  </button>
+                </div>
+              </section>
+              <div id="propertyEditPanel">
+                <div class="property-form-grid property-form-grid--required">
+                  <label class="property-field full">
+                    <span>Street address</span
+                    ><input
+                      id="propertyLine1"
+                      name="property_line1"
+                      autocomplete="street-address"
+                      placeholder="123 Main Street"
+                      required
+                    />
+                  </label>
+                  <label class="property-field wide">
+                    <span>City</span
+                    ><input
+                      id="propertyCity"
+                      name="property_city"
+                      autocomplete="address-level2"
+                      required
+                    />
+                  </label>
+                  <label class="property-field">
+                    <span>State</span
+                    ><input
+                      id="propertyState"
+                      name="property_state"
+                      value="CA"
+                      maxlength="2"
+                      autocomplete="address-level1"
+                      required
+                    />
+                  </label>
+                  <label class="property-field">
+                    <span>ZIP code</span
+                    ><input
+                      id="propertyPostalCode"
+                      name="property_postal_code"
+                      inputmode="numeric"
+                      autocomplete="postal-code"
+                      pattern="[0-9]{5}(-[0-9]{4})?"
+                      required
+                    />
+                  </label>
+                </div>
+                <details class="property-optional" id="propertyOptionalDetails">
+                  <summary>
+                    <span
+                      ><strong id="propertyOptionalSummary"
+                        >Add optional home details</strong
+                      ><small
+                        >Year built, size, roof, pool, and more</small
+                      ></span
+                    ><em>Helpful, not required</em>
+                  </summary>
+                  <div class="property-optional-body">
+                    <p>
+                      Share only what you know. Leaving these blank will not
+                      stop the review.
+                    </p>
+                    <div
+                      class="property-form-grid property-form-grid--optional"
+                    >
+                      <label class="property-field">
+                        <span>Year built</span
+                        ><input
+                          id="propertyYearBuilt"
+                          name="year_built"
+                          inputmode="numeric"
+                          min="1800"
+                          max="2100"
+                          type="number"
+                          placeholder="1988"
+                        />
+                      </label>
+                      <label class="property-field">
+                        <span>Living area</span
+                        ><input
+                          id="propertySquareFeet"
+                          name="square_feet"
+                          inputmode="numeric"
+                          min="100"
+                          type="number"
+                          placeholder="2,150 sq ft"
+                        />
+                      </label>
+                      <label class="property-field">
+                        <span>Stories</span
+                        ><input
+                          id="propertyStories"
+                          name="stories"
+                          inputmode="decimal"
+                          min="1"
+                          max="10"
+                          step="0.5"
+                          type="number"
+                          placeholder="2"
+                        />
+                      </label>
+                      <label class="property-field">
+                        <span>Construction</span
+                        ><select
+                          id="propertyConstructionType"
+                          name="construction_type"
+                        >
+                          <option value="">Not sure</option>
+                          <option>Frame</option>
+                          <option>Masonry</option>
+                          <option>Stucco</option>
+                          <option>Mixed</option>
+                          <option>Other</option>
+                        </select>
+                      </label>
+                      <label class="property-field">
+                        <span>Roof type</span
+                        ><select id="propertyRoofType" name="roof_type">
+                          <option value="">Not sure</option>
+                          <option>Composition shingle</option>
+                          <option>Tile</option>
+                          <option>Metal</option>
+                          <option>Flat</option>
+                          <option>Wood shake</option>
+                          <option>Other</option>
+                        </select>
+                      </label>
+                      <label class="property-field">
+                        <span>Roof year</span
+                        ><input
+                          id="propertyRoofYear"
+                          name="roof_year"
+                          inputmode="numeric"
+                          min="1800"
+                          max="2100"
+                          type="number"
+                          placeholder="2018"
+                        />
+                      </label>
+                      <label class="property-field">
+                        <span>Foundation</span
+                        ><select
+                          id="propertyFoundationType"
+                          name="foundation_type"
+                        >
+                          <option value="">Not sure</option>
+                          <option>Slab</option>
+                          <option>Raised</option>
+                          <option>Basement</option>
+                          <option>Mixed</option>
+                          <option>Other</option>
+                        </select>
+                      </label>
+                      <label class="property-field">
+                        <span>Swimming pool</span
+                        ><select id="propertyPool" name="pool">
+                          <option value="">Not sure</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      </label>
+                      <label class="property-field">
+                        <span>Detached structures</span
+                        ><select
+                          id="propertyDetachedStructures"
+                          name="detached_structures"
+                        >
+                          <option value="">Not sure</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      </label>
+                    </div>
+                    <div class="property-quality" id="propertyQuality" hidden>
+                      <div class="property-quality-top">
+                        <strong>Optional details added</strong
+                        ><span id="propertyQualityText">0% complete</span>
+                      </div>
+                      <div class="property-quality-track">
+                        <div
+                          class="property-quality-bar"
+                          id="propertyQualityBar"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+                <div class="property-actions">
+                  <button class="btn primary" type="submit">
+                    Continue to My Review</button
+                  ><button
+                    class="text-action"
+                    id="propertySkipBtn"
+                    type="button"
+                  >
+                    Continue with address only
+                  </button>
+                </div>
+              </div>
+              <p class="property-privacy">
+                Only details you confirm are used to personalize the review.
+                CoverageFit does not use them to make underwriting, eligibility,
+                valuation, hazard, or coverage conclusions.
+              </p>
+            </form>
+          </section>
+          <section
+            class="advisory-opening"
+            id="advisoryOpening"
+            hidden
+            aria-labelledby="advisoryOpeningTitle"
+          >
+            <div class="advisory-opening__head">
+              <div>
+                <span class="eyebrow-chip">Before we look at coverage</span>
+                <h2 id="advisoryOpeningTitle">What are you hoping to get out of this review?</h2>
+                <p>
+                  Two quick questions help keep the review focused on what you are actually trying to solve—not just a list of insurance terms.
+                </p>
+              </div>
+              <span class="advisory-opening__badge">About 30 seconds</span>
+            </div>
+
+            <div class="advisory-opening__connected" id="advisoryConnectedReason" hidden>
+              <div>
+                <span>Connected from your request</span>
+                <strong id="advisoryConnectedReasonText"></strong>
+                <small>We’ll carry this forward so you do not have to repeat yourself.</small>
+              </div>
+              <button class="advisory-opening__edit" id="advisoryEditReasonBtn" type="button">Change</button>
+            </div>
+
+            <fieldset id="advisoryReasonFieldset">
+              <legend>What’s bringing you here today?</legend>
+              <span class="advisory-opening__hint">Choose the closest answer. This is context for the conversation, not a score.</span>
+              <div class="advisory-choice-grid">
+                <label class="advisory-choice"><input type="radio" name="advisory_reason" value="price_increase" /><span class="advisory-choice__card"><strong>My insurance is getting expensive</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_reason" value="comparing_options" /><span class="advisory-choice__card"><strong>I’m comparing options</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_reason" value="buying_home" /><span class="advisory-choice__card"><strong>I’m buying a home</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_reason" value="renewal_coming" /><span class="advisory-choice__card"><strong>My renewal is coming up</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_reason" value="unhappy_current" /><span class="advisory-choice__card"><strong>I’m unhappy with my current company</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_reason" value="coverage_check" /><span class="advisory-choice__card"><strong>I want to make sure I’m properly covered</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_reason" value="life_change" /><span class="advisory-choice__card"><strong>I recently had a life change</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_reason" value="other" /><span class="advisory-choice__card"><strong>Something else</strong></span></label>
+              </div>
+            </fieldset>
+
+            <div class="advisory-opening__other" id="advisoryOtherReasonWrap" hidden>
+              <label for="advisoryOtherReason">In your own words</label>
+              <input id="advisoryOtherReason" type="text" maxlength="300" autocomplete="off" placeholder="What prompted the review?" />
+            </div>
+
+            <div class="advisory-opening__connected" id="advisoryConnectedPriority" hidden>
+              <div>
+                <span>Priority connected from your request</span>
+                <strong id="advisoryConnectedPriorityText"></strong>
+                <small>We’ll use this as the starting point for price-versus-protection tradeoffs.</small>
+              </div>
+              <button class="advisory-opening__edit" id="advisoryEditPriorityBtn" type="button">Change</button>
+            </div>
+
+            <fieldset id="advisoryPriorityFieldset">
+              <legend>What matters most in this review?</legend>
+              <span class="advisory-opening__hint">There is no “right” answer. This helps make the tradeoffs visible later.</span>
+              <div class="advisory-choice-grid">
+                <label class="advisory-choice"><input type="radio" name="advisory_priority" value="price" /><span class="advisory-choice__card"><strong>Keep my cost down</strong><small>Start lean and make every added protection earn its place.</small></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_priority" value="balance" /><span class="advisory-choice__card"><strong>Find the right balance</strong><small>Weigh protection and price together.</small></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_priority" value="protection" /><span class="advisory-choice__card"><strong>Protect myself as strongly as practical</strong><small>Show stronger practical protection first, with the tradeoffs visible.</small></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_priority" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure yet</strong><small>That’s okay—we can compare the tradeoffs as we go.</small></span></label>
+              </div>
+            </fieldset>
+
+            <div class="advisory-opening__boundary">
+              <span aria-hidden="true">✓</span>
+              <span><strong>These answers do not change your Protection Score.</strong> They only help Dylan understand what matters to you and frame the review around your situation.</span>
+            </div>
+            <div class="advisory-opening__actions">
+              <button class="btn primary" id="advisoryOpeningContinue" type="button" disabled>Start My Coverage Review</button>
+            </div>
+            <p class="advisory-opening__live" id="advisoryOpeningLive" role="status" aria-live="polite"></p>
+          </section>
+          <section
+            class="advisory-relationship"
+            id="advisoryRelationship"
+            hidden
+            aria-labelledby="advisoryRelationshipTitle"
+          >
+            <div class="advisory-relationship__head">
+              <div>
+                <span class="eyebrow-chip">Before we compare anything</span>
+                <h2 id="advisoryRelationshipTitle">What already works for you?</h2>
+                <p>
+                  A good review should not assume your current insurance is wrong. This helps Dylan understand what you value, what you would change, and what should not be lost just to make a switch.
+                </p>
+              </div>
+              <span class="advisory-relationship__badge">Current relationship</span>
+            </div>
+
+            <div class="advisory-relationship__connected" id="advisoryConnectedCarrier" hidden>
+              <div>
+                <span>Current company connected from your request</span>
+                <strong id="advisoryConnectedCarrierText"></strong>
+                <small>We’ll carry this forward so you do not have to repeat it.</small>
+              </div>
+              <button class="advisory-relationship__edit" id="advisoryEditCarrierBtn" type="button">Change</button>
+            </div>
+
+            <fieldset id="advisoryCarrierFieldset">
+              <legend>Who are you insured with now?</legend>
+              <span class="advisory-relationship__hint">Enter the company name, or choose an explicit unknown state below.</span>
+              <input
+                class="advisory-relationship__text-input"
+                id="advisoryCarrierInput"
+                type="text"
+                maxlength="180"
+                autocomplete="organization"
+                placeholder="Current insurance company"
+              />
+              <div class="advisory-relationship__minor-options">
+                <label><input type="radio" name="advisory_carrier_state" value="unsure" /><span>I’m not sure</span></label>
+                <label><input type="radio" name="advisory_carrier_state" value="prefer_not_to_answer" /><span>Prefer not to answer</span></label>
+              </div>
+            </fieldset>
+
+            <div class="advisory-relationship__connected" id="advisoryConnectedTenure" hidden>
+              <div>
+                <span>Relationship length connected from your request</span>
+                <strong id="advisoryConnectedTenureText"></strong>
+                <small>We’ll keep this as context unless you want to change it.</small>
+              </div>
+              <button class="advisory-relationship__edit" id="advisoryEditTenureBtn" type="button">Change</button>
+            </div>
+
+            <fieldset id="advisoryTenureFieldset">
+              <legend>How long have you been with your current company?</legend>
+              <div class="advisory-choice-grid advisory-choice-grid--compact">
+                <label class="advisory-choice"><input type="radio" name="advisory_tenure" value="under_1" /><span class="advisory-choice__card"><strong>Less than 1 year</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_tenure" value="1_2" /><span class="advisory-choice__card"><strong>1–2 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_tenure" value="3_5" /><span class="advisory-choice__card"><strong>3–5 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_tenure" value="6_9" /><span class="advisory-choice__card"><strong>6–9 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_tenure" value="10_plus" /><span class="advisory-choice__card"><strong>10 years or more</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_tenure" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_tenure" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>What have you liked about them?</legend>
+              <span class="advisory-relationship__hint">Choose anything you would give them credit for. This is not a trick question.</span>
+              <div class="advisory-choice-grid">
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="service" /><span class="advisory-choice__card"><strong>Customer service / responsiveness</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="agent" /><span class="advisory-choice__card"><strong>My agent / personal relationship</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="claims" /><span class="advisory-choice__card"><strong>Claims experience</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="price" /><span class="advisory-choice__card"><strong>Price</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="coverage" /><span class="advisory-choice__card"><strong>Coverage / options</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="convenience" /><span class="advisory-choice__card"><strong>Convenience / easy account management</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="familiarity" /><span class="advisory-choice__card"><strong>Familiarity / consistency</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="none" /><span class="advisory-choice__card"><strong>Nothing in particular</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_likes" value="other" /><span class="advisory-choice__card"><strong>Something else</strong></span></label>
+              </div>
+            </fieldset>
+            <div class="advisory-relationship__other" id="advisoryLikesOtherWrap" hidden>
+              <label for="advisoryLikesOther">What else have you liked?</label>
+              <input id="advisoryLikesOther" type="text" maxlength="300" autocomplete="off" placeholder="In your own words" />
+            </div>
+
+            <fieldset>
+              <legend>If you could change one thing about your current insurance, what would it be?</legend>
+              <div class="advisory-choice-grid">
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="price" /><span class="advisory-choice__card"><strong>Price / premium</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="service" /><span class="advisory-choice__card"><strong>Service / responsiveness</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="claims" /><span class="advisory-choice__card"><strong>Claims experience</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="coverage" /><span class="advisory-choice__card"><strong>Coverage / policy options</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="convenience" /><span class="advisory-choice__card"><strong>Convenience / account management</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="agent" /><span class="advisory-choice__card"><strong>Agent relationship</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="nothing" /><span class="advisory-choice__card"><strong>Nothing—I’m mostly satisfied</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_would_change" value="other" /><span class="advisory-choice__card"><strong>Something else</strong></span></label>
+              </div>
+            </fieldset>
+            <div class="advisory-relationship__other" id="advisoryChangeOtherWrap" hidden>
+              <label for="advisoryChangeOther">What would you change?</label>
+              <input id="advisoryChangeOther" type="text" maxlength="300" autocomplete="off" placeholder="In your own words" />
+            </div>
+
+            <div class="advisory-branch-followup" id="advisoryRelationshipPreserveCue" hidden aria-live="polite"></div>
+            <fieldset id="advisoryMustKeepFieldset" hidden>
+              <legend>What do you definitely want to keep?</legend>
+              <span class="advisory-relationship__hint">Choose anything you would not want a new option to make worse.</span>
+              <div class="advisory-choice-grid">
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="service" /><span class="advisory-choice__card"><strong>Responsive service / support</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="agent" /><span class="advisory-choice__card"><strong>My agent relationship</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="deductible" /><span class="advisory-choice__card"><strong>My deductible level</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="coverage" /><span class="advisory-choice__card"><strong>Specific coverage or limits</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="claims" /><span class="advisory-choice__card"><strong>Claims support</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="billing" /><span class="advisory-choice__card"><strong>Billing / payment setup</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="bundle" /><span class="advisory-choice__card"><strong>Bundle / discount structure</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="none" /><span class="advisory-choice__card"><strong>Nothing specific</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_must_keep" value="other" /><span class="advisory-choice__card"><strong>Something else</strong></span></label>
+              </div>
+            </fieldset>
+            <div class="advisory-relationship__other" id="advisoryKeepOtherWrap" hidden>
+              <label for="advisoryKeepOther">What should we make sure not to lose?</label>
+              <input id="advisoryKeepOther" type="text" maxlength="300" autocomplete="off" placeholder="In your own words" />
+            </div>
+
+            <div class="advisory-relationship__boundary">
+              <span aria-hidden="true">✓</span>
+              <span><strong>Loyalty is not a problem to fix, and none of these answers change your Protection Score.</strong> This context helps Dylan understand the difference between a price issue, a service issue, and a relationship worth preserving.</span>
+            </div>
+            <div class="advisory-relationship__actions">
+              <button class="btn primary" id="advisoryRelationshipContinue" type="button" disabled>Continue to My Coverage Review</button>
+            </div>
+            <p class="advisory-relationship__live" id="advisoryRelationshipLive" role="status" aria-live="polite"></p>
+          </section>
+          <section
+            class="advisory-relationship advisory-lifestyle"
+            id="advisoryLifestyle"
+            hidden
+            aria-labelledby="advisoryLifestyleTitle"
+          >
+            <div class="advisory-relationship__head">
+              <div>
+                <span class="eyebrow-chip">How the home fits your life</span>
+                <h2 id="advisoryLifestyleTitle">Tell us a little about how you live here.</h2>
+                <p class="advisory-lifestyle__intro">These answers help Dylan connect coverage recommendations to your actual household—not just to policy terms.</p>
+              </div>
+              <span class="advisory-relationship__badge">Lifestyle context</span>
+            </div>
+
+            <fieldset>
+              <legend>Is this the home you live in most of the time?</legend>
+              <div class="advisory-choice-grid advisory-choice-grid--compact">
+                <label class="advisory-choice"><input type="radio" name="advisory_primary_home" value="primary_residence" /><span class="advisory-choice__card"><strong>Yes — this is my primary home</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_primary_home" value="not_primary" /><span class="advisory-choice__card"><strong>No — it is not my primary home</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_primary_home" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_primary_home" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>How long have you lived here?</legend>
+              <div class="advisory-choice-grid advisory-choice-grid--compact">
+                <label class="advisory-choice"><input type="radio" name="advisory_residence_tenure" value="under_1" /><span class="advisory-choice__card"><strong>Less than 1 year</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_residence_tenure" value="1_2" /><span class="advisory-choice__card"><strong>1–2 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_residence_tenure" value="3_5" /><span class="advisory-choice__card"><strong>3–5 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_residence_tenure" value="6_10" /><span class="advisory-choice__card"><strong>6–10 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_residence_tenure" value="10_plus" /><span class="advisory-choice__card"><strong>More than 10 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_residence_tenure" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_residence_tenure" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>How long do you expect to stay here?</legend>
+              <span class="advisory-relationship__hint">A rough answer is enough. This is about your relationship to the home, not underwriting.</span>
+              <div class="advisory-choice-grid advisory-choice-grid--compact">
+                <label class="advisory-choice"><input type="radio" name="advisory_stay_intent" value="under_2" /><span class="advisory-choice__card"><strong>Probably less than 2 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_stay_intent" value="2_5" /><span class="advisory-choice__card"><strong>About 2–5 years</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_stay_intent" value="5_plus" /><span class="advisory-choice__card"><strong>5+ years / long term</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_stay_intent" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure yet</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_stay_intent" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+              </div>
+            </fieldset>
+
+            <div class="advisory-branch-followup" id="advisoryLifestyleImprovementsCue" hidden aria-live="polite"></div>
+            <fieldset id="advisoryImprovementsFieldset" hidden>
+              <legend>Have you made meaningful improvements to the home?</legend>
+              <div class="advisory-choice-grid advisory-choice-grid--compact">
+                <label class="advisory-choice"><input type="radio" name="advisory_improvements" value="significant" /><span class="advisory-choice__card"><strong>Yes — significant improvements or remodeling</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_improvements" value="some" /><span class="advisory-choice__card"><strong>Some updates, but nothing major</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_improvements" value="none" /><span class="advisory-choice__card"><strong>No meaningful improvements</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_improvements" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_improvements" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Who relies on this home day-to-day?</legend>
+              <span class="advisory-relationship__hint">Choose the household roles that fit. We do not need names, ages, or personal details.</span>
+              <div class="advisory-choice-grid">
+                <label class="advisory-choice"><input type="checkbox" name="advisory_household_reliance" value="just_me" /><span class="advisory-choice__card"><strong>Just me</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_household_reliance" value="partner" /><span class="advisory-choice__card"><strong>Spouse / partner</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_household_reliance" value="children" /><span class="advisory-choice__card"><strong>Children / dependents</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_household_reliance" value="other_household" /><span class="advisory-choice__card"><strong>Other household members</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_household_reliance" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure how to answer</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_household_reliance" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_household_reliance" value="other" /><span class="advisory-choice__card"><strong>Something else</strong></span></label>
+              </div>
+            </fieldset>
+            <div class="advisory-lifestyle__other" id="advisoryHouseholdOtherWrap" hidden>
+              <label for="advisoryHouseholdOther">Anything else we should understand about who relies on the home?</label>
+              <input id="advisoryHouseholdOther" type="text" maxlength="300" autocomplete="off" placeholder="Keep it general—no names or private details needed" />
+            </div>
+
+            <fieldset>
+              <legend>If you had to live somewhere else temporarily, how disruptive would that be?</legend>
+              <span class="advisory-relationship__hint">This is about practical dependence on the home—not about imagining a worst-case scenario.</span>
+              <div class="advisory-choice-grid">
+                <label class="advisory-choice"><input type="radio" name="advisory_displacement" value="major" /><span class="advisory-choice__card"><strong>Major disruption</strong><small>We would need a clear plan right away.</small></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_displacement" value="meaningful" /><span class="advisory-choice__card"><strong>Meaningful disruption</strong><small>It would take real coordination.</small></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_displacement" value="manageable" /><span class="advisory-choice__card"><strong>Manageable</strong><small>We have some flexibility.</small></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_displacement" value="minimal" /><span class="advisory-choice__card"><strong>Minimal</strong><small>We have easy alternatives.</small></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_displacement" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure</strong></span></label>
+                <label class="advisory-choice"><input type="radio" name="advisory_displacement" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+              </div>
+            </fieldset>
+
+            <div class="advisory-lifestyle__boundary">
+              <span aria-hidden="true">✓</span>
+              <span><strong>These answers do not change your Protection Score.</strong> They give the later recommendations real-life context, and you can stay general rather than sharing private household details.</span>
+            </div>
+            <div class="advisory-relationship__actions">
+              <button class="btn primary" id="advisoryLifestyleContinue" type="button" disabled>Continue to My Coverage Review</button>
+            </div>
+            <p class="advisory-relationship__live" id="advisoryLifestyleLive" role="status" aria-live="polite"></p>
+          </section>
+          <section
+            class="advisory-relationship advisory-outcome"
+            id="advisoryOutcome"
+            hidden
+            aria-labelledby="advisoryOutcomeTitle"
+          >
+            <div class="advisory-relationship__head">
+              <div>
+                <span class="eyebrow-chip">What matters if something happens</span>
+                <h2 id="advisoryOutcomeTitle">Which outcomes would be hardest for your household?</h2>
+                <p class="advisory-outcome__intro">Choose up to two. This is not about imagining a worst-case scenario—it simply tells Dylan which tradeoffs and protections matter most to you.</p>
+              </div>
+              <span class="advisory-outcome__counter" id="advisoryOutcomeCount">0 of 2 selected</span>
+            </div>
+
+            <fieldset>
+              <legend>If something went wrong with your home, what would be hardest for your household?</legend>
+              <span class="advisory-relationship__hint">Your first selection is kept first so CoverageFit can preserve your stated priority order.</span>
+              <div class="advisory-choice-grid">
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="out_of_pocket" /><span class="advisory-choice__card"><strong>A major unexpected out-of-pocket expense</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="temporary_displacement" /><span class="advisory-choice__card"><strong>Having to live somewhere else temporarily</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="rebuild_properly" /><span class="advisory-choice__card"><strong>Rebuilding the home properly</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="replace_belongings" /><span class="advisory-choice__card"><strong>Replacing belongings</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="water_loss" /><span class="advisory-choice__card"><strong>A serious water loss</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="liability_finances" /><span class="advisory-choice__card"><strong>Liability affecting our finances</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="premium_low" /><span class="advisory-choice__card"><strong>Keeping the premium as low as practical</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="unsure" /><span class="advisory-choice__card"><strong>I’m not sure yet</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="prefer_not_to_answer" /><span class="advisory-choice__card"><strong>Prefer not to answer</strong></span></label>
+                <label class="advisory-choice"><input type="checkbox" name="advisory_outcome_concern" value="other" /><span class="advisory-choice__card"><strong>Something else</strong></span></label>
+              </div>
+            </fieldset>
+            <div class="advisory-outcome__other" id="advisoryOutcomeOtherWrap" hidden>
+              <label for="advisoryOutcomeOther">What else would be hard for your household?</label>
+              <input id="advisoryOutcomeOther" type="text" maxlength="300" autocomplete="off" placeholder="In your own words" />
+            </div>
+
+            <div class="advisory-outcome__boundary">
+              <span aria-hidden="true">✓</span>
+              <span><strong>These are preferences, not scored findings.</strong> They do not change your Protection Score, create coverage recommendations, or mean you have agreed to buy anything.</span>
+            </div>
+            <div class="advisory-relationship__actions">
+              <button class="btn primary" id="advisoryOutcomeContinue" type="button" disabled>Continue to My Coverage Review</button>
+            </div>
+            <p class="advisory-relationship__live" id="advisoryOutcomeLive" role="status" aria-live="polite"></p>
+          </section>
+          <section class="advisory-reaction" id="advisoryReaction" hidden aria-labelledby="advisoryReactionTitle">
+            <span class="advisory-reaction__eyebrow">What we heard</span>
+            <h2 id="advisoryReactionTitle">We’ll keep this context in view.</h2>
+            <ul class="advisory-reaction__messages" id="advisoryReactionMessages"></ul>
+            <p class="advisory-reaction__boundary"><strong>This is an acknowledgment, not a coverage recommendation.</strong> It does not change your Protection Score or mean a coverage issue has been identified.</p>
+            <p class="advisory-reaction__live" id="advisoryReactionLive" role="status" aria-live="polite"></p>
+          </section>
+          <div id="quiz">
+            <section class="assessment-chapter" id="assessmentChapter" aria-labelledby="assessmentChapterTitle" aria-describedby="assessmentChapterCopy">
+              <div class="assessment-chapter__meta">
+                <span class="assessment-chapter__step" id="assessmentChapterStep">Chapter 4 of 6</span>
+                <span class="assessment-chapter__count" id="assessmentChapterCount"></span>
+              </div>
+              <h2 id="assessmentChapterTitle">How your current protection works</h2>
+              <p id="assessmentChapterCopy">First, let’s make the policy itself understandable—what is known, what has been reviewed, and what still needs verification.</p>
+            </section>
+            <div class="progress-meta">
+              <span id="stepLabel"></span
+              ><span id="timeRemaining">About 5 minutes remaining</span>
+            </div>
+            <div
+              class="progress"
+              role="progressbar"
+              aria-label="Coverage review progress"
+              aria-valuemin="1"
+              aria-valuemax="11"
+              aria-valuenow="1"
+              aria-valuetext="Coverage question 1 of 11"
+            >
+              <div
+                class="progress-bar"
+                id="progressBar"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div
+              class="question"
+              role="group"
+              aria-labelledby="questionTitle"
+              aria-describedby="questionHelp"
+            >
+              <span class="question-kicker" id="questionKicker"
+                >What this helps you understand</span
+              >
+              <h2 id="questionTitle" tabindex="-1"></h2>
+              <p id="questionHelp"></p>
+              <div
+                class="answers"
+                id="answers"
+                role="group"
+                aria-labelledby="questionTitle"
+              ></div>
+              <p
+                class="sr-only"
+                id="assessmentQuestionLive"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              ></p>
+            </div>
+            <aside
+              class="early-insight early-insight--inline"
+              id="earlyInsight"
+              hidden
+              aria-live="polite"
+            >
+              <span class="eyebrow-chip">Quick checkpoint</span>
+              <h2 id="earlyInsightTitle">
+                You’re already narrowing the coverage questions most worth
+                checking.
+              </h2>
+              <p id="earlyInsightCopy">
+                Finish your Snapshot to see your strongest areas and the first
+                discussion priorities to bring to Dylan.
+              </p>
+              <div class="early-insight-note">
+                You are not being graded. Keep choosing the answer that best
+                matches what you know today.
+              </div>
+            </aside>
+            <div class="actions">
+              <button class="btn ghost" id="backBtn" type="button">
+                ← Back</button
+              ><button class="btn primary" id="nextBtn" type="button" disabled>
+                Next Question
+              </button>
+            </div>
+            <p class="disclaimer">
+              Educational use only. CoverageFit is not a quote, insurance
+              advice, or a coverage determination.
+            </p>
+          </div>
+          <div class="result" id="result">
+            <div class="snapshot-ready">
+              <span class="snapshot-status" id="statusBadge"
+                >Protection Snapshot ready</span
+              >
+              <h2 id="resultTitle">Your Protection Snapshot is ready.</h2>
+              <p id="resultCopy"></p>
+              <div class="snapshot-preview">
+                <div>
+                  <span>Positive starting point</span
+                  ><strong id="strongestPreview"></strong>
+                </div>
+                <div>
+                  <span>First discussion priority</span
+                  ><strong id="priorityPreview"></strong>
+                </div>
+              </div>
+              <div class="capture">
+                <div>
+                  <span class="eyebrow">Open your Protection Snapshot</span>
+                  <h3 id="captureHeading">Your Snapshot is ready to open.</h3>
+                  <p id="captureCopy">
+                    Use the contact information below so
+                    <span data-producer-first-name>Dylan</span> can prepare for
+                    a focused Protection Review.
+                  </p>
+                </div>
+                <div
+                  class="zero-repeat-capture"
+                  id="zeroRepeatCapture"
+                  hidden
+                  role="status"
+                  aria-live="polite"
+                >
+                  <span class="zero-repeat-check" aria-hidden="true">✓</span>
+                  <div>
+                    <strong id="zeroRepeatTitle"
+                      >Your information is connected.</strong
+                    >
+                    <p id="zeroRepeatDetail">
+                      We’ll use the contact information you already provided and
+                      open your Protection Snapshot automatically.
+                    </p>
+                    <small id="zeroRepeatContact"></small>
+                  </div>
+                </div>
+                <form
+                  id="captureForm"
+                  action="https://formspree.io/f/mvzlgagr"
+                  method="POST"
+                >
+                  <input
+                    type="hidden"
+                    name="_subject"
+                    value="New CoverageFit v1 Pilot Assessment"
+                  /><input
+                    type="hidden"
+                    name="source"
+                    value="CoverageFit v1 Pilot"
+                  /><input type="hidden" name="trigger" value="" /><input
+                    type="hidden"
+                    name="score"
+                    id="captureScore"
+                  /><input
+                    type="hidden"
+                    name="risk_areas"
+                    id="captureRisks"
+                  /><input
+                    type="hidden"
+                    name="priority"
+                    id="capturePriority"
+                  /><input
+                    type="hidden"
+                    name="report_payload"
+                    id="capturePayload"
+                  /><input
+                    type="hidden"
+                    name="consultation_record_id"
+                    id="consultationRecordId"
+                  /><label class="sr-only" aria-hidden="true"
+                    >Website<input
+                      type="text"
+                      name="website"
+                      id="website"
+                      tabindex="-1"
+                      autocomplete="off"
+                  /></label>
+                  <div class="field-row">
+                    <label
+                      >Name<input
+                        type="text"
+                        name="first_name"
+                        id="firstName"
+                        required
+                        autocomplete="name"
+                        placeholder="Full name" /></label
+                    ><label
+                      >Email<input
+                        type="email"
+                        name="email"
+                        id="email"
+                        required
+                        autocomplete="email"
+                        placeholder="Email address"
+                    /></label>
+                  </div>
+                  <div class="field-row">
+                    <label
+                      >Phone<input
+                        type="tel"
+                        name="phone"
+                        id="phone"
+                        autocomplete="tel"
+                        placeholder="Phone number" /></label
+                    ><label
+                      >Property ZIP<input
+                        type="text"
+                        name="property"
+                        id="propertyField"
+                        inputmode="numeric"
+                        placeholder="ZIP code"
+                    /></label>
+                  </div>
+                  <label
+                    class="contact-confirmation-consent"
+                    id="contactConsentConfirmWrap"
+                    hidden
+                    ><input
+                      type="checkbox"
+                      name="contact_confirmation"
+                      id="contactConsentConfirm"
+                      value="confirmed"
+                    /><span
+                      >I confirm that Dylan Haysbert and Virginia Tam Insurance
+                      Agency, Inc. may contact me by call, text, or email about
+                      this review. Consent is not a condition of purchase.</span
+                    ></label
+                  ><button class="btn primary full" type="submit">
+                    View My Protection Snapshot
+                  </button>
+                  <p id="captureConsentCopy">
+                    By submitting, you agree that the licensed insurance
+                    professional shown on this page may contact you about your
+                    assessment. No purchase is required.
+                  </p>
+                </form>
+              </div>
+              <div class="actions">
+                <button class="btn ghost" id="restartBtn" type="button">
+                  Retake review
+                </button>
+              </div>
+              <p class="disclaimer">
+                Your Protection Snapshot is directional and educational. Actual
+                coverage is governed by the issued policy.
+              </p>
+            </div>
+            <div id="gapGrid" hidden></div>
+            <div id="scoreCircle" hidden><span id="scoreNumber">0</span></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <dialog
+      class="assessment-dialog"
+      id="saveExitDialog"
+      aria-labelledby="saveExitTitle"
+    >
+      <div class="assessment-dialog-card">
+        <span class="eyebrow-chip">Pause your review</span>
+        <h2 id="saveExitTitle">Save your progress and finish later?</h2>
+        <p>
+          Your answers will stay on this device for seven days. A Protection
+          Score, completed consultation, or producer notification will not be
+          created unless you finish the assessment.
+        </p>
+        <div class="assessment-dialog-actions">
+          <button class="btn ghost" id="continueReviewBtn" type="button">
+            Continue My Review</button
+          ><button class="btn primary" id="confirmSaveExitBtn" type="button">
+            Save &amp; Exit
+          </button>
+        </div>
+        <a
+          class="assessment-dialog-help"
+          href="sms:+14083276377?&amp;body=Hi%20Dylan%2C%20I%20started%20my%20CoverageFit%20review%20and%20would%20like%20some%20help."
+          >Prefer help? Text Dylan</a
+        >
+      </div>
+    </dialog>
+    <dialog
+      class="assessment-dialog"
+      id="resumeDraftDialog"
+      aria-labelledby="resumeDraftTitle"
+    >
+      <div class="assessment-dialog-card">
+        <span class="eyebrow-chip">Welcome back</span>
+        <h2 id="resumeDraftTitle">Continue your saved Coverage Review?</h2>
+        <strong class="assessment-resume-progress" id="resumeDraftProgress"
+          >Your review is saved</strong
+        >
+        <p id="resumeDraftDetail">
+          Your answers were saved on this device. Continue where you left off or
+          start a new review.
+        </p>
+        <div class="assessment-dialog-actions">
+          <button class="btn primary" id="continueDraftBtn" type="button">
+            Continue My Review</button
+          ><button class="btn ghost" id="startOverDraftBtn" type="button">
+            Start Over
+          </button>
+        </div>
+        <small
+          >Saved drafts expire automatically after seven days and are removed
+          when the assessment is completed.</small
+        >
+      </div>
+    </dialog>
+    <script defer src="/assets/js/property-intelligence.js"></script>
+    <script defer src="/assets/js/prefill-intake.js"></script>
+    <script defer src="/assets/js/campaign-identifiers.js"></script>
+    <script defer src="/assets/js/attribution.js"></script>
+    <script defer src="/assets/js/personalization-context.js"></script>
+    <script defer src="/assets/js/conversion-handoff.js"></script>
+    <script defer src="/assets/js/home-branch-recovery.js"></script>
+    <script defer src="/assets/js/consultation-records.js"></script>
+    <script defer src="/assets/js/remote-consultations.js"></script>
+    <script defer src="/assets/js/prospect-report-access.js"></script>
+    <script defer src="/assets/js/assessment-prefill.js"></script>
+    <script defer src="/assets/js/contact-prefill.js"></script>
+    <script defer src="/assets/js/producer-config.js"></script>
+    <script defer src="/assets/js/producer-branding.js"></script>
+    <script defer src="/assets/js/analytics.js"></script>
+    <script defer src="/assets/js/home-journey-baseline.js"></script>
+    <script defer src="/assets/js/protection-score.js"></script>
+    <script defer src="/home/assessment-config.js"></script>
+    <script defer src="/assets/js/assessment-consumer-copy.js"></script>
+    <script defer src="/assets/js/advisory-discovery-contract.js"></script>
+    <script defer src="/assets/js/advisory-signal-engine.js"></script>
+    <script defer src="/assets/js/advisory-recommendation-anchor-contract.js"></script>
+    <script defer src="/assets/js/assessment-continuity.js"></script>
+    <script defer src="/assets/js/advisory-progressive-discovery-branching.js"></script>
+    <script defer src="/assets/js/advisory-opening.js"></script>
+    <script defer src="/assets/js/advisory-relationship-discovery.js"></script>
+    <script defer src="/assets/js/advisory-lifestyle-discovery.js"></script>
+    <script defer src="/assets/js/advisory-outcome-discovery.js"></script>
+    <script defer src="/assets/js/advisory-assessment-orchestration.js"></script>
+    <script defer src="/assets/js/advisory-customer-reaction.js"></script>
+    <script defer src="/assets/js/advisory-results-model.js"></script>
+    <script defer src="/assets/js/property-confirmation.js"></script>
+    <script defer src="/assets/js/trigger-context.js"></script>
+    <script defer src="/assets/js/professional-intent-continuity.js"></script>
+    <script defer src="/assets/js/intent-payoff-continuity.js"></script>
+    <script defer src="/assets/js/report-generation.js"></script>
+    <script defer src="/assets/js/post-submission-share.js"></script>
+    <script defer src="/assets/js/referral-attribution.js"></script>
+    <script defer src="/assets/js/assessment-engine.js"></script>
+    <script defer src="/assets/js/journey-timeline.js"></script>
+    <script defer src="/assets/js/trigger-illustrations.js"></script>
+    <script defer src="/assets/js/home-mobile-certification.js"></script>
+  </body>
+</html>

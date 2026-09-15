@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/coveragefit-mark.svg">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0b2f57">
+  <meta name="robots" content="noindex">
+  <title>Opening CoverageFit Assessment</title>
+  <script>
+    const target = new URL('/transition/', location.origin);
+    target.search = location.search;
+    target.searchParams.set('next', '/assessment/');
+    location.replace(`${target.pathname}${target.search}`);
+  </script>
+  <noscript><meta http-equiv="refresh" content="0;url=/assessment/"></noscript>
+  <script src="/assets/js/attribution.js"></script>
+</head>
+<body>
+  <p>Opening the CoverageFit assessment… <a href="/assessment/">Continue</a></p>
+</body>
+</html>

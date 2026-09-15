@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<meta content="#0b2f57" name="theme-color"/>
+<meta content="noindex, nofollow" name="robots"/>
+<title>Agent Workspace | CoverageFit</title>
+<meta content="Internal CoverageFit consultation preparation workspace." name="description"/>
+<link href="/assets/images/coveragefit-mark.svg" rel="icon"/>
+<link href="workspace.css?v=CF-APPOINTMENT-FIRST-INBOX-1.0" rel="stylesheet"/>
+<link href="/assets/css/solo-desk.css?v=CF-ACQ-MEASURE-1.0" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip-link" href="#workspace-main">Skip to workspace</a>
+<header class="workspace-header">
+<div class="workspace-header__inner">
+<a aria-label="CoverageFit home" class="workspace-brand" href="/">
+<img alt="CoverageFit" src="/assets/images/coveragefit-logo-board.png"/>
+</a>
+<div class="workspace-header__context">
+<span class="workspace-badge cf-badge">Internal</span>
+<span>Agent Workspace</span>
+</div>
+<details class="workspace-tools">
+<summary><span aria-hidden="true" class="workspace-tools__icon">•••</span><span>Tools</span></summary>
+<div aria-label="Workspace tools" class="workspace-header__actions">
+<a class="button button--secondary cf-button cf-button--secondary" href="/agent/sms-simulator/">SMS Simulator</a>
+<a class="button button--secondary cf-button cf-button--secondary" href="/agent/displacement-outreach.html">Displacement Outreach</a>
+<button aria-keyshortcuts="Alt+R" class="button button--secondary cf-button cf-button--secondary" id="refreshWorkspace" title="Refresh Workspace data (Alt+R)" type="button">Refresh workspace</button>
+<a aria-disabled="true" class="button button--secondary cf-button cf-button--secondary" href="/agent/consultation/" id="openConsultationDocument" rel="noopener" target="_blank">Consultation Document</a>
+<a class="button button--primary cf-button cf-button--primary" href="/home/report/" id="openCustomerReport">Client Snapshot</a>
+</div>
+</details>
+</div>
+</header>
+<main aria-describedby="workspaceA11yInstructions" class="workspace-main" id="workspace-main" tabindex="-1">
+<div class="sr-only" id="workspaceA11yInstructions">The Workspace opens in Today unless a direct consultation link is present. Use the Today, Inbox, Consultation, and Pipeline tabs to move through the Workspace; Left and Right Arrow, Home, and End move between tabs. Inbox summary buttons filter the existing review queue, while delivery, stage, and follow-up filters are available under More filters. Opening a homeowner review moves focus to the Consultation tab. The active homeowner snapshot provides call, text, email, document, and Snapshot actions using the selected consultation. On narrower screens its review facts can be expanded or collapsed, consultation stages form a horizontal swipeable list, and a bottom action dock keeps Call, Text, the current stage, and More actions reachable. Left and Right Arrow, Home, and End also move through Focus Mode stages. Workspace tools, connection setup, conversation readiness, and homeowner document details use expandable controls. Checklist changes are saved automatically. Press Alt+R to refresh Workspace data or Alt+C to show or hide detailed steps.</div>
+<div aria-atomic="true" aria-live="polite" class="sr-only" id="workspaceAnnouncements" role="status"></div>
+<section aria-labelledby="workspace-title" class="workspace-intro">
+<div>
+<span class="eyebrow">CoverageFit agent workspace</span>
+<h1 id="workspace-title">Your next clear step.</h1>
+<p id="workspaceSubtitle">Start with the best possession, prepare only what matters, and leave each conversation with one recorded next action.</p>
+<div class="workspace-intro__actions"><a id="soloShotsEntry" class="button button--primary cf-button cf-button--primary" href="/agent/shots/">Open Today’s Shots</a><a id="prepareQuoteRecommendation" class="button button--secondary cf-button cf-button--secondary" href="/agent/recommendations/">Prepare recommendation</a></div>
+</div>
+<div aria-live="polite" class="workspace-status" id="workspaceStatus" role="status">
+<span aria-hidden="true" class="status-dot"></span>
+<span>Checking saved assessment data</span>
+</div>
+</section><nav aria-label="Agent Workspace views" aria-orientation="horizontal" class="workspace-tabs" id="workspaceTabs" role="tablist"><button aria-controls="workspaceViewToday" aria-selected="true" class="workspace-tab" data-workspace-view="today" id="workspaceTabToday" role="tab" type="button">Today</button><button aria-controls="workspaceViewInbox" aria-selected="false" class="workspace-tab" data-workspace-view="inbox" id="workspaceTabInbox" role="tab" type="button">Inbox</button><button aria-controls="workspaceViewConsultation" aria-selected="false" class="workspace-tab" data-workspace-view="consultation" id="workspaceTabConsultation" role="tab" type="button">Consultation</button><button aria-controls="workspaceViewPipeline" aria-selected="false" class="workspace-tab" data-workspace-view="pipeline" id="workspaceTabPipeline" role="tab" type="button">Pipeline</button></nav>
+<section aria-labelledby="workspaceTabToday" class="workspace-view solo-desk" data-workspace-panel="today" id="workspaceViewToday" role="tabpanel">
+  <div class="desk-heading"><div><span class="eyebrow">Solo producer cockpit</span><h2>Work the next possession.</h2><p>Today’s Shots is the home base. Use this desk to inspect context, prepare, and wrap the conversation.</p></div><div class="desk-actions"><a class="button button--primary" href="/agent/shots/">Open Today’s Shots</a><button class="button button--secondary" id="deskRefresh" type="button">Sync &amp; refresh</button><button class="button button--secondary" id="deskAdd" type="button">Add opportunity</button></div></div>
+  <p id="deskStatus" role="status" aria-live="polite">Connect your producer inbox below to load shared work.</p>
+  <p id="deskSyncStatus" class="desk-muted" role="status" aria-live="polite"></p>
+  <details class="desk-weekly-review" id="deskWeeklyReview">
+    <summary><span><strong>Weekly review</strong><small>Acquisition, economics, and FIV calibration — review when you are not in the middle of selling.</small></span><b>Background analytics</b></summary>
+    <div class="desk-weekly-review__body">
+  <details class="desk-acq" id="deskAcq">
+    <summary><span><strong>Acquisition scoreboard</strong><small>Spend → qualified at-bats → binds → verified premium</small></span><b id="deskAcqHeadline">30-day view</b></summary>
+    <div class="desk-acq-body">
+      <div class="desk-acq-metrics" id="deskAcqMetrics"><p class="desk-muted">Connect the producer inbox to load acquisition economics.</p></div>
+      <div class="desk-acq-table-wrap"><table class="desk-acq-table"><thead><tr><th>Source / campaign</th><th>Spend</th><th>Qualified</th><th>Quotes</th><th>Binds</th><th>Premium</th><th>Cost / bind</th><th>Premium / $</th></tr></thead><tbody id="deskAcqRows"><tr><td colspan="8">No acquisition measurement loaded.</td></tr></tbody></table></div>
+      <p class="desk-muted" id="deskAcqWarning"></p>
+      <div class="desk-acq-controls">
+        <details><summary>Register a campaign</summary><form id="deskCampaignForm" class="desk-form desk-acq-form">
+          <div class="desk-form-grid"><label>Campaign ID<input name="id" maxlength="160" placeholder="condo_google_v1" required></label><label>Campaign name<input name="name" maxlength="180" placeholder="Condo Google V1" required></label></div>
+          <div class="desk-form-grid"><label>Source family<select name="sourceFamily"><option value="paid_search">Paid search</option><option value="purchased_lead">Purchased lead</option><option value="direct_mail">Direct mail</option><option value="paid_social">Paid social</option><option value="referral_partner">Referral partner</option><option value="local_partner">Local partner</option><option value="district_lead">District lead</option><option value="organic_web">Organic web</option><option value="outbound">Outbound</option><option value="existing_relationship">Existing relationship</option><option value="event_or_affinity">Event / affinity</option><option value="other">Other</option></select></label><label>Source key<input name="sourceKey" maxlength="120" placeholder="web_408_condo"></label></div>
+          <div class="desk-form-grid"><label>Variant<input name="campaignVariant" maxlength="120" placeholder="creative_a"></label><label>Partner / batch<input name="partnerId" maxlength="120" placeholder="Optional partner ID"><input name="batchId" maxlength="120" placeholder="Optional batch ID"></label></div>
+          <button class="button button--secondary" type="submit">Save campaign</button><span class="desk-form-status" id="deskCampaignStatus" role="status" aria-live="polite"></span>
+        </form></details>
+        <details><summary>Record acquisition spend</summary><form id="deskSpendForm" class="desk-form desk-acq-form">
+          <div class="desk-form-grid"><label>Amount ($)<input name="amount" type="number" min="0.01" step="0.01" required></label><label>Date<input name="incurredOn" type="date" required></label></div>
+          <div class="desk-form-grid"><label>Campaign<select name="campaignId" id="deskSpendCampaign"><option value="">No registered campaign</option></select></label><label>Source family<select name="sourceFamily"><option value="paid_search">Paid search</option><option value="purchased_lead">Purchased lead</option><option value="direct_mail">Direct mail</option><option value="paid_social">Paid social</option><option value="referral_partner">Referral partner</option><option value="local_partner">Local partner</option><option value="district_lead">District lead</option><option value="organic_web">Organic web</option><option value="outbound">Outbound</option><option value="existing_relationship">Existing relationship</option><option value="event_or_affinity">Event / affinity</option><option value="other">Other</option></select></label></div>
+          <div class="desk-form-grid"><label>Source key<input name="sourceKey" maxlength="120" placeholder="web_408_condo"></label><label>Category<select name="category"><option value="media">Media</option><option value="data">Data</option><option value="mail">Mail</option><option value="event">Event</option><option value="partner">Partner</option><option value="other">Other</option></select></label></div>
+          <label>Note<input name="note" maxlength="600" placeholder="Example: September Google Search budget"></label>
+          <button class="button button--secondary" type="submit">Record spend</button><span class="desk-form-status" id="deskSpendStatus" role="status" aria-live="polite"></span>
+        </form></details>
+      </div>
+    </div>
+  </details>
+  <details class="desk-acq" id="deskEconomics">
+    <summary><span><strong>True acquisition economics</strong><small>Acquisition spend + recorded producer attention → binds → verified premium</small></span><b id="deskEconHeadline">90-day view</b></summary>
+    <div class="desk-acq-body">
+      <div class="desk-acq-metrics" id="deskEconMetrics"><p class="desk-muted">Connect the producer inbox to load true acquisition economics.</p></div>
+      <div class="desk-acq-table-wrap"><table class="desk-acq-table desk-econ-table"><thead><tr><th>Source / campaign</th><th>Spend</th><th>Producer hrs</th><th>Binds</th><th>Premium</th><th>Premium / producer hr</th><th>Observed cost*</th><th>True CAC</th><th>Evidence</th></tr></thead><tbody id="deskEconRows"><tr><td colspan="9">No economics loaded.</td></tr></tbody></table></div>
+      <p class="desk-muted" id="deskEconWarning">*Observed cost includes only recorded attention when an attention cost/hour is explicitly configured. It is not automatically true CAC.</p>
+    </div>
+  </details>
+  <details class="desk-acq" id="deskFivCalibration">
+    <summary><span><strong>FIV calibration</strong><small>First-ready queue → binds → verified premium → actual producer minutes</small></span><b id="deskFivCalHeadline">90-day observational view</b></summary>
+    <div class="desk-acq-body">
+      <div class="desk-acq-metrics" id="deskFivCalMetrics"><p class="desk-muted">Connect the producer inbox to compare Small Ball queue performance.</p></div>
+      <div class="desk-acq-table-wrap"><table class="desk-acq-table"><thead><tr><th>First-ready queue</th><th>Qualified</th><th>Binds</th><th>Bind rate</th><th>Premium</th><th>Min / bind</th><th>Premium / producer hr</th><th>Evidence</th></tr></thead><tbody id="deskFivCalRows"><tr><td colspan="8">No FIV calibration loaded.</td></tr></tbody></table></div>
+      <p class="desk-muted" id="deskFivCalWarning">Observational only. CoverageFit never changes FIV rules automatically from these results.</p>
+    </div>
+  </details>
+    </div>
+  </details>
+  <div class="desk-toolbar"><div class="desk-filters" aria-label="Work queue"><button type="button" data-desk-view="today" aria-pressed="true">Today</button><button type="button" data-desk-view="all" aria-pressed="false">All opportunities</button><button type="button" data-desk-view="waiting" aria-pressed="false">Waiting</button><button type="button" data-desk-view="closed" aria-pressed="false">Closed</button></div><label>Small Ball queue<select id="deskQueue"><option value="">All queues</option><option value="shoot_now">🔥 Shoot now</option><option value="quick_play">⚡ Quick play</option><option value="develop">🏀 Develop</option><option value="nurture">🌱 Nurture</option><option value="low_priority">⬇ Low priority</option><option value="unclassified">Unclassified</option></select></label><label>Work type<select id="deskWork"><option value="">All work types</option><option value="outreach">Outreach</option><option value="quoting_service">Quoting / Service</option><option value="advice_closing">Advice / Closing</option></select></label></div>
+  <form class="desk-search" id="deskSearch"><label for="deskQuery">Find a person, source, product, or review reason</label><div><input type="search" id="deskQuery" maxlength="120" autocomplete="off"/><button class="button button--secondary" type="submit">Search</button></div></form>
+  <div class="desk-layout"><div><div id="deskList" class="desk-list"><p class="desk-empty">Shared work will appear here after you connect.</p></div><button id="deskMore" type="button" class="button button--secondary" hidden>Load more</button></div><aside id="deskDetail" class="desk-detail" aria-label="Opportunity details"><p class="desk-empty">Choose an opportunity to see its next action and record a conversation.</p></aside></div>
+</section>
+<section aria-labelledby="workspaceFlowTitle" class="workspace-architecture" id="workspaceArchitecture">
+<div class="workspace-architecture__intro"><span class="eyebrow">Workspace flow</span><h2 id="workspaceFlowTitle">One review from preparation to follow-up</h2></div>
+<ol aria-label="Consultation workspace sequence" class="workspace-architecture__stages"><li><span>1</span><strong>Prepare</strong></li><li><span>2</span><strong>Verify</strong></li><li><span>3</span><strong>Discuss</strong></li><li><span>4</span><strong>Recommend</strong></li><li><span>5</span><strong>Close</strong></li></ol>
+</section>
+<section aria-labelledby="remoteInboxTitle" class="remote-inbox-bar cf-card remote-inbox-bar--compact" id="remoteInboxBar">
+<div class="remote-inbox-bar__intro">
+<div class="remote-inbox-bar__heading">
+<div>
+<span class="eyebrow">Secure inbox</span>
+<h2 id="remoteInboxTitle">Producer inbox connection</h2>
+</div>
+<span class="remote-inbox-status" data-state="disconnected" id="remoteInboxBadge">Not connected</span>
+<span class="remote-inbox-summary" id="remoteInboxSummary">Connect once to receive completed reviews from prospect devices.</span><button aria-controls="remoteInboxPanel" aria-expanded="true" class="button button--secondary button--compact remote-inbox-disclosure" id="remoteInboxDisclosure" type="button">Hide setup</button></div>
+
+</div>
+
+<div class="remote-inbox-panel" id="remoteInboxPanel"><p>Connect with the producer access key configured in Cloudflare. The key stays in this browser session and is never written into the page or consultation URLs.</p><form class="remote-inbox-form" id="remoteInboxForm">
+<label for="remoteInboxToken">Producer inbox access key</label>
+<div class="remote-inbox-form__row">
+<input autocomplete="off" id="remoteInboxToken" minlength="24" name="producer_inbox_token" placeholder="Enter secure access key" type="password"/>
+<button class="button button--primary cf-button cf-button--primary" id="remoteInboxConnect" type="submit">Connect &amp; sync</button>
+<button class="button button--secondary cf-button cf-button--secondary" disabled="" id="remoteInboxSync" type="button">Sync inbox</button>
+<button class="button button--secondary cf-button cf-button--secondary" hidden="" id="remoteInboxDisconnect" type="button">Disconnect</button>
+</div>
+<span aria-live="polite" class="remote-inbox-message" id="remoteInboxMessage" role="status">Browser-local records remain available even when the secure inbox is not connected.</span>
+</form></div></section><details class="pvx-readiness-pilot cf-card" id="pvxReadinessPilotDashboard" data-state="idle"><summary><span><em>Readiness pilot</em><strong>Meaningful progress, not raw conversion</strong></span><b>View aggregate measures</b></summary><div><p data-pilot-status role="status" aria-live="polite">Connect the secure producer inbox to view aggregate pilot measures.</p><ul data-pilot-metrics aria-label="Aggregate readiness-to-outcome measures"></ul><p data-pilot-note>No target is established before a meaningful approved cohort.</p><button class="button button--secondary button--compact" id="pvxReadinessPilotRefresh" type="button">Refresh aggregate measures</button></div></details><section aria-labelledby="workspaceTabConsultation" class="workspace-view workspace-view--consultation" data-workspace-panel="consultation" hidden="" id="workspaceViewConsultation" role="tabpanel"><section aria-busy="true" aria-labelledby="workspaceLoadingTitle" class="workspace-loading" id="workspaceLoading">
+<div class="sr-only" id="workspaceLoadingTitle">Preparing Agent Workspace</div>
+<div aria-hidden="true" class="workspace-loading__grid">
+<article class="workspace-card cf-card workspace-skeleton workspace-skeleton--summary">
+<div class="skeleton-line skeleton-line--eyebrow"></div>
+<div class="skeleton-line skeleton-line--title"></div>
+<div class="workspace-skeleton__summary">
+<div class="skeleton-score"></div>
+<div class="workspace-skeleton__copy">
+<div class="skeleton-line skeleton-line--wide"></div>
+<div class="skeleton-line skeleton-line--medium"></div>
+<div class="skeleton-facts"><span></span><span></span><span></span></div>
+</div>
+</div>
+</article>
+<article class="workspace-card cf-card workspace-skeleton">
+<div class="skeleton-line skeleton-line--eyebrow"></div>
+<div class="skeleton-line skeleton-line--title"></div>
+<div class="skeleton-grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</article>
+<article class="workspace-card cf-card workspace-skeleton workspace-skeleton--timeline">
+<div class="skeleton-line skeleton-line--eyebrow"></div>
+<div class="skeleton-line skeleton-line--title"></div>
+<div class="skeleton-timeline"><span></span><span></span><span></span><span></span></div>
+</article>
+<article class="workspace-card cf-card workspace-skeleton workspace-skeleton--recommendations">
+<div class="skeleton-line skeleton-line--eyebrow"></div>
+<div class="skeleton-line skeleton-line--title"></div>
+<div class="skeleton-recommendations"><span></span><span></span><span></span></div>
+</article>
+</div>
+<aside aria-hidden="true" class="checklist-sidebar workspace-skeleton workspace-skeleton--sidebar">
+<div class="skeleton-line skeleton-line--eyebrow"></div>
+<div class="skeleton-line skeleton-line--title"></div>
+<div class="skeleton-progress"></div>
+<div class="skeleton-checklist"><span></span><span></span><span></span><span></span></div>
+</aside>
+</section><section aria-labelledby="emptyStateTitle" class="workspace-state workspace-state--page cf-state" data-state="empty" hidden="" id="emptyState">
+<div aria-hidden="true" class="workspace-state__icon"><img alt="" src="/assets/images/coveragefit-mark.svg"/></div>
+<div class="workspace-state__content">
+<span class="eyebrow" id="emptyStateEyebrow">No assessment loaded</span>
+<h2 id="emptyStateTitle">Complete a Home assessment on this device first.</h2>
+<p id="emptyStateMessage">The workspace reads the latest saved Home Protection Snapshot from this browser. It does not create or modify customer assessment data.</p>
+<div class="workspace-state__actions">
+<a class="button button--primary cf-button cf-button--primary" href="/assessment/" id="emptyStatePrimaryAction">Open Home assessment</a>
+<button class="button button--secondary cf-button cf-button--secondary" data-workspace-action="retry" id="emptyStateRetry" type="button">Try again</button>
+</div>
+</div>
+</section><div class="workspace-layout workspace-layout--consultation-first" hidden="" id="workspaceLayout"><div class="workspace-grid workspace-grid--consultation-first" id="workspaceGrid"><section aria-labelledby="activeCustomerName" class="active-customer-header active-customer-header--snapshot cf-card" id="activeCustomerHeader"><div class="active-customer-header__identity">
+<span class="eyebrow">Active consultation</span>
+<h2 id="activeCustomerName">Homeowner review</h2>
+<p><span id="activeCustomerProperty">Property address not provided</span><span aria-hidden="true"> · </span><span id="activeCustomerReason">General coverage review</span></p>
+<span class="active-customer-header__meta" id="activeCustomerReceived">Review date unavailable</span>
+</div><details class="active-customer-snapshot" id="activeCustomerSnapshotDetails" open=""><summary><span>Review snapshot</span><small id="activeCustomerSnapshotSummary">Review received · Continue guided consultation</small></summary><div class="active-customer-snapshot__facts">
+<section aria-labelledby="activeCustomerPriorityLabel"><span id="activeCustomerPriorityLabel">Top priority</span><strong id="activeCustomerPriority">No major priority identified</strong></section>
+<section aria-labelledby="activeCustomerStatusLabel"><span id="activeCustomerStatusLabel">Status</span><strong class="cf-badge" data-stage="review_received" id="activeCustomerStatus">Review received</strong></section>
+<section aria-labelledby="activeCustomerNextStepLabel"><span id="activeCustomerNextStepLabel">Next step</span><strong id="activeCustomerNextStep">Continue guided consultation</strong></section>
+</div></details><div aria-label="Customer and consultation quick actions" class="active-customer-header__actions">
+<a aria-disabled="true" class="button button--primary button--compact cf-button cf-button--primary" href="#" id="customerCallAction">Call</a>
+<a aria-disabled="true" class="button button--secondary button--compact cf-button cf-button--secondary" href="#" id="customerTextAction">Text</a>
+<a aria-disabled="true" class="button button--secondary button--compact cf-button cf-button--secondary" href="#" id="customerEmailAction">Email</a>
+<a aria-disabled="true" class="button button--secondary button--compact cf-button cf-button--secondary" href="/agent/consultation/" id="activeCustomerDocumentAction" rel="noopener" target="_blank">Document</a>
+<a aria-disabled="true" class="button button--secondary button--compact cf-button cf-button--secondary" href="/home/report/" id="activeCustomerSnapshotAction">Snapshot</a>
+<button class="button button--secondary button--compact cf-button cf-button--secondary" id="chooseConsultationAction" type="button">Inbox</button>
+</div></section><nav aria-label="Mobile consultation actions" class="mobile-consultation-dock" id="mobileConsultationDock">
+<a aria-disabled="true" href="#" id="mobileCallAction">Call</a>
+<a aria-disabled="true" href="#" id="mobileTextAction">Text</a>
+<a href="#consultationCommandCenter" id="mobileFocusAction">Current step</a>
+<details class="mobile-consultation-more" id="mobileConsultationMore"><summary>More <span class="sr-only">consultation actions</span></summary><div aria-describedby="mobileConsultationGuardrail" aria-labelledby="mobileConsultationActionsTitle" class="mobile-consultation-more__panel" role="region">
+<div class="mobile-consultation-more__heading"><div><span class="eyebrow">Active consultation</span><strong id="mobileConsultationActionsTitle"><span class="sr-only">Actions for </span><span id="mobileConsultationCustomer">Homeowner review</span></strong></div><button aria-label="Close more consultation actions" data-mobile-console-action="close" type="button">×</button></div>
+<a aria-disabled="true" href="#" id="mobileEmailAction">Email homeowner</a>
+<a aria-disabled="true" href="/agent/consultation/" id="mobileDocumentAction" rel="noopener" target="_blank">Consultation Document</a>
+<a aria-disabled="true" href="/home/report/" id="mobileSnapshotAction">Client Snapshot</a>
+<button data-mobile-console-action="inbox" id="mobileInboxAction" type="button">Return to Inbox</button>
+<p id="mobileConsultationGuardrail">These actions use only the selected consultation’s existing contact and document availability.</p>
+</div></details>
+</nav><section aria-labelledby="consultationFocusTitle" class="consultation-focus cf-card" data-state="active" id="consultationFocus">
+<div class="consultation-focus__progress"><span class="eyebrow">Current focus</span><strong id="consultationFocusStep">Step 1 of 6</strong><div aria-label="Consultation completion" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="consultation-focus__track" id="consultationFocusProgress" role="progressbar"><span aria-hidden="true"></span></div><small id="consultationFocusMeta">0 complete</small></div>
+<div aria-atomic="true" aria-live="polite" class="consultation-focus__copy"><span class="consultation-focus__label" id="consultationFocusLabel">Understand</span><h2 id="consultationFocusTitle">Start with the homeowner’s story</h2><p id="consultationFocusDetail">Review who the homeowner is, why the review exists, and the priorities CoverageFit identified.</p></div>
+<a class="button button--primary button--compact cf-button cf-button--primary cf-button--compact" href="#consultationCommandCenter" id="consultationFocusAction">Review command center</a>
+</section><section aria-labelledby="consultationFocusModeTitle" class="consultation-focus-mode cf-card" data-enabled="true" id="consultationFocusMode">
+<div class="consultation-focus-mode__heading"><div><span class="eyebrow">Guided consultation</span><h2 id="consultationFocusModeTitle">Focus on one stage at a time</h2><p id="consultationFocusModeDetail">Only the work for the selected stage is shown. The complete record remains one tap away.</p></div><button aria-pressed="true" class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" id="consultationFocusModeToggle" type="button">Show full record</button></div>
+<span class="sr-only" id="consultationFocusKeyboardHelp">Use Left and Right Arrow keys to move between consultation stages. Use Home or End to move to the first or last stage.</span><nav aria-describedby="consultationFocusKeyboardHelp consultationFocusModeStatus" aria-label="Consultation focus stages"><ol class="consultation-focus-mode__stages" id="consultationFocusModeStages"><li data-state="current"><button aria-current="step" data-consultation-focus-stage="understand" type="button"><span aria-hidden="true">1</span><strong>Understand</strong><small>Current</small></button></li><li data-state="upcoming"><button data-consultation-focus-stage="verify" type="button"><span aria-hidden="true">2</span><strong>Verify</strong><small>Upcoming</small></button></li><li data-state="upcoming"><button data-consultation-focus-stage="discuss" type="button"><span aria-hidden="true">3</span><strong>Discuss</strong><small>Upcoming</small></button></li><li data-state="upcoming"><button data-consultation-focus-stage="recommend" type="button"><span aria-hidden="true">4</span><strong>Recommend</strong><small>Upcoming</small></button></li><li data-state="upcoming"><button data-consultation-focus-stage="decide" type="button"><span aria-hidden="true">5</span><strong>Decide</strong><small>Upcoming</small></button></li><li data-state="upcoming"><button data-consultation-focus-stage="next-step" type="button"><span aria-hidden="true">6</span><strong>Next step</strong><small>Upcoming</small></button></li></ol></nav>
+<div class="consultation-focus-mode__actions"><button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" data-consultation-focus-action="previous" disabled="" type="button">Previous stage</button><button class="consultation-focus-mode__current" data-consultation-focus-action="current" hidden="" type="button">Return to recommended stage</button><span aria-live="polite" id="consultationFocusModeStatus" role="status">Showing Understand, the recommended current stage.</span><button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" data-consultation-focus-action="next" type="button">Next stage</button></div>
+<p class="consultation-focus-mode__guardrail">Stage navigation changes only this view. Completion, verification, recommendations, decisions, and follow-up remain driven by the existing consultation record.</p>
+</section><details class="workspace-secondary-disclosure workspace-readiness-disclosure"><summary><span><em>Conversation readiness</em><strong>Check the live consultation path</strong><small>Selected review, secure recovery, guided workflow, and document output.</small></span><b>Open checks</b></summary><section aria-labelledby="producerPilotReadinessTitle" class="producer-pilot-readiness cf-card" data-state="blocked" id="producerPilotReadiness">
+<div class="producer-pilot-readiness__heading"><div><span class="eyebrow">Conversation readiness</span><h2 id="producerPilotReadinessTitle">Ready for this conversation?</h2><p id="producerPilotReadinessDetail">CoverageFit is checking the selected review, guided workflow, secure recovery, and document output.</p></div><span aria-live="polite" class="producer-pilot-readiness__badge cf-badge" id="producerPilotReadinessBadge" role="status">0 of 5 ready</span></div>
+<ol aria-label="Live producer pilot readiness checks" class="producer-pilot-readiness__checks" id="producerPilotReadinessChecks"></ol>
+<div class="producer-pilot-readiness__confirm"><label><input disabled="" id="producerPilotOutputConfirmed" type="checkbox"/> <span><strong>I reviewed every page in Print Preview on this device.</strong><small>This confirmation applies only to this selected consultation and open Workspace session.</small></span></label></div>
+<div class="producer-pilot-readiness__footer"><p id="producerPilotReadinessGuardrail">Pilot readiness confirms the operational path only; it is not a coverage or carrier determination.</p><a class="button button--primary button--compact cf-button cf-button--primary cf-button--compact" href="#producerPilotReadiness" id="producerPilotReadinessAction">Review pilot preflight</a></div>
+</section></details><section aria-labelledby="consultationCommandCenterTitle" class="consultation-command-center cf-card" id="consultationCommandCenter">
+<div class="consultation-command-center__heading">
+<div><span class="eyebrow">Review overview</span><h2 id="consultationCommandCenterTitle">What matters for this review</h2></div>
+<p>The homeowner, reason, priorities, confirmation work, and next action—organized in one place.</p>
+</div>
+<div class="consultation-command-center__orientation">
+<section aria-labelledby="consultationCommandWhoLabel" class="consultation-command-tile"><span class="consultation-command-label" id="consultationCommandWhoLabel">Who</span><strong id="consultationCommandWhoName">Homeowner name not provided</strong><span id="consultationCommandWhoProperty">Property address not provided</span></section>
+<section aria-labelledby="consultationCommandWhyLabel" class="consultation-command-tile"><span class="consultation-command-label" id="consultationCommandWhyLabel">Why</span><strong id="consultationCommandWhyReason">Review reason not provided</strong><span id="consultationCommandWhyDetail">Confirm why the homeowner requested the review.</span></section>
+<section aria-labelledby="consultationCommandStatusLabel" class="consultation-command-tile consultation-command-tile--status"><span class="consultation-command-label" id="consultationCommandStatusLabel">Status</span><strong class="consultation-command-status cf-badge" data-stage="review_received" id="consultationCommandStatus">Review received</strong><span id="consultationCommandStatusDetail">Assessment complete · Guided steps are being prepared</span></section>
+</div>
+<section aria-labelledby="consultationProspectStoryTitle" class="consultation-prospect-story" data-story-kind="homeowner" id="consultationProspectStory">
+<div class="consultation-prospect-story__heading"><div><span class="consultation-command-label">Prospect story</span><h3 id="consultationProspectStoryTitle">How this review began</h3></div><span class="consultation-prospect-story__cue">Read this first</span></div>
+<p class="consultation-prospect-story__narrative" id="consultationProspectStoryNarrative">The homeowner’s intake and attribution context are being organized.</p>
+<ul aria-label="Prospect journey context" class="consultation-prospect-story__facts" id="consultationProspectStoryFacts"></ul>
+<p class="consultation-prospect-story__note" id="consultationProspectStoryNote">Acquisition context explains how they arrived; it does not replace the homeowner’s stated review reason.</p><section class="consultation-prospect-story__note" id="displacementProducerBrief" hidden aria-labelledby="displacementProducerBriefTitle"><strong id="displacementProducerBriefTitle">Carrier displacement</strong><span id="displacementProducerBriefText"></span></section>
+</section>
+<div class="consultation-command-center__guidance">
+<section aria-labelledby="consultationCommandPrioritiesTitle" class="consultation-command-panel" id="consultationCommandPriorities"><div class="consultation-command-panel__heading"><div><span class="consultation-command-label">Priority findings</span><h3 id="consultationCommandPrioritiesTitle">What to address first</h3></div><span class="consultation-command-count" id="consultationCommandPriorityCount">0 ranked findings</span></div><ol class="consultation-command-list consultation-command-list--priorities" id="consultationCommandPriorityList"></ol></section>
+<section aria-labelledby="consultationCommandVerifyTitle" class="consultation-command-panel" id="consultationCommandVerify" tabindex="-1"><div class="consultation-command-panel__heading"><div><span class="consultation-command-label">Verify before advising</span><h3 id="consultationCommandVerifyTitle">Facts, assumptions, and gaps</h3></div><span class="consultation-command-count" id="consultationCommandVerifyCount">0 classified items</span></div><ul aria-label="Known, inferred, missing, and needs-confirmation status" class="consultation-verification-map" id="consultationCommandVerifyList"></ul><p class="consultation-command-guardrail" id="consultationCommandGuardrail">Confirm policy details before making a recommendation.</p></section>
+<aside aria-labelledby="consultationCommandActionTitle" class="consultation-command-action"><span class="consultation-command-label" id="consultationCommandActionEyebrow">Next action</span><h3 id="consultationCommandActionTitle">Begin the guided consultation</h3><p id="consultationCommandActionDetail">Use the prepared questions and checks while preserving producer judgment.</p><a class="button button--primary cf-button cf-button--primary" href="#consultationDuringTitle" id="consultationCommandAction">Open guided steps</a></aside>
+</div>
+<details class="consultation-shared-story" data-completion-state="draft" data-story-source="coveragefit-producer-consumer-story" id="consultationDocumentStory">
+<summary><span><em>Homeowner document</em><strong>Preview the same consultation story</strong><small>Purpose, priority order, confirmation details, saved judgments, and next step come from this consultation record.</small></span><b>Shared source</b></summary>
+<div class="consultation-shared-story__grid">
+<section><span>Why this review started</span><strong id="consultationDocumentStoryWhy">Review reason not provided</strong></section>
+<section><span>Priority order</span><ol id="consultationDocumentStoryPriorities"></ol></section>
+<section><span>Details to confirm</span><strong id="consultationDocumentStoryVerify">Preparing confirmation details</strong></section>
+<section><span>Recommendation record</span><strong id="consultationDocumentStoryRecommendations">No decisions loaded</strong></section>
+<section><span>Current next step</span><strong id="consultationDocumentStoryNext">Continue the consultation</strong></section>
+</div>
+<p>Only saved producer judgments and a completed consultation summary are presented as recorded decisions. Draft work remains clearly labeled in the homeowner document.</p>
+</details>
+</section><section aria-labelledby="consultationBeforeTitle" class="consultation-phase consultation-phase--before"><div class="consultation-phase__heading">
+<div><span class="consultation-phase__number">1</span><div><span class="eyebrow">Prepare</span><h2 id="consultationBeforeTitle">Know what matters first</h2></div></div>
+<p>Review the homeowner’s reason, top priorities, and items that still need confirmation.</p>
+</div><div class="consultation-before-grid"><section aria-labelledby="summaryTitle" class="workspace-card cf-card workspace-card--summary">
+<div class="card-heading cf-section-heading">
+<div>
+<span class="eyebrow">At a glance</span>
+<h2 id="summaryTitle">What to discuss first</h2>
+</div>
+<span class="data-label" id="assessmentDate">Date unavailable</span>
+</div>
+<div class="summary-layout">
+<div aria-label="Protection preparedness score" class="score-panel">
+<strong id="scoreValue">—</strong>
+<span>Protection Score</span>
+<em id="scoreBand">Review Summary</em>
+</div>
+<div class="summary-copy">
+<p class="summary-lead" id="executiveSummary"></p>
+<dl class="summary-facts">
+<div><dt>Customer</dt><dd id="customerName">Not provided</dd></div>
+<div><dt>Primary priority</dt><dd id="primaryPriority">No major priority identified</dd></div>
+<div><dt>Positive starting point</dt><dd id="primaryStrength">Assessment completed</dd></div>
+</dl>
+</div>
+</div>
+</section><section aria-labelledby="evidenceHandoffTitle" class="workspace-card cf-card workspace-card--evidence" id="evidenceHandoffCard">
+<div class="card-heading cf-section-heading">
+<div>
+<span class="eyebrow">Before the conversation</span>
+<h2 id="evidenceHandoffTitle">What to confirm</h2>
+</div>
+<span class="evidence-handoff-status cf-badge" data-state="preparing" id="evidenceHandoffStatus">Preparing evidence</span>
+</div>
+<div aria-label="Assessment evidence counts" class="evidence-handoff-metrics" id="evidenceHandoffMetrics">
+<div><strong id="evidenceConfirmedCount">0</strong><span>What they told us</span></div>
+<div><strong id="evidenceVerificationCount">0</strong><span>Check the policy</span></div>
+<div><strong id="evidenceUnresolvedCount">0</strong><span>Ask the homeowner</span></div>
+</div>
+<div class="evidence-handoff-grid" id="evidenceHandoffGrid">
+<section aria-labelledby="evidenceConfirmedTitle" class="evidence-handoff-group evidence-handoff-group--confirmed">
+<div class="evidence-handoff-group__heading"><span aria-hidden="true">✓</span><h3 id="evidenceConfirmedTitle">What they told us</h3></div>
+<p>Homeowner-reported answers to use as a starting point.</p>
+<ul id="evidenceConfirmedList"></ul>
+</section>
+<section aria-labelledby="evidenceVerificationTitle" class="evidence-handoff-group evidence-handoff-group--verification">
+<div class="evidence-handoff-group__heading"><span aria-hidden="true">?</span><h3 id="evidenceVerificationTitle">Check the policy</h3></div>
+<p>Items to compare with current declarations, endorsements, or terms.</p>
+<ul id="evidenceVerificationList"></ul>
+</section>
+<section aria-labelledby="evidenceUnresolvedTitle" class="evidence-handoff-group evidence-handoff-group--unresolved">
+<div class="evidence-handoff-group__heading"><span aria-hidden="true">→</span><h3 id="evidenceUnresolvedTitle">Ask the homeowner</h3></div>
+<p>Open questions to resolve during the conversation.</p>
+<ul id="evidenceUnresolvedList"></ul>
+</section>
+</div>
+<p class="card-note evidence-handoff-note" id="evidenceHandoffNote">Confirm all homeowner-reported facts against the issued policy before making a recommendation.</p>
+</section><section aria-labelledby="recommendationsTitle" class="workspace-card cf-card workspace-card--recommendations">
+<div class="card-heading cf-section-heading">
+<div>
+<span class="eyebrow">Conversation priorities</span>
+<h2 id="recommendationsTitle">Top topics to explore</h2>
+</div>
+<span class="data-label">Discussion support</span>
+</div>
+<div class="workspace-inline-state cf-state" hidden="" id="recommendationState" role="status"></div>
+<div class="recommendation-list" id="recommendationList"></div>
+</section></div><div class="consultation-detail-grid"><details class="workspace-disclosure"><summary>Contact and review details</summary><section aria-labelledby="clientIntakeTitle" class="workspace-card cf-card workspace-card--client-intake">
+<div class="card-heading cf-section-heading">
+<div>
+<span class="eyebrow">Review details</span>
+<h2 id="clientIntakeTitle">Customer and campaign context</h2>
+</div>
+<span class="data-label" id="clientIntakeStatus">Assessment provided</span>
+</div>
+<dl class="client-intake-grid" id="clientIntakeGrid">
+<div><dt>Name</dt><dd id="clientIntakeName">Not provided</dd></div>
+<div><dt>Phone</dt><dd id="clientIntakePhone">Not provided</dd></div>
+<div><dt>Email</dt><dd id="clientIntakeEmail">Not provided</dd></div>
+<div><dt>Property</dt><dd id="clientIntakeProperty">Not provided</dd></div>
+<div><dt>Reason for review</dt><dd id="clientIntakeReason">General coverage review</dd></div>
+<div><dt>Entry source</dt><dd id="clientIntakeSource">CoverageFit direct</dd></div>
+</dl>
+<p class="card-note" id="clientIntakeNote">Confirm the client’s contact information and review reason before beginning the consultation.</p>
+</section></details><details class="workspace-disclosure"><summary>Property details</summary><section aria-labelledby="propertyTitle" class="workspace-card cf-card">
+<div class="card-heading cf-section-heading">
+<div>
+<span class="eyebrow">Property</span>
+<h2 id="propertyTitle">Known home details</h2>
+</div>
+<span class="data-label" id="propertyConfidence">Confirmation status unavailable</span>
+</div>
+<div class="workspace-inline-state cf-state" hidden="" id="propertyState" role="status"></div>
+<dl class="property-grid" id="propertyGrid"></dl>
+<p class="card-note" id="propertyNote"></p>
+</section></details></div></section><section aria-labelledby="consultationDuringTitle" class="consultation-phase consultation-phase--during"><div class="consultation-phase__heading">
+<div><span class="consultation-phase__number">2</span><div><span class="eyebrow">Work the review</span><h2 id="consultationDuringTitle">Follow one working flow</h2></div></div>
+<p>Begin with the assessment-driven questions, then use the conversation map and working steps to stay oriented.</p>
+</div><section aria-labelledby="consultationProgressTitle" class="workspace-card cf-card consultation-progress" data-state="active" id="consultationProgress">
+<div class="consultation-progress__heading"><div><span class="eyebrow">Consultation progress</span><h2 id="consultationProgressTitle">Understand → Verify → Discuss → Recommend → Decide → Next step</h2><p>One sequence, derived from the work already recorded in this consultation.</p></div><span class="consultation-progress__badge cf-badge" id="consultationProgressBadge">0 of 6 complete</span></div>
+<nav aria-label="Guided consultation progress"><ol class="consultation-progress__stages" id="consultationProgressStages"><li data-state="current"><span>1</span><strong>Understand</strong><small>Current</small></li><li data-state="upcoming"><span>2</span><strong>Verify</strong><small>Upcoming</small></li><li data-state="upcoming"><span>3</span><strong>Discuss</strong><small>Upcoming</small></li><li data-state="upcoming"><span>4</span><strong>Recommend</strong><small>Upcoming</small></li><li data-state="upcoming"><span>5</span><strong>Decide</strong><small>Upcoming</small></li><li data-state="upcoming"><span>6</span><strong>Next step</strong><small>Upcoming</small></li></ol></nav>
+<div class="consultation-progress__action" id="consultationProgressAction"><div><span class="eyebrow" id="consultationProgressCurrentLabel">Current · Understand</span><h3 id="consultationProgressCurrentTitle">Start with the homeowner’s story</h3><p id="consultationProgressCurrentDetail">Review who the homeowner is, why the review exists, and the priorities CoverageFit identified.</p></div><a class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" href="#consultationCommandCenter" id="consultationProgressCurrentAction">Review command center</a></div>
+<p class="consultation-progress__guardrail" id="consultationProgressGuardrail">Progress reflects the existing consultation record and never turns incomplete information into verified fact.</p>
+</section><section aria-labelledby="guidedQuestionsTitle" class="workspace-card cf-card guided-questions-panel" data-state="preparing" id="guidedQuestionsPanel">
+<div class="card-heading cf-section-heading guided-questions-panel__heading"><div><span class="eyebrow">Guided questions</span><h2 id="guidedQuestionsTitle">What to ask next</h2></div><span class="data-label" id="guidedQuestionCount">Preparing questions</span></div>
+<p class="guided-questions-panel__intro">CoverageFit organized these from unanswered details, policy checks, property confirmation, and the highest-priority findings.</p>
+<ol aria-describedby="guidedQuestionsGuardrail" class="guided-question-list" id="guidedQuestionList"><li class="guided-question-list__empty">Preparing assessment-driven questions.</li></ol>
+<p class="guided-questions-panel__guardrail" id="guidedQuestionsGuardrail">Use the wording naturally. Confirm the answer and policy language before turning a finding into advice.</p>
+</section><section aria-labelledby="conversationTimelineTitle" class="workspace-card cf-card workspace-card--consultation-flow"><section aria-labelledby="conversationTimelineTitle" class="consultation-flow__timeline">
+<div class="card-heading cf-section-heading">
+<div>
+<span class="eyebrow">Conversation map</span>
+<h2 id="conversationTimelineTitle">Where you are in the consultation</h2>
+</div>
+<span class="data-label" id="conversationTimelineSummary">Preparing timeline</span>
+</div>
+<div aria-describedby="workspaceA11yInstructions" aria-labelledby="conversationTimelineTitle" class="conversation-timeline" id="conversationTimeline" role="region">
+<div class="conversation-timeline__empty">Preparing conversation timeline.</div>
+</div>
+</section><section aria-describedby="workspaceA11yInstructions" aria-labelledby="checklistSidebarTitle" class="consultation-flow__checklist is-loading" data-state="loading" id="checklistSidebar">
+<div class="checklist-sidebar__header">
+<div>
+<span class="eyebrow">Working steps</span>
+<h2 id="checklistSidebarTitle">Questions, checks, and notes</h2>
+</div>
+<button aria-controls="checklistSidebarBody" aria-expanded="true" aria-keyshortcuts="Alt+C" class="checklist-sidebar__toggle" id="checklistSidebarToggle" title="Show or hide detailed consultation steps (Alt+C)" type="button">
+<span class="checklist-sidebar__toggle-label">Hide details</span>
+<span aria-hidden="true" class="checklist-sidebar__toggle-icon">⌃</span>
+</button>
+</div>
+<div class="checklist-sidebar__body" id="checklistSidebarBody">
+<section aria-label="Consultation progress" class="checklist-progress-placeholder checklist-progress" id="checklistProgress">
+<div class="checklist-progress-placeholder__row">
+<span>Consultation progress</span>
+<strong id="checklistProgressPlaceholder">0%</strong>
+</div>
+<div aria-label="Checklist completion" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="checklist-progress__track cf-progress-track" id="checklistProgressTrack" role="progressbar">
+<span id="checklistProgressBar"></span>
+</div>
+<div class="checklist-progress__metrics">
+<div><strong id="checklistProgressCount">0/0</strong><span>Items complete</span></div>
+<div><strong id="checklistRemainingMinutes">0 min</strong><span>Remaining</span></div>
+</div>
+<div class="checklist-progress__phase">
+<span>Current phase</span>
+<strong id="checklistCurrentPhase">Preparing</strong>
+</div>
+<p id="checklistOverviewText">Preparing consultation phases and discussion items.</p>
+<p class="checklist-progress__persistence" data-state="device" id="checklistPersistenceState" role="status">Progress will be saved on this device.</p>
+<div class="checklist-progress__complete" hidden="" id="checklistCompleteState" role="status">
+<strong>Consultation complete</strong>
+<span>Every checklist item has been reviewed.</span>
+</div>
+</section>
+<div aria-live="polite" class="checklist-shell-state checklist-shell-state--loading checklist-loading-skeleton" id="checklistLoadingState" role="status">
+<div class="sr-only">Preparing checklist from the conversation plan.</div>
+<div aria-hidden="true" class="checklist-loading-skeleton__progress"></div>
+<div aria-hidden="true" class="checklist-loading-skeleton__items">
+<span></span><span></span><span></span><span></span>
+</div>
+</div>
+<div class="checklist-shell-state checklist-shell-state--empty workspace-inline-state cf-state" hidden="" id="checklistEmptyState" role="status">
+<strong>No checklist available</strong>
+<p>A checklist will appear after a valid conversation plan is prepared.</p>
+<button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" data-workspace-action="retry" type="button">Prepare again</button>
+</div>
+<div class="checklist-shell-state checklist-shell-state--error workspace-inline-state cf-state" hidden="" id="checklistErrorState" role="alert">
+<strong>Checklist unavailable</strong>
+<p>The checklist shell loaded, but checklist state could not be prepared.</p>
+<button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" data-workspace-action="retry" type="button">Retry checklist</button>
+</div>
+<div class="workspace-inline-state workspace-inline-state--warning cf-state" hidden="" id="checklistStorageState" role="status">
+<strong>Progress cannot be saved</strong>
+<p>Your checklist still works in this tab, but browser storage is unavailable. Keep this page open until the consultation is complete.</p>
+</div>
+<section aria-label="Checklist phase region" class="checklist-phase-shell" hidden="" id="checklistPhaseShell">
+<div class="checklist-phase-shell__heading">
+<span>Consultation phases</span>
+<button class="checklist-reset-all" data-checklist-action="reset-all" disabled="" id="checklistResetAll" type="button">Reset all</button>
+</div>
+<div class="checklist-phase-list cf-list" id="checklistPhaseList" role="list"></div>
+</section>
+</div>
+</section></section></section><section aria-labelledby="recommendationBuilderTitle" class="workspace-card cf-card recommendation-builder" id="recommendationBuilder">
+<div class="recommendation-builder__heading"><div><span class="eyebrow">Recommendation builder</span><h2 id="recommendationBuilderTitle">Turn verified findings into a clear plan</h2><p>Confirm the facts, explain each issue naturally, choose your professional judgment, and record why it fits this homeowner.</p></div><span class="recommendation-builder__status cf-badge" data-state="not-started" id="recommendationBuilderStatus">Not started</span></div>
+<div aria-label="Recommendation plan summary" class="recommendation-builder__summary" id="recommendationBuilderSummary"><span>0 verified</span><span>0 recommended</span><span>0 undecided</span></div>
+<form aria-describedby="recommendationBuilderGuardrail" id="recommendationBuilderForm">
+<div class="recommendation-builder__list" id="recommendationBuilderList"><div class="recommendation-builder__empty">Preparing ranked findings.</div></div>
+<div class="recommendation-builder__footer"><p id="recommendationBuilderGuardrail">CoverageFit organizes the findings. The licensed producer verifies the facts, applies professional judgment, and confirms carrier requirements before advising.</p><div class="recommendation-builder__actions"><button class="button button--primary cf-button cf-button--primary" id="saveRecommendationPlan" type="submit">Save recommendation plan</button><span aria-live="polite" id="recommendationBuilderMessage" role="status">No recommendation is selected automatically.</span></div></div>
+</form>
+</section><section aria-labelledby="consultationAfterTitle" class="consultation-phase consultation-phase--after"><div class="consultation-phase__heading">
+<div><span class="consultation-phase__number">3</span><div><span class="eyebrow">Record the outcome</span><h2 id="consultationAfterTitle">Save the decision and next step</h2></div></div>
+<p>Update the stage, schedule follow-up, and leave a clear note for the next touchpoint.</p>
+</div><section aria-labelledby="consultationCompletionTitle" class="workspace-card cf-card consultation-completion" data-state="draft" id="consultationCompletion">
+<div class="consultation-completion__heading"><div><span class="eyebrow">Consultation completion</span><h2 id="consultationCompletionTitle">Close out the conversation clearly</h2><p>Capture what was decided, what remains open, what a carrier quote needs, and who does what next.</p></div><span class="consultation-completion__badge cf-badge" data-state="draft" id="consultationCompletionBadge">Closeout needed</span></div>
+<div aria-label="Existing consultation context" class="consultation-completion__context">
+<section><span>Recommendation plan</span><strong id="consultationCompletionDecisionCount">Preparing decisions</strong><ul id="consultationCompletionDecisionList"></ul></section>
+<section><span>Open verification</span><strong id="consultationCompletionOpenCount">Preparing open items</strong><p id="consultationCompletionOpenDetail">Assessment and finding status will appear here.</p></section>
+<section><span>Existing follow-up</span><strong id="consultationCompletionFollowUpState">Preparing next step</strong><p id="consultationCompletionFollowUpDetail">Follow-up status will appear here.</p></section>
+</div>
+<form aria-describedby="consultationCompletionGuardrail" id="consultationCompletionForm">
+<div class="consultation-completion__fields">
+<label class="consultation-completion__field consultation-completion__field--wide"><span>What did the homeowner decide or agree to consider?</span><textarea id="consultationCompletionDecision" maxlength="700" name="completion_decision" placeholder="Example: Review a higher water-backup limit in the formal carrier quote; keep the current deductible option for comparison." required="" rows="3"></textarea></label>
+<label class="consultation-completion__field"><span>Do unresolved items remain?</span><select id="consultationCompletionUnresolvedState" name="completion_unresolved_state"><option value="open">Yes — items remain open</option><option value="none">No unresolved items</option></select></label>
+<label class="consultation-completion__field consultation-completion__field--wide" id="consultationCompletionUnresolvedField"><span>What remains unresolved?</span><textarea id="consultationCompletionUnresolved" maxlength="900" name="completion_unresolved" placeholder="List policy terms, property facts, documents, or homeowner decisions that still require confirmation." required="" rows="3"></textarea></label>
+<label class="consultation-completion__field"><span>Carrier quote status</span><select id="consultationCompletionQuoteState" name="completion_quote_state"><option value="not_requested">No carrier quote requested</option><option value="ready">Ready to prepare</option><option value="needs_items">Needs information or documents</option><option value="requested">Carrier quote requested</option></select></label>
+<label class="consultation-completion__field consultation-completion__field--wide" id="consultationCompletionQuoteField"><span>Quote requirements or instructions</span><textarea id="consultationCompletionQuoteRequirements" maxlength="900" name="completion_quote_requirements" placeholder="List documents, limits, options, carrier checks, or comparisons needed for the formal quote." rows="3"></textarea></label>
+<label class="consultation-completion__field consultation-completion__field--wide"><span>Who does what next?</span><textarea id="consultationCompletionNextAction" maxlength="700" name="completion_next_action" placeholder="Example: Dylan will prepare two deductible options; homeowner will send the declarations page by Friday." required="" rows="3"></textarea></label>
+</div>
+<div class="consultation-completion__footer"><p id="consultationCompletionGuardrail">This is a consultation closeout, not a carrier proposal or coverage determination.</p><div><span aria-live="polite" id="consultationCompletionMessage" role="status">Complete all required closeout fields before saving.</span><button class="button button--primary cf-button cf-button--primary" id="saveConsultationCompletion" type="submit">Save consultation closeout</button></div></div>
+</form>
+</section><div class="workspace-card cf-card consultation-after-card"><div aria-labelledby="consultationDeliveryTitle" class="consultation-delivery" id="consultationDeliveryState">
+<div class="consultation-delivery__copy">
+<span class="eyebrow" id="consultationDeliveryTitle">Record status</span>
+<div class="consultation-delivery__line">
+<span class="consultation-delivery__badge cf-badge" data-state="local" id="consultationDeliveryBadge">Saved locally</span>
+<span aria-live="polite" id="consultationDeliveryMeta" role="status">This consultation is available in this browser.</span>
+</div>
+</div>
+<button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" hidden="" id="acknowledgeConsultation" type="button">Acknowledge review</button>
+</div><form aria-labelledby="consultationDispositionTitle" class="consultation-disposition" id="consultationDispositionForm">
+<div class="consultation-disposition__heading">
+<div>
+<span class="eyebrow">Outcome</span>
+<h3 id="consultationDispositionTitle">Stage and result</h3>
+</div>
+<span class="consultation-disposition__badge cf-badge" data-stage="review_received" id="consultationDispositionBadge">Review received</span>
+</div>
+<div class="consultation-disposition__fields">
+<div class="consultation-disposition__field">
+<label for="consultationStage">Stage</label>
+<select id="consultationStage" name="consultation_stage">
+<option value="review_received">Review received</option>
+<option value="contact_attempted">Contact attempted</option>
+<option value="consultation_scheduled">Consultation scheduled</option>
+<option value="consultation_completed">Consultation completed</option>
+<option value="proposal_prepared">Proposal prepared</option>
+<option value="decision_pending">Decision pending</option>
+<option value="closed">Closed</option>
+</select>
+</div>
+<div class="consultation-disposition__field">
+<label for="consultationOutcome">Final outcome</label>
+<select disabled="" id="consultationOutcome" name="consultation_outcome">
+<option value="none">Choose final outcome</option>
+<option value="policy_bound">Policy bound</option>
+<option value="current_carrier_retained">Stayed with current carrier</option>
+<option value="declined_price">Declined — price</option>
+<option value="declined_coverage">Declined — coverage</option>
+<option value="unable_to_reach">Unable to reach</option>
+<option value="not_eligible">Not eligible / not a fit</option>
+<option value="deferred">Deferred / future review</option>
+</select>
+</div>
+<div class="consultation-disposition__field consultation-disposition__field--note">
+<label for="consultationDispositionNote">Disposition note</label>
+<input id="consultationDispositionNote" maxlength="240" name="consultation_disposition_note" placeholder="Optional reason, objection, or closing context" type="text"/>
+</div>
+</div>
+<div class="consultation-disposition__actions">
+<button class="button button--primary button--compact cf-button cf-button--primary cf-button--compact" id="saveConsultationDisposition" type="submit">Save stage</button>
+<span aria-live="polite" class="consultation-disposition__message" id="consultationDispositionMessage" role="status">Stage changes are saved with this consultation record.</span>
+</div>
+</form><form aria-labelledby="consultationFollowUpTitle" class="consultation-follow-up" hidden="" id="consultationFollowUpForm">
+<div class="consultation-follow-up__heading">
+<div>
+<span class="eyebrow">Next step</span>
+<h3 id="consultationFollowUpTitle">Schedule follow-up</h3>
+</div>
+<span class="consultation-follow-up__badge cf-badge" data-state="none" id="consultationFollowUpBadge">Not scheduled</span>
+</div>
+<div class="consultation-follow-up__fields">
+<div class="consultation-follow-up__field">
+<label for="consultationFollowUpDate">Follow-up date</label>
+<input id="consultationFollowUpDate" name="follow_up_date" type="date"/>
+</div>
+<div class="consultation-follow-up__field consultation-follow-up__field--note">
+<label for="consultationFollowUpNote">Action note</label>
+<input id="consultationFollowUpNote" maxlength="240" name="follow_up_note" placeholder="Example: Call after 4 PM to review deductible options" type="text"/>
+</div>
+</div>
+<div class="consultation-follow-up__actions">
+<button class="button button--primary button--compact cf-button cf-button--primary cf-button--compact" id="saveConsultationFollowUp" type="submit">Save follow-up</button>
+<button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" id="completeConsultationFollowUp" type="button">Mark complete</button>
+<button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" id="clearConsultationFollowUp" type="button">Clear</button>
+</div>
+<span aria-live="polite" class="consultation-follow-up__message" id="consultationFollowUpMessage" role="status">Follow-up details sync with the secure producer inbox.</span>
+</form><section aria-labelledby="consultationNotesTitle" class="consultation-notes-activity" hidden="" id="consultationNotesActivity">
+<div class="consultation-notes-activity__heading">
+<div>
+<span class="eyebrow">History</span>
+<h3 id="consultationNotesTitle">Notes and activity</h3>
+</div>
+<span class="consultation-notes-activity__count" id="consultationActivityCount">No activity yet</span>
+</div>
+<form class="consultation-note-form" hidden="" id="consultationNoteForm">
+<label for="consultationNoteText">Add producer note</label>
+<textarea id="consultationNoteText" maxlength="1000" name="producer_note" placeholder="Document the conversation, decision, objection, or next step." rows="3"></textarea>
+<div class="consultation-note-form__actions">
+<span aria-live="polite" id="consultationNoteMessage" role="status">Notes are saved to the secure producer inbox.</span>
+<button class="button button--primary button--compact cf-button cf-button--primary cf-button--compact" id="saveConsultationNote" type="submit">Add note</button>
+</div>
+</form>
+<ol aria-label="Consultation activity timeline" class="consultation-activity-list" id="consultationActivityList"></ol>
+<p class="consultation-activity-empty" hidden="" id="consultationActivityEmpty">No server-backed consultation activity is available for this record.</p>
+</section></div></section></div></div></section><section aria-labelledby="workspaceTabInbox" class="workspace-view workspace-view--inbox" data-workspace-panel="inbox" hidden="" id="workspaceViewInbox" role="tabpanel"><section aria-live="polite" class="inbox-connection-state cf-state" data-state="offline" id="inboxConnectionState" role="status"><div><span class="eyebrow" id="inboxConnectionEyebrow">Saved-device mode</span><strong id="inboxConnectionTitle">Showing records saved on this device</strong><p id="inboxConnectionMessage">Connect the secure producer inbox to receive and update inquiries and reviews from other devices.</p></div><button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" data-inbox-action="connect" id="inboxConnectionAction" type="button">Connect inbox</button></section><section class="early-lead-inbox cf-card" id="pvxEarlyLeadInbox" aria-labelledby="pvxEarlyLeadInboxTitle" data-state="idle"><div class="early-lead-inbox__heading"><div><span class="eyebrow">Appointment-first inbox</span><h2 id="pvxEarlyLeadInboxTitle">New 408FARMERS inquiries</h2><p>See who requested a review, what they shared, and whether a callback time has been selected.</p></div><strong class="early-lead-inbox__count" id="pvxEarlyLeadCount" aria-live="polite">0</strong></div><div class="early-lead-filters" aria-label="Filter appointment-first inquiries"><button type="button" aria-pressed="true" data-early-lead-filter="all"><span>All</span><strong data-filter-count>0</strong></button><button type="button" aria-pressed="false" data-early-lead-filter="needs_scheduling"><span>Needs scheduling</span><strong data-filter-count>0</strong></button><button type="button" aria-pressed="false" data-early-lead-filter="scheduled"><span>Scheduled</span><strong data-filter-count>0</strong></button><button type="button" aria-pressed="false" data-early-lead-filter="today"><span>Today</span><strong data-filter-count>0</strong></button></div><p id="pvxEarlyLeadStatus" role="status" aria-live="polite">Connect the secure producer inbox to load appointment-first inquiries.</p><div id="pvxEarlyLeadCards" class="early-lead-cards" aria-live="polite"></div></section><section aria-labelledby="consultationRecordsTitle" class="consultation-records-bar cf-card consultation-records-bar--inbox" hidden="" id="consultationRecordsBar"><div class="workspace-view-heading">
+<div><span class="eyebrow">Completed review records</span><h2 id="consultationRecordsTitle">Deeper CoverageFit reviews</h2><p>These tools appear for prospects who have completed enough CoverageFit information for a guided consultation.</p></div>
+<span aria-live="polite" id="consultationRecordMeta" role="status">Preparing saved records</span>
+</div><div class="workspace-compat-control" hidden="">
+<label for="consultationRecordSelect">Active consultation record</label>
+<select aria-describedby="consultationRecordMeta consultationDeliveryMeta consultationFollowUpMessage" id="consultationRecordSelect"></select>
+</div><section aria-label="Inbox review summary" class="inbox-summary" id="inboxSummary"><button aria-pressed="true" data-inbox-quick-filter="all" type="button"><span>All reviews</span><strong id="inboxSummaryAll">0</strong><small>Saved records</small></button><button aria-pressed="false" data-inbox-quick-filter="attention" type="button"><span>Needs attention</span><strong id="inboxSummaryAttention">0</strong><small>New or due now</small></button><button aria-pressed="false" data-inbox-quick-filter="new" type="button"><span>New</span><strong id="inboxSummaryNew">0</strong><small>Not opened</small></button><button aria-pressed="false" data-inbox-quick-filter="today" type="button"><span>Due today</span><strong id="inboxSummaryToday">0</strong><small>Scheduled follow-up</small></button></section><section aria-labelledby="consultationQueueTitle" class="consultation-queue">
+<div class="consultation-queue__heading">
+<div>
+<span class="eyebrow">Reviews</span>
+<h3 id="consultationQueueTitle">Choose the next conversation</h3>
+</div>
+<span aria-live="polite" id="consultationQueueMeta" role="status">Preparing queue</span>
+</div>
+<div class="consultation-queue__filters" role="search">
+<div class="consultation-queue__field consultation-queue__field--search">
+<label for="consultationSearch">Search completed reviews</label>
+<input autocomplete="off" id="consultationSearch" placeholder="Name, address, phone, email, or review reason" type="search"/>
+</div>
+<details class="consultation-queue__advanced" id="consultationAdvancedFilters"><summary><span><strong>More filters</strong><small>Delivery, consultation stage, and follow-up</small></span><b id="consultationActiveFilterCount">None active</b></summary><div class="consultation-queue__advanced-grid">
+<div class="consultation-queue__field">
+<label for="consultationStatusFilter">Delivery status</label>
+<select id="consultationStatusFilter">
+<option value="all">All statuses</option>
+<option value="new">New</option>
+<option value="opened">Opened</option>
+<option value="acknowledged">Acknowledged</option>
+<option value="local">Saved locally</option>
+</select>
+</div>
+<div class="consultation-queue__field">
+<label for="consultationStageFilter">Consultation stage</label>
+<select id="consultationStageFilter">
+<option value="all">All stages</option>
+<option value="review_received">Review received</option>
+<option value="contact_attempted">Contact attempted</option>
+<option value="consultation_scheduled">Consultation scheduled</option>
+<option value="consultation_completed">Consultation completed</option>
+<option value="proposal_prepared">Proposal prepared</option>
+<option value="decision_pending">Decision pending</option>
+<option value="closed">Closed</option>
+</select>
+</div>
+<div class="consultation-queue__field">
+<label for="consultationFollowUpFilter">Follow-up</label>
+<select id="consultationFollowUpFilter">
+<option value="all">All follow-up states</option>
+<option value="needs-action">Needs action</option>
+<option value="overdue">Overdue</option>
+<option value="today">Due today</option>
+<option value="upcoming">Upcoming</option>
+<option value="completed">Completed</option>
+<option value="unscheduled">Not scheduled</option>
+</select>
+</div>
+</div><button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact consultation-queue__clear" id="clearConsultationFilters" type="button">Clear filters</button></details>
+</div>
+<div aria-label="Filtered consultation records" class="consultation-queue__list" id="consultationQueueList" role="list"></div>
+<div class="consultation-queue__empty" hidden="" id="consultationQueueEmpty"><strong>No matching completed reviews</strong><p>Try another search or clear the active filters.</p><button class="button button--secondary button--compact cf-button cf-button--secondary cf-button--compact" data-inbox-action="clear-filters" type="button">Clear filters</button></div>
+</section></section><section class="workspace-view-empty cf-card inbox-empty-state" hidden="" id="inboxViewEmpty">
+<span class="eyebrow">Producer inbox</span>
+<h2 id="inboxEmptyTitle">No saved inquiries or completed reviews yet</h2>
+<p id="inboxEmptyMessage">Connect the secure producer inbox to load 408FARMERS inquiries and CoverageFit review records.</p>
+<div class="inbox-empty-state__actions"><button class="button button--primary cf-button cf-button--primary" data-inbox-action="connect" type="button">Connect secure inbox</button><a class="button button--secondary cf-button cf-button--secondary" href="/assessment/">Start Home assessment</a></div>
+</section></section><section aria-labelledby="workspaceTabPipeline" class="workspace-view workspace-view--pipeline" data-workspace-panel="pipeline" hidden="" id="workspaceViewPipeline" role="tabpanel"><section aria-labelledby="consultationPipelineTitle" class="consultation-pipeline cf-card consultation-pipeline--standalone" id="consultationPipeline">
+<div class="consultation-pipeline__heading">
+<div>
+<span class="eyebrow">Pipeline</span>
+<h3 id="consultationPipelineTitle">Performance and source reporting</h3>
+</div>
+<span aria-live="polite" id="consultationPipelineMeta" role="status">Preparing pipeline totals</span>
+</div>
+<div aria-labelledby="pipelineDateRangeLabel" class="consultation-pipeline__date-controls">
+<div class="consultation-pipeline__date-field">
+<label for="pipelineDateRange" id="pipelineDateRangeLabel">Reporting date range</label>
+<select aria-describedby="pipelineDateMessage" id="pipelineDateRange">
+<option value="all">All time</option>
+<option value="7d">Last 7 days</option>
+<option value="30d">Last 30 days</option>
+<option value="90d">Last 90 days</option>
+<option value="custom">Custom range</option>
+</select>
+</div>
+<div class="consultation-pipeline__custom-dates" hidden="" id="pipelineCustomDates">
+<div class="consultation-pipeline__date-field">
+<label for="pipelineDateStart">Start date</label>
+<input aria-describedby="pipelineDateMessage" id="pipelineDateStart" type="date"/>
+</div>
+<div class="consultation-pipeline__date-field">
+<label for="pipelineDateEnd">End date</label>
+<input aria-describedby="pipelineDateMessage" id="pipelineDateEnd" type="date"/>
+</div>
+</div>
+<span aria-live="polite" class="consultation-pipeline__date-message" id="pipelineDateMessage" role="status">Reporting across all synchronized records.</span>
+</div>
+<div aria-label="Consultation pipeline totals" class="consultation-pipeline__metrics">
+<article class="consultation-pipeline__metric">
+<span>Total consultations</span>
+<strong id="pipelineTotalCount">0</strong>
+<small id="pipelineTotalScope">All synchronized records</small>
+</article>
+<article class="consultation-pipeline__metric" data-metric="open">
+<span>Open</span>
+<strong id="pipelineOpenCount">0</strong>
+<small id="pipelineOpenShare">0% of pipeline</small>
+</article>
+<article class="consultation-pipeline__metric" data-metric="closed">
+<span>Closed</span>
+<strong id="pipelineClosedCount">0</strong>
+<small id="pipelineClosedShare">0% of pipeline</small>
+</article>
+<article class="consultation-pipeline__metric" data-metric="bound">
+<span>Policy bound</span>
+<strong id="pipelineBoundCount">0</strong>
+<small id="pipelineBoundShare">0% of closed</small>
+</article>
+</div>
+<section aria-labelledby="pipelineTrendTitle" class="consultation-pipeline__trend">
+<div class="consultation-pipeline__trend-heading">
+<div>
+<h4 id="pipelineTrendTitle">Consultation and conversion trend</h4>
+<span id="pipelineTrendMeta">Preparing trend buckets</span>
+</div>
+<button class="button button--secondary button--compact" disabled="" id="pipelineExportCsv" type="button">Download pipeline CSV</button>
+</div>
+<div aria-hidden="true" class="consultation-pipeline__trend-legend">
+<span><i data-series="consultations"></i>Consultations received</span>
+<span><i data-series="conversion"></i>Policy-bound conversion</span>
+</div>
+<p class="consultation-pipeline__trend-context">Each bucket groups reviews by received date and shows their current policy-bound conversion.</p>
+<div aria-label="Consultation and policy-bound conversion trend" class="consultation-pipeline__trend-chart" id="pipelineTrendChart" role="img"></div>
+<p class="consultation-pipeline__empty" id="pipelineTrendEmpty">No dated consultations are available in this reporting range.</p>
+<div class="consultation-pipeline__trend-table-wrap" id="pipelineTrendTableWrap">
+<table class="consultation-pipeline__trend-table">
+<caption class="sr-only">Date-bucketed consultation and conversion trend</caption>
+<thead>
+<tr>
+<th scope="col">Period</th>
+<th scope="col">Consultations</th>
+<th scope="col">Closed</th>
+<th scope="col">Policy bound</th>
+<th scope="col">Close rate</th>
+<th scope="col">Bound conversion</th>
+</tr>
+</thead>
+<tbody id="pipelineTrendTableBody"></tbody>
+</table>
+</div>
+<p aria-live="polite" class="consultation-pipeline__export-message" id="pipelineExportMessage" role="status">CSV export uses the selected reporting date range.</p>
+</section>
+<div class="consultation-pipeline__reports">
+<section aria-labelledby="pipelineStagesTitle" class="consultation-pipeline__report">
+<div class="consultation-pipeline__report-heading">
+<h4 id="pipelineStagesTitle">Stage totals</h4>
+<span>Select a stage to focus the queue</span>
+</div>
+<div class="consultation-pipeline__list" id="pipelineStageList" role="list"></div>
+</section>
+<section aria-labelledby="pipelineOutcomesTitle" class="consultation-pipeline__report">
+<div class="consultation-pipeline__report-heading">
+<h4 id="pipelineOutcomesTitle">Final outcomes</h4>
+<span>Closed consultations only</span>
+</div>
+<div class="consultation-pipeline__list" id="pipelineOutcomeList" role="list"></div>
+<p class="consultation-pipeline__empty" id="pipelineOutcomeEmpty">No final outcomes have been recorded yet.</p>
+</section>
+</div>
+<div aria-label="Consultation source segmentation" class="consultation-pipeline__source-reports">
+<section aria-labelledby="pipelineCampaignsTitle" class="consultation-pipeline__report">
+<div class="consultation-pipeline__report-heading">
+<h4 id="pipelineCampaignsTitle">Campaigns</h4>
+<span>Selected date range</span>
+</div>
+<div class="consultation-pipeline__list" id="pipelineCampaignList" role="list"></div>
+<p class="consultation-pipeline__empty" id="pipelineCampaignEmpty">No campaign attribution is available in this date range.</p>
+</section>
+<section aria-labelledby="pipelineReferralsTitle" class="consultation-pipeline__report">
+<div class="consultation-pipeline__report-heading">
+<h4 id="pipelineReferralsTitle">Referral sources</h4>
+<span>Selected date range</span>
+</div>
+<div class="consultation-pipeline__list" id="pipelineReferralList" role="list"></div>
+<p class="consultation-pipeline__empty" id="pipelineReferralEmpty">No referral attribution is available in this date range.</p>
+</section>
+<section aria-labelledby="pipelineEntriesTitle" class="consultation-pipeline__report">
+<div class="consultation-pipeline__report-heading">
+<h4 id="pipelineEntriesTitle">Entry sources</h4>
+<span>Selected date range</span>
+</div>
+<div class="consultation-pipeline__list" id="pipelineEntryList" role="list"></div>
+<p class="consultation-pipeline__empty" id="pipelineEntryEmpty">No entry-source attribution is available in this date range.</p>
+</section>
+</div>
+</section><section class="workspace-view-empty cf-card" hidden="" id="pipelineViewEmpty">
+<span class="eyebrow">Pipeline</span>
+<h2>No consultations to report yet</h2>
+<p>Pipeline reporting will appear after completed reviews are synchronized.</p>
+</section></section>
+
+
+
+
+</main>
+<footer class="workspace-footer">
+<span>CoverageFit Agent Workspace</span>
+<span>Virginia Tam Insurance Agency · Internal consultation preparation</span>
+</footer>
+<script src="/assets/js/property-intelligence.js"></script>
+<script src="/assets/js/producer-config.js"></script>
+<script src="/assets/js/consultation-records.js"></script>
+<script src="/assets/js/remote-consultations.js"></script>
+<script src="/assets/js/protection-score.js"></script>
+<script src="/assets/js/advisory-discovery-contract.js"></script>
+<script src="/assets/js/workspace-data.js"></script>
+<script src="/assets/js/advisory-workspace-data.js"></script>
+<script src="/assets/js/consultation-command-center.js"></script>
+<script src="/assets/js/consultation-pipeline-summary.js"></script>
+<script src="/assets/js/conversation-planner.js"></script>
+<script src="/assets/js/recommendation-builder.js"></script>
+<script src="/assets/js/explanation-assist.js"></script>
+<script src="/assets/js/consultation-progress.js"></script>
+<script src="/assets/js/producer-pilot-readiness.js"></script>
+<script src="/assets/js/consultation-completion.js"></script>
+<script src="/assets/js/producer-consumer-story.js"></script>
+<script src="/assets/js/consultation-checklist.js"></script>
+<script src="/assets/js/workspace-motion.js"></script>
+<script src="/assets/js/print-adapters.js"></script>
+<script src="/assets/js/print-sections.js"></script>
+<script src="/assets/js/print-visibility.js"></script>
+<script src="/assets/js/print/consumer-language.js"></script>
+<script src="/assets/js/print/models/executive-summary-model.js"></script>
+<script src="/assets/js/print/models/protection-snapshot-model.js"></script>
+<script src="/assets/js/print/models/property-summary-model.js"></script>
+<script src="/assets/js/print/models/recommendation-model.js"></script>
+<script src="/assets/js/print/sections/executive-summary.js"></script>
+<script src="/assets/js/print/sections/property-summary.js"></script>
+<script src="/assets/js/print/sections/recommendations.js"></script>
+<script src="/assets/js/print/models/checklist-model.js"></script>
+<script src="/assets/js/print/sections/checklist.js"></script>
+<script src="/assets/js/print/models/timeline-model.js"></script>
+<script src="/assets/js/print/sections/timeline.js"></script>
+<script src="/assets/js/print/sections/metadata.js"></script>
+<script src="/assets/js/document-composer.js"></script>
+<script src="/assets/js/print/report-shell.js"></script>
+<script src="/assets/js/print-renderers.js"></script>
+<script src="/assets/js/print-engine.js"></script>
+<script src="/assets/js/pvx-consumer-events.js"></script>
+<script src="/assets/js/pvx-unified-workspace.js?v=CF-APPOINTMENT-FIRST-INBOX-1.0"></script>
+<script src="/assets/js/pvx-readiness-pilot-dashboard.js"></script>
+<script src="/assets/js/agent-workspace.js?v=CF-SOLO-DESK-1.0"></script>
+<script src="/assets/js/workspace-simplified-architecture.js"></script>
+<script type="module" src="/assets/js/solo-desk.mjs?v=CF-ACQ-MEASURE-1.0"></script>
+</body>
+</html>

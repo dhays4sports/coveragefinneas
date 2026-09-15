@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0b2f57">
+  <title>Business Profile | CoverageFit Business</title>
+  <meta name="description" content="Tell CoverageFit a little about your business so your review can follow the right path.">
+  <link rel="icon" href="/assets/images/coveragefit-mark.svg">
+  <link rel="stylesheet" href="/assets/css/coveragefit.css">
+  <link rel="stylesheet" href="/assets/css/pilot.css">
+  <link rel="stylesheet" href="/assets/css/business-profile.css">
+</head>
+<body class="business-profile-page">
+<header class="assessment-top"><div class="wrap assessment-top-inner"><a href="/business/"><img src="/assets/images/coveragefit-logo-board.png" alt="CoverageFit"></a><div class="assessment-presented"><span>CoverageFit Business</span><strong>Business Profile</strong></div></div></header>
+<main class="business-profile-main"><div class="business-journey" id="businessJourney" aria-label="Business coverage review progress"><div class="journey-step is-active" data-stage="profile"><span>1</span><strong>Business Profile</strong></div><div class="journey-step" data-stage="industry"><span>2</span><strong>Industry Review</strong></div><div class="journey-step" data-stage="coverage"><span>3</span><strong>Current Coverage</strong></div><div class="journey-step" data-stage="snapshot"><span>4</span><strong>Snapshot</strong></div><div class="journey-step" data-stage="contact"><span>5</span><strong>Contact Review</strong></div></div>
+  <div class="wrap business-profile-wrap">
+    <div class="business-profile-intro">
+      <span class="eyebrow-chip">Step 1 of your review</span>
+      <h1>Tell us what kind of business you run.</h1>
+      <p>Your answers determine which question path comes next. You are not requesting a quote yet, and no policy documents are required.</p>
+    </div>
+    <form id="businessProfileForm" class="business-profile-card">
+      <section class="profile-section">
+        <div class="profile-heading"><span>01</span><div><h2>Choose your industry</h2><p>Select the option that most closely matches your primary operation.</p></div></div>
+        <div class="industry-grid" id="industryGrid">
+          <label class="industry-option"><input type="radio" name="industry" value="contractor" required><span class="industry-icon">🛠️</span><strong>Contractor</strong><small>Trades, construction, installation</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="restaurant"><span class="industry-icon">🍽️</span><strong>Restaurant</strong><small>Food service, catering, hospitality</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="professional-office"><span class="industry-icon">💼</span><strong>Professional Office</strong><small>Consulting, legal, accounting, services</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="retail"><span class="industry-icon">🛍️</span><strong>Retail</strong><small>Storefront, ecommerce, inventory</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="nonprofit"><span class="industry-icon">🤝</span><strong>Nonprofit</strong><small>Community, education, volunteer-led</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="healthcare"><span class="industry-icon">⚕️</span><strong>Healthcare</strong><small>Medical, wellness, patient services</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="technology"><span class="industry-icon">💻</span><strong>Technology</strong><small>Software, IT, data, online services</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="property-management"><span class="industry-icon">🏢</span><strong>Property Management</strong><small>Residential or commercial portfolios</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="manufacturing"><span class="industry-icon">🏭</span><strong>Manufacturing</strong><small>Production, fabrication, distribution</small></label>
+          <label class="industry-option"><input type="radio" name="industry" value="other"><span class="industry-icon">＋</span><strong>Other</strong><small>Choose this if none fit closely</small></label>
+        </div>
+      </section>
+
+      <section class="profile-section profile-details">
+        <div class="profile-heading"><span>02</span><div><h2>Build your business profile</h2><p>These details help organize the next part of the review.</p></div></div>
+        <div class="profile-fields">
+          <label>Business size<select name="businessSize" required><option value="">Select one</option><option value="just-me">Just me</option><option value="2-5">2–5 people</option><option value="6-20">6–20 people</option><option value="21-50">21–50 people</option><option value="51-plus">51+ people</option></select></label>
+          <label>Primary location type<select name="locationType" required><option value="">Select one</option><option value="home-based">Home-based</option><option value="mobile">Mobile / customer locations</option><option value="office">Office</option><option value="retail-storefront">Retail storefront</option><option value="restaurant-facility">Restaurant / food facility</option><option value="warehouse">Warehouse</option><option value="industrial">Industrial / manufacturing</option><option value="multiple">Multiple location types</option></select></label>
+          <label>Number of employees<select name="employees" required><option value="">Select one</option><option value="0">No employees</option><option value="1-5">1–5 employees</option><option value="6-20">6–20 employees</option><option value="21-50">21–50 employees</option><option value="51-plus">51+ employees</option></select></label>
+          <label>Estimated annual revenue<select name="revenueRange" required><option value="">Select one</option><option value="pre-revenue">Pre-revenue / startup</option><option value="under-100k">Under $100,000</option><option value="100k-250k">$100,000–$250,000</option><option value="250k-500k">$250,000–$500,000</option><option value="500k-1m">$500,000–$1 million</option><option value="1m-5m">$1 million–$5 million</option><option value="5m-plus">More than $5 million</option></select></label>
+        </div>
+      </section>
+
+      <div class="profile-submit-row">
+        <div><strong>Next: Industry Review</strong><span>Your selected industry will determine the question path.</span></div>
+        <button class="btn primary" type="submit">Continue My Business Review</button>
+      </div>
+      <p class="profile-disclaimer">Educational use only. This profile does not determine eligibility, pricing, underwriting, or coverage.</p>
+    </form>
+  </div>
+</main>
+<script src="/assets/js/attribution.js"></script><script src="/assets/js/business-profile.js"></script>
+</body>
+</html>

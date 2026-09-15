@@ -1,0 +1,2 @@
+import {withD1RateLimit} from '../../../server/api-rate-limit.mjs';import {createPVXRecordStore} from '../../../server/d1-json-store.mjs';import {handlePVXPolicyIntake} from '../../../server/pvx-policy-intake-core.mjs';
+export const onRequest=context=>withD1RateLimit(context,{route:'pvx-policy-upload',limit:10,windowSeconds:60},()=>handlePVXPolicyIntake(context.request,{recordStore:context.env?.COVERAGEFIT_DB?createPVXRecordStore(context.env.COVERAGEFIT_DB):null,fileStore:context.env?.POLICY_FILES||null}));

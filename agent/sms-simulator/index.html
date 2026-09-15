@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#0b2f57">
+  <link rel="manifest" href="/site.webmanifest">
+  <title>408FARMERS SMS Connection Lab | CoverageFit</title>
+  <link rel="icon" href="/assets/images/coveragefit-mark.svg">
+  <link rel="stylesheet" href="/assets/css/sms-simulator.css">
+</head>
+<body>
+  <header class="sim-header">
+    <div class="sim-shell sim-header__inner">
+      <a class="sim-brand" href="/agent/workspace/" aria-label="CoverageFit Agent Workspace">
+        <img src="/assets/images/coveragefit-logo-board.png" alt="CoverageFit">
+      </a>
+      <div class="sim-header__context">
+        <strong>408FARMERS SMS Connection Lab</strong>
+        <span>RC-SMS-1.9 · Operations + reliability</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="sim-shell sim-main">
+    <section class="sim-lock" id="simLock" aria-labelledby="simLockTitle">
+      <span class="sim-eyebrow">Protected internal tool</span>
+      <h1 id="simLockTitle">Test the complete homebuyer intake and verify the RingCentral connection.</h1>
+      <p>Enter the same secure producer access key used by the CoverageFit Agent Workspace. The key stays in this browser session and is never placed in the URL.</p>
+      <form id="simAccessForm" class="sim-access-form">
+        <label for="simAccessKey">Producer access key</label>
+        <div class="sim-access-row">
+          <input id="simAccessKey" type="password" minlength="24" autocomplete="current-password" required>
+          <button type="submit" class="sim-button sim-button--primary">Open simulator</button>
+        </div>
+        <p class="sim-form-status" id="simAccessStatus" role="status"></p>
+      </form>
+    </section>
+
+    <section id="simWorkspace" hidden>
+      <div class="sim-intro">
+        <div>
+          <span class="sim-eyebrow">Deterministic conversation engine</span>
+          <h1>Simulate the 408-FARMERS homebuyer intake</h1>
+          <p>Use only fictional test details. Walk through the buyer address, closing date, occupancy, auto-review, and RUSH path. STOP, HELP, START, RESTART, and DYLAN remain available at every stage. RingCentral credentials remain server-side.</p>
+        </div>
+        <div class="sim-actions sim-actions--inline"><a class="sim-button sim-button--secondary" href="/agent/sms-operations/">Operations dashboard</a><button class="sim-button sim-button--quiet" id="simDisconnect" type="button">Lock simulator</button></div>
+      </div>
+
+      <div class="sim-grid">
+        <section class="sim-phone" aria-labelledby="simPhoneTitle">
+          <div class="sim-phone__top">
+            <div>
+              <span class="sim-phone__label">Text conversation</span>
+              <h2 id="simPhoneTitle">408-FARMERS</h2>
+            </div>
+            <span class="sim-state" id="simState">new</span>
+          </div>
+          <div class="sim-transcript" id="simTranscript" aria-live="polite"></div>
+          <form class="sim-compose" id="simMessageForm">
+            <label class="sr-only" for="simMessage">Test inbound message</label>
+            <textarea id="simMessage" rows="2" maxlength="800" placeholder="Type a fictional inbound text…" required></textarea>
+            <button class="sim-button sim-button--primary" type="submit">Send test message</button>
+          </form>
+          <div class="sim-chips" id="simChips" aria-label="Suggested test responses"></div>
+          <p class="sim-form-status" id="simMessageStatus" role="status"></p>
+        </section>
+
+        <aside class="sim-sidebar">
+          <section class="sim-card">
+            <div class="sim-card__heading">
+              <div>
+                <span class="sim-card__label">Conversation</span>
+                <h2>State and captured context</h2>
+              </div>
+            </div>
+            <dl class="sim-details">
+              <div><dt>Opaque ID</dt><dd id="simConversationId">—</dd></div>
+              <div><dt>Test number</dt><dd id="simTestPhone">+1 408-555-0199</dd></div>
+              <div><dt>Intent</dt><dd id="simIntent">Not selected</dd></div>
+              <div><dt>Invalid tries</dt><dd id="simInvalidAttempts">0</dd></div>
+              <div><dt>Last command</dt><dd id="simLastCommand">None</dd></div>
+              <div><dt>Property</dt><dd id="simAddress">Not captured</dd></div>
+              <div><dt>Closing</dt><dd id="simClosing">Not captured</dd></div>
+              <div><dt>Occupancy</dt><dd id="simOccupancy">Not captured</dd></div>
+              <div><dt>Auto review</dt><dd id="simBundle">Not captured</dd></div>
+              <div><dt>Priority</dt><dd id="simPriority">Standard</dd></div>
+              <div><dt>Referred by</dt><dd id="simPartner">Direct / no partner captured</dd></div>
+              <div><dt>CoverageFit handoff</dt><dd id="simHandoff">Not created</dd></div>
+            </dl>
+          </section>
+
+          <section class="sim-card">
+            <span class="sim-card__label">Producer handoff</span>
+            <h2>Dylan-ready intake summary</h2>
+            <pre id="simProducerSummary" class="sim-summary">Complete the buyer intake to generate the producer summary.</pre>
+          </section>
+
+
+          <section class="sim-card" aria-labelledby="liveQueueTitle">
+            <div class="sim-card__heading">
+              <div><span class="sim-card__label">Producer handoff</span><h2 id="liveQueueTitle">Live Dylan queue</h2></div>
+              <button type="button" class="sim-button sim-button--secondary" id="simRefreshProducerQueue">Refresh</button>
+            </div>
+            <div id="simProducerQueue" class="sim-live-queue"><p>No live queue loaded yet.</p></div>
+            <p class="sim-form-status" id="simProducerQueueStatus" role="status"></p>
+            <p class="sim-privacy-note">Protected with the same producer access key. This is a bounded handoff view; the full RC-SMS-1.9 operations dashboard is now available above.</p>
+          </section>
+
+          <section class="sim-card" aria-labelledby="rcConnectionTitle">
+            <span class="sim-card__label">Live connection</span>
+            <h2 id="rcConnectionTitle">RingCentral status</h2>
+            <div class="sim-connection-state" id="rcConnectionState" data-state="unchecked">Not checked</div>
+            <dl class="sim-details sim-details--connection">
+              <div><dt>Environment</dt><dd id="rcEnvironment">—</dd></div>
+              <div><dt>Sender</dt><dd id="rcFromNumber">—</dd></div>
+              <div><dt>SmsSender</dt><dd id="rcSmsCapability">—</dd></div>
+              <div><dt>Webhook</dt><dd id="rcWebhookStatus">—</dd></div>
+              <div><dt>Automatic maintenance</dt><dd id="rcMaintenanceStatus">—</dd></div>
+            </dl>
+            <div class="sim-actions sim-actions--inline">
+              <button type="button" class="sim-button sim-button--secondary" id="rcCheckConnection">Check connection</button>
+              <button type="button" class="sim-button sim-button--primary" id="rcCreateSubscription">Repair or renew now</button>
+            </div>
+            <p class="sim-form-status" id="rcConnectionMessage" role="status"></p>
+            <p class="sim-privacy-note">Client secret, JWT, validation token, and full phone number are never returned to this page.</p>
+          </section>
+
+          <section class="sim-card">
+            <span class="sim-card__label">Operator controls</span>
+            <h2>Test non-message transitions</h2>
+            <div class="sim-actions">
+              <button type="button" class="sim-button sim-button--secondary" data-sim-action="restart">Restart simulation</button>
+              <button type="button" class="sim-button sim-button--secondary" data-sim-action="awaiting_producer">Queue for Dylan</button>
+              <button type="button" class="sim-button sim-button--secondary" data-sim-action="human_takeover">Pause for human takeover</button>
+              <button type="button" class="sim-button sim-button--secondary" data-sim-action="resume">Resume guided intake</button>
+              <button type="button" class="sim-button sim-button--secondary" data-sim-action="resend_handoff">Resend CoverageFit link</button>
+              <button type="button" class="sim-button sim-button--secondary" data-sim-action="complete">Mark complete</button>
+              <button type="button" class="sim-button sim-button--secondary" data-sim-action="not_proceeding">Mark not proceeding</button>
+            </div>
+          </section>
+
+          <section class="sim-card sim-card--note">
+            <span class="sim-card__label">Bounded sprint</span>
+            <h2>No live SMS is sent by the simulator</h2>
+            <p>The simulator never sends a live text. In production, completed buyer intake is queued for Dylan with a concise summary. A manual RingCentral reply from Dylan changes the live conversation to human takeover so automated replies remain paused.</p>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <script src="/assets/js/sms-simulator.js"></script>
+</body>
+</html>
