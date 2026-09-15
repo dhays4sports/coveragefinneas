@@ -1,0 +1,17 @@
+/* CoverageFit report-generation experience */
+.cf-generation-overlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;background:rgba(255,255,255,.98);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
+.cf-generation-overlay.is-visible{opacity:1;visibility:visible}
+.cf-generation-card{width:min(560px,100%);text-align:center;color:var(--navy,#09243d)}
+.cf-generation-mark{width:112px;height:112px;margin:0 auto 26px;display:grid;place-items:center;border-radius:32px;background:linear-gradient(145deg,#eef8fd,#f0fbf5);box-shadow:0 20px 55px rgba(9,36,61,.11);position:relative;overflow:hidden}
+.cf-generation-mark:after{content:"";position:absolute;width:52px;height:52px;border:3px solid rgba(39,169,99,.16);border-radius:50%;animation:cfGenerationPulse 1.7s ease-in-out infinite}
+.cf-generation-mark svg{width:70px;height:70px;position:relative;z-index:1}
+.cf-generation-eyebrow{display:block;margin-bottom:10px;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--green2,#1c7c4b)}
+.cf-generation-title{margin:0;font-size:clamp(32px,6vw,50px);line-height:1.05;letter-spacing:-.045em;color:var(--navy,#09243d)}
+.cf-generation-message{min-height:28px;margin:18px 0 22px;font-size:17px;line-height:1.55;color:var(--muted,#607589);transition:opacity .18s ease,transform .18s ease}
+.cf-generation-message.is-changing{opacity:0;transform:translateY(5px)}
+.cf-generation-progress{height:7px;overflow:hidden;border-radius:999px;background:#e6eef4;box-shadow:inset 0 1px 2px rgba(9,36,61,.05)}
+.cf-generation-progress-bar{height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--blue,#1474b8),var(--green,#29a963));transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.cf-generation-note{margin:14px 0 0;font-size:12px;color:#8293a2}
+.cf-generation-context{margin-top:18px;font-size:10px;font-weight:850;letter-spacing:.1em;text-transform:uppercase;color:#8a9aa8}
+@keyframes cfGenerationPulse{0%,100%{transform:scale(.82);opacity:.45}50%{transform:scale(1.28);opacity:0}}
+@media(prefers-reduced-motion:reduce){.cf-generation-overlay,.cf-generation-message,.cf-generation-progress-bar{transition:none}.cf-generation-mark:after{animation:none}}

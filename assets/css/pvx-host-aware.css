@@ -1,0 +1,7 @@
+.pvx-web-bootstrap{max-width:680px;text-align:center;padding-block:clamp(42px,9vw,88px)}
+.pvx-host-trust{display:flex;align-items:center;gap:8px;color:#31576a;font-size:.82rem;font-weight:700;line-height:1.25}
+.pvx-host-trust::before{content:"";width:7px;height:7px;border-radius:50%;background:#1f8f67;box-shadow:0 0 0 4px rgba(31,143,103,.12)}
+body[data-pvx-host-mode="408farmers"] .pvx-header{border-bottom-color:rgba(8,40,90,.12)}
+@media(max-width:560px){.pvx-host-trust{max-width:170px;text-align:right;justify-content:flex-end}.pvx-host-trust::before{flex:0 0 auto}}
+@media(prefers-reduced-motion:reduce){.pvx-web-bootstrap *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+

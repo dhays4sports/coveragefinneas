@@ -1,0 +1,20 @@
+.neighbor-share{position:relative;margin-top:18px;padding:26px;border:1px solid #d7e6ee;border-radius:20px;background:linear-gradient(145deg,#f8fbfd,#eef7fb);box-shadow:0 14px 34px rgba(9,47,77,.08)}
+.neighbor-share[hidden]{display:none!important}
+.neighbor-share__dismiss{position:absolute;top:14px;right:14px;width:36px;height:36px;border:0;border-radius:50%;background:#fff;color:#667d8f;font-size:22px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(9,47,77,.1)}
+.neighbor-share__dismiss:hover,.neighbor-share__dismiss:focus-visible{color:var(--navy);box-shadow:0 0 0 3px rgba(20,94,132,.14)}
+.neighbor-share__eyebrow{display:block;margin-bottom:8px;color:#157653;font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+.neighbor-share h3{max-width:720px;margin:0;color:var(--navy);font-size:clamp(24px,3.2vw,34px);letter-spacing:-.035em}
+.neighbor-share__intro{max-width:720px;margin:9px 0 0;color:#526a7c;line-height:1.6}
+.neighbor-share__actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;padding-right:44px}
+.neighbor-share__actions .btn{min-height:48px}
+.neighbor-share__copy{border:0;background:transparent;color:#245d7b;font:inherit;font-weight:850;padding:10px 4px;cursor:pointer}
+.neighbor-share__copy:hover,.neighbor-share__copy:focus-visible{text-decoration:underline}
+.neighbor-share__note{margin:15px 0 0;color:#65798a;font-size:12px;line-height:1.5}
+.neighbor-share__link{display:inline-block;margin-top:8px;color:#245d7b;font-size:12px;font-weight:800;text-decoration:none}
+.neighbor-share__link:hover,.neighbor-share__link:focus-visible{text-decoration:underline}
+.neighbor-share__feedback{min-height:20px;margin:10px 0 0;color:#526a7c;font-size:12px;font-weight:750}
+.neighbor-share__feedback[data-tone=success]{color:#157653}
+.neighbor-share__feedback[data-tone=error]{color:#9b3c3c}
+@media(max-width:560px){.neighbor-share{padding:24px 20px}.neighbor-share__actions{display:grid;padding-right:0}.neighbor-share__actions .btn,.neighbor-share__copy{width:100%;text-align:center}.neighbor-share__dismiss{top:10px;right:10px}.neighbor-share h3{padding-right:32px;font-size:27px}}
+@media(prefers-reduced-motion:reduce){.neighbor-share__dismiss{scroll-behavior:auto}}
+@media print{.neighbor-share{display:none!important}}

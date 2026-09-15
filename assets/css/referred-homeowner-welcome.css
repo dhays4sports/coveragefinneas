@@ -1,0 +1,10 @@
+html[data-welcome-state="referred"] .pilot-hero{background:radial-gradient(circle at 82% 8%,rgba(20,120,201,.17),transparent 31%),linear-gradient(135deg,#fbfdff,#edf6fc 58%,#f7fbfd)}
+html[data-welcome-state="referred"] .pilot-hero h1{max-width:760px}
+html[data-welcome-state="referred"] .personalized-welcome{border-color:#c7dfee;background:rgba(247,252,255,.94);box-shadow:0 10px 26px rgba(8,67,111,.07);color:#204d70}
+html[data-welcome-state="referred"] .personalized-welcome-icon{background:#e2f0fa;color:#126da9;font-size:17px}
+html[data-welcome-state="referred"] .personalized-welcome strong{color:#123f62}
+html[data-welcome-state="referred"] .personalized-welcome-context>span{background:#eaf4fb;color:#245a7e!important}
+html[data-welcome-state="referred"] [data-home-dashboard]{display:none!important}
+html[data-welcome-state="referred"] [data-home-default-art]{display:block!important}
+html[data-welcome-state="referred"] [data-welcome-cta-context]{display:block;margin-top:9px;color:var(--muted);font-size:12px;font-weight:700}
+@media(max-width:520px){html[data-welcome-state="referred"] [data-hero-greeting] [data-welcome-heading-main]{font-size:.62em}}

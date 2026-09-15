@@ -1,0 +1,43 @@
+/* CF-408-CONTINUITY-1.0 — shared appointment and confirmation identity. */
+body.appointment-408{--navy:#061f48;--blue:#082c61;--red:#c9192e;--ink:#102f55;--muted:#566a84;--line:#dce3eb;--wash:#fbfcfe;background:var(--wash);color:var(--ink);font:1rem/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.appointment-408 [hidden]{display:none!important}
+.agency-408-header{display:flex;align-items:center;justify-content:space-between;gap:1.25rem;background:#fff;border-bottom:1px solid var(--line);padding:1rem max(1rem,calc((100vw - 1040px)/2))}
+.agency-408-header>a{flex:0 0 auto}.agency-408-logo{display:block;width:108px;height:auto}
+.agency-408-header>div{display:grid;gap:.15rem;text-align:right;min-width:0;font-size:.875rem;color:var(--muted)}
+.agency-408-header strong{color:var(--navy);font-weight:750}
+.brand-408-bar{width:min(100% - 2rem,1040px);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.brand-408-bar img{display:block;width:180px;max-width:58%;height:auto}.brand-408-bar>span{font-size:.875rem;color:var(--muted);text-align:right}
+.appointment-408 .appointment-shell{width:min(100% - 2rem,740px);padding:2.25rem 0 1.5rem}
+.appointment-408 .appointment-intro{text-align:left;margin:0 0 1.5rem;max-width:none}
+.appointment-408 .eyebrow{color:var(--red);font-size:.875rem;font-weight:800;letter-spacing:.075em;text-align:left}
+.appointment-408 .appointment-intro h1{font-size:clamp(2rem,5.7vw,3.15rem);line-height:1.1;letter-spacing:-.035em;margin:.4rem 0 .85rem;max-width:18ch}
+.appointment-408 .appointment-intro>p:last-child{font-size:1.0625rem;margin:0;max-width:58ch}
+.appointment-408 .request-summary,.appointment-408 .booking-card,.appointment-408 .producer-card,.appointment-408 .calendar-card{border-color:var(--line);border-radius:16px;box-shadow:0 8px 26px rgba(3,26,61,.06)}
+.appointment-408 .request-summary{padding:1rem 1.2rem;margin:0 0 1rem}
+.request-summary summary{cursor:pointer;font-weight:750;color:var(--navy);min-height:32px;line-height:1.5}
+.request-summary summary>span{display:block;font-size:.875rem;font-weight:400;color:var(--muted);margin-left:1.1rem}
+.appointment-408 .request-summary dl{padding-top:1rem;gap:.6rem}.appointment-408 .request-summary dt{font-size:.875rem;letter-spacing:0;text-transform:none}.appointment-408 .request-summary dd{overflow-wrap:anywhere}
+.appointment-408 .booking-card{padding:clamp(1.25rem,4vw,2rem);border-top:4px solid var(--navy)}
+.appointment-408 .booking-card h2{font-size:clamp(1.5rem,4vw,1.9rem)}
+.appointment-408 .booking-fields{gap:.85rem}.appointment-408 .booking-fields select{appearance:auto}
+.appointment-408 .booking-fields input,.appointment-408 .booking-fields select{min-width:0;border-color:#d4dce8;border-radius:12px}
+.appointment-408 .primary-button{background:var(--red);box-shadow:none;border-radius:12px;font-weight:750}
+.appointment-408 .primary-button:hover:not(:disabled){background:#ad1528}
+.appointment-408 :is(button,a,input,select,summary):focus-visible{outline:3px solid #176bb5;outline-offset:3px}
+.appointment-408 .consent-note,.appointment-408 .booking-status{font-size:.875rem;line-height:1.55}
+.appointment-408 .booking-status{color:var(--navy)}
+.appointment-408 .producer-card{box-shadow:none;background:transparent;border:0;padding:1.25rem .25rem .5rem;gap:.85rem}
+.appointment-408 .producer-initial{width:44px;height:44px;flex-basis:44px;background:#eaf0f8;color:var(--navy)}
+.appointment-408 .producer-card span{font-size:.875rem}
+.appointment-powered{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.6rem;padding:1.15rem 0 .65rem;color:var(--muted);font-size:.9375rem}
+.appointment-powered img{width:132px;height:auto}
+.appointment-408 .calendar-shell{display:block;min-height:0;width:min(100% - 2rem,680px);margin:2rem auto 0;padding:0}
+.appointment-408 .calendar-card{width:100%;padding:clamp(1.25rem,4vw,2.5rem);border-top:4px solid var(--navy)}
+.appointment-408 .calendar-card h1{text-align:left;color:var(--navy);letter-spacing:-.035em;font-size:clamp(2rem,5.7vw,2.75rem)}
+.appointment-408 .calendar-status{text-align:left;color:var(--muted)}
+.appointment-408 .calendar-when{border-radius:12px;padding:1.15rem;background:#edf3fb;color:var(--navy);font-size:1.25rem;text-align:left;line-height:1.4}
+.appointment-408 .calendar-actions .button{min-height:52px}.appointment-408 .calendar-actions .button-primary{background:var(--red);border-color:var(--red);color:#fff}
+.appointment-408 .calendar-actions .button-primary:hover{background:#ad1528;border-color:#ad1528}
+.appointment-408 .trust{text-align:left;font-size:.875rem}.appointment-408 .trust strong{color:var(--navy);font-size:1rem}
+@media(max-width:560px){.agency-408-header{gap:.75rem;padding:.8rem 1rem}.agency-408-logo{width:84px}.agency-408-header>div{font-size:.875rem;line-height:1.4}.brand-408-bar img{width:150px}.brand-408-bar>span{max-width:9ch}.appointment-408 .appointment-shell{padding:1.65rem 0 1rem}.appointment-408 .appointment-intro h1{font-size:2.1rem}.appointment-408 .booking-fields{grid-template-columns:1fr}.appointment-408 .calendar-shell{margin-top:1.5rem}.appointment-408 .request-summary dl{grid-template-columns:1fr}}
+@media(forced-colors:active){.appointment-408 .primary-button,.appointment-408 .calendar-actions .button-primary{border:2px solid ButtonText}.appointment-408 .booking-card,.appointment-408 .calendar-card{border:1px solid CanvasText}}

@@ -1,0 +1,31 @@
+.pvx-discovery-continuity {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 22px;
+  padding: 15px 17px;
+  border: 1px solid #cfe6d8;
+  border-radius: 14px;
+  background: #f3fbf6;
+  color: var(--pvx-navy);
+}
+
+.pvx-discovery-continuity strong {
+  font-size: 14px;
+}
+
+.pvx-discovery-continuity span {
+  color: var(--pvx-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.pvx-discovery-continuity[hidden] {
+  display: none;
+}
+
+@media (forced-colors: active) {
+  .pvx-discovery-continuity {
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+}

@@ -1,0 +1,32 @@
+/* CF-ADV-1.12 — Why This Fits You recommendation cards */
+.advisory-fit-card{position:relative;overflow:hidden}
+.advisory-fit-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:#d8e6f3}
+.advisory-fit-card[data-personalized="true"]:before{background:#2f80c8}
+.advisory-fit-card__status-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px}
+.advisory-fit-card__status,.advisory-fit-card__verification{display:inline-flex;align-items:center;min-height:28px;padding:5px 9px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.advisory-fit-card__status{background:#edf4fb;color:#265c8d}
+.advisory-fit-card__status[data-tone="personalized"]{background:#e9f6f0;color:#176a4c}
+.advisory-fit-card__verification{background:#f5f7f9;color:#64788c}
+.advisory-fit-card__verification[data-quality="partial"],.advisory-fit-card__verification[data-quality="needs-verification"],.advisory-fit-card__verification[data-quality="needs_verification"],.advisory-fit-card__verification[data-quality="missing"]{background:#fff7e8;color:#8c6319}
+.advisory-fit-card__lane{margin-top:10px;padding:13px 14px;border:1px solid #e0e8ef;border-radius:12px;background:#fff}
+.advisory-fit-card__lane>span{display:block;margin-bottom:6px;color:#6b7e90;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.advisory-fit-card__lane p{margin:0;color:#344e65;font-size:12.75px;line-height:1.55}
+.advisory-fit-card__lane small{display:block;margin-top:6px;color:#758596;font-size:10.5px;line-height:1.5}
+.advisory-fit-card__lane--personal{border-color:#cae5d7;background:#f6fbf8}
+.advisory-fit-card__lane--personal>span{color:#1b7554}
+.advisory-fit-card__lane--neutral{border-style:dashed;background:#fbfcfd}
+.advisory-fit-card__lane--finding{border-left:3px solid #6d9ec8;background:#f7faff}
+.advisory-fit-card__lane--review{border-left:3px solid #3f9470;background:#f8fcfa}
+.advisory-fit-card__evidence,.advisory-fit-card__tradeoff{margin:8px 0 0!important;padding-top:8px;border-top:1px solid rgba(65,91,112,.12);font-size:10.5px!important;color:#65798b!important}
+.advisory-fit-card__evidence strong,.advisory-fit-card__tradeoff strong{color:#425a70}
+.advisory-card-reaction{margin-top:12px;padding-top:12px;border-top:1px solid #e1e8ee}
+.advisory-card-reaction__heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+.advisory-card-reaction__heading>span{color:#536b80;font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+.advisory-card-reaction__heading small{color:#7e8c98;font-size:9px}
+.advisory-card-reaction__controls{display:flex;flex-wrap:wrap;gap:7px}
+.advisory-card-reaction__button{min-height:44px;padding:9px 12px;border:1px solid #d6e0e8;border-radius:999px;background:#fff;color:#3d566d;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
+.advisory-card-reaction__button:hover{border-color:#8db7d9;background:#f7fbff}
+.advisory-card-reaction__button[aria-pressed="true"]{border-color:#2f80c8;background:#eaf4fc;color:#1e629c}
+.advisory-card-reaction__button:focus-visible{outline:3px solid rgba(47,128,200,.25);outline-offset:2px}
+@media(max-width:640px){.advisory-fit-card__status-row{align-items:flex-start;flex-direction:column}.advisory-card-reaction__button{flex:1 1 calc(50% - 7px);font-size:12px}.advisory-fit-card__lane{padding:12px}}
+@media print{.advisory-fit-card{break-inside:avoid}.advisory-card-reaction{display:none!important}}

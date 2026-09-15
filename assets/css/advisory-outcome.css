@@ -1,0 +1,7 @@
+.advisory-outcome__intro{max-width:66ch}
+.advisory-outcome__counter{display:inline-flex;align-items:center;min-height:32px;padding:4px 10px;border:1px solid var(--line,#d8dee8);border-radius:999px;font-size:.82rem;font-weight:700}
+.advisory-outcome__other{margin-top:12px}
+.advisory-outcome__other label{display:block;font-weight:700;margin-bottom:6px}
+.advisory-outcome__other input{width:100%;min-height:44px;font-size:16px}
+.advisory-outcome__boundary{display:flex;gap:10px;align-items:flex-start;margin-top:18px;padding:14px;border-radius:14px;background:rgba(15,23,42,.04)}
+@media (max-width:640px){.advisory-outcome__counter{min-height:44px}.advisory-outcome .advisory-choice__card{min-height:44px}}

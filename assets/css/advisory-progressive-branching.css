@@ -1,0 +1,4 @@
+.advisory-branch-followup{margin:0 0 18px;padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:#fbfcfe;color:var(--muted);font-size:13px;line-height:1.5}
+.advisory-branch-followup[hidden]{display:none}.advisory-branch-followup strong{display:block;color:var(--navy);margin-bottom:2px}.advisory-branch-followup[data-active="true"]{border-color:#cfe6d8;background:#f7fcf9}
+@media(max-width:640px){.advisory-branch-followup{font-size:12.5px}}
+@media(prefers-reduced-motion:reduce){.advisory-branch-followup{scroll-behavior:auto}}

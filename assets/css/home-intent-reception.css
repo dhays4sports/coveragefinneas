@@ -1,0 +1,19 @@
+.home-intent-reception {
+  margin: 1rem 0 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(19, 95, 69, .2);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(232, 248, 241, .96), rgba(246, 250, 255, .96));
+  color: #17324d;
+}
+.home-intent-reception[hidden] { display: none !important; }
+.home-intent-reception__eyebrow { display: block; margin-bottom: .35rem; color: #0d6848; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.home-intent-reception h2,
+.home-intent-reception h3 { margin: 0 0 .45rem; color: #0b2f57; font-size: clamp(1.05rem, 2.5vw, 1.3rem); line-height: 1.25; }
+.home-intent-reception p { margin: .3rem 0 0; line-height: 1.5; }
+.home-intent-reception__timing { color: #0d6848; font-weight: 700; }
+.home-intent-reception__boundary { padding-top: .55rem; border-top: 1px solid rgba(19, 95, 69, .15); color: #486176; font-size: .84rem; }
+.home-intent-reception__campaign { display: inline-flex; margin: 0 0 .65rem !important; padding: .32rem .58rem; border-radius: 999px; background: rgba(13, 104, 72, .1); color: #0d6848; font-size: .74rem; font-weight: 800; }
+.home-intent-reception__campaign[hidden] { display: none !important; }
+.transition-panel .home-intent-reception { text-align: left; }
+@media (max-width: 640px) { .home-intent-reception { padding: .9rem; border-radius: 13px; } }

@@ -1,0 +1,10 @@
+.assessment-chapter{margin:0 0 18px;padding:16px 18px;border:1px solid var(--line,#d8dee8);border-radius:16px;background:rgba(15,23,42,.035)}
+.assessment-chapter__meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.assessment-chapter__step{font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#5f6d7b)}
+.assessment-chapter__count{font-size:.8rem;font-weight:700;color:var(--muted,#5f6d7b)}
+.assessment-chapter h2{margin:0 0 5px;font-size:1.12rem;line-height:1.25}
+.assessment-chapter p{margin:0;color:var(--muted,#5f6d7b);font-size:.92rem;line-height:1.5}
+.assessment-chapter[data-entered="true"]{animation:cfadv18-chapter-in .18s ease-out}
+@keyframes cfadv18-chapter-in{from{opacity:.72;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.assessment-chapter[data-entered="true"]{animation:none}}
+@media (max-width:640px){.assessment-chapter{padding:14px}.assessment-chapter__meta{align-items:flex-start;flex-direction:column;gap:3px}}

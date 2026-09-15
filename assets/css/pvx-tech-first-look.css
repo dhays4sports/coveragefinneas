@@ -1,0 +1,77 @@
+.pvx-tech-first-look {
+  width: min(680px, 100%);
+  min-height: 0;
+  padding: clamp(24px, 6vw, 48px);
+}
+
+.pvx-tech-first-look .pvx-clarity-logo {
+  width: min(220px, 66%);
+  margin-bottom: 24px;
+}
+
+.pvx-tech-first-look h1 {
+  max-width: 560px;
+  margin: 8px 0 12px;
+  color: var(--pvx-navy);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -.045em;
+}
+
+.pvx-tech-first-look__intro {
+  margin: 0;
+  color: var(--pvx-muted);
+  font-size: 1rem;
+}
+
+.pvx-tech-first-look__facts {
+  display: grid;
+  gap: 0;
+  margin: 24px 0 0;
+  border: 1px solid var(--pvx-line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.pvx-tech-first-look__facts > div {
+  display: grid;
+  grid-template-columns: minmax(118px, .7fr) 1.3fr;
+  gap: 20px;
+  padding: 16px 18px;
+}
+
+.pvx-tech-first-look__facts > div + div { border-top: 1px solid var(--pvx-line); }
+.pvx-tech-first-look__facts dt { color: var(--pvx-muted); font-size: .875rem; font-weight: 760; }
+.pvx-tech-first-look__facts dd { margin: 0; color: var(--pvx-navy); font-weight: 820; }
+.pvx-tech-first-look__facts dd strong,
+.pvx-tech-first-look__facts dd span { display: block; }
+.pvx-tech-first-look__facts dd strong { color: var(--pvx-green-dark); }
+.pvx-tech-first-look__facts dd span { margin-top: 4px; color: var(--pvx-muted); font-size: .875rem; font-weight: 520; line-height: 1.45; }
+.pvx-tech-first-look__eligibility { background: var(--pvx-mint); }
+
+.pvx-tech-first-look__next {
+  margin-top: 26px;
+  padding-top: 25px;
+  border-top: 1px solid var(--pvx-line);
+}
+
+.pvx-tech-first-look__next h2 { margin: 0 0 7px; color: var(--pvx-navy); font-size: clamp(1.35rem, 4vw, 1.75rem); }
+.pvx-tech-first-look__next p { margin: 0 0 18px; color: var(--pvx-muted); }
+.pvx-tech-first-look__next .pvx-button { width: 100%; }
+.pvx-tech-first-look__next small { display: block; margin-top: 9px; color: var(--pvx-muted); text-align: center; }
+.pvx-tech-first-look__ask { display: block; width: fit-content; margin: 18px auto 0; color: var(--pvx-navy-soft); font-weight: 780; text-underline-offset: 4px; }
+.pvx-tech-first-look__boundary { margin: 24px 0 0; color: var(--pvx-muted); font-size: .75rem; text-align: center; }
+
+@media (max-width: 520px) {
+  .pvx-tech-first-look__facts > div { grid-template-columns: 1fr; gap: 4px; }
+}
+
+@media (forced-colors: active) {
+  .pvx-tech-first-look__facts,
+  .pvx-tech-first-look__next { border-color: CanvasText; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pvx-tech-first-look * { animation: none !important; transition: none !important; }
+}

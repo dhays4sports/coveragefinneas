@@ -1,0 +1,61 @@
+body[data-pvx-web-bootstrap] .pvx-main {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding-block: 24px;
+}
+
+.pvx-web-bootstrap {
+  width: min(620px, 100%);
+  min-height: 0;
+  padding: clamp(24px, 6vw, 48px);
+}
+
+.pvx-clarity-logo {
+  display: block;
+  width: min(240px, 70%);
+  height: auto;
+  margin: 0 auto 28px;
+}
+
+.pvx-web-bootstrap .pvx-kicker {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.pvx-web-bootstrap h1 {
+  margin: 0 0 16px;
+  color: var(--pvx-navy);
+  font-size: clamp(1.9rem, 6vw, 2.65rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.pvx-web-bootstrap > p {
+  margin: 0;
+  color: var(--pvx-muted);
+}
+
+@media (max-width: 430px) {
+  body[data-pvx-web-bootstrap] .pvx-main {
+    width: min(100% - 32px, 920px);
+  }
+
+  .pvx-web-bootstrap {
+    border-radius: 20px;
+  }
+}
+
+@media (forced-colors: active) {
+  .pvx-web-bootstrap {
+    border: 1px solid CanvasText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pvx-web-bootstrap * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

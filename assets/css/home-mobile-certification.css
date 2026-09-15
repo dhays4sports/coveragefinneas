@@ -1,0 +1,224 @@
+/* CF-HOME-2.9 — assessment/transition mobile, accessibility, and performance safeguards. */
+:root {
+  --cf-a11y-focus: #005fcc;
+  --cf-safe-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 88px;
+}
+
+body:is(.assessment-shell, .transition-page) {
+  min-width: 0;
+  overflow-x: clip;
+  overflow-wrap: break-word;
+}
+
+.cf-skip-link {
+  position: fixed;
+  z-index: 10000;
+  top: max(10px, env(safe-area-inset-top));
+  left: max(10px, env(safe-area-inset-left));
+  min-height: 44px;
+  padding: 11px 15px;
+  border: 2px solid var(--cf-a11y-focus);
+  border-radius: 10px;
+  background: #fff;
+  color: #061a2e;
+  font-weight: 900;
+  line-height: 1.25;
+  text-decoration: none;
+  transform: translateY(-180%);
+  transition: transform .16s ease;
+  box-shadow: 0 10px 30px rgba(4, 26, 59, .22);
+}
+
+.cf-skip-link:focus,
+.cf-skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+body:is(.assessment-shell, .transition-page) :where(a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid transparent !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--cf-a11y-focus) !important;
+}
+
+#main-content:focus,
+#questionTitle:focus {
+  outline: none;
+}
+
+.assessment-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.assessment-brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 44px;
+}
+
+.assessment-brand img,
+.transition-brand img {
+  display: block;
+  height: auto;
+}
+
+.assessment-main :where(.wrap, .tool-card, .question, .answers, .answer > *, .capture, .field-row, .property-field),
+.transition-shell :where(.transition-panel, .transition-property-content, .transition-step-label) {
+  min-width: 0;
+}
+
+.assessment-shell :where(.btn, .answer, .assessment-save-exit, .text-action, summary, .assessment-dialog-help),
+.transition-page :where(.transition-continue, a[href]) {
+  min-height: 44px;
+}
+
+.assessment-shell .answer {
+  min-height: 58px;
+  gap: 14px;
+  touch-action: manipulation;
+}
+
+.assessment-shell .answer .circle {
+  flex: 0 0 auto;
+}
+
+.assessment-shell :where(input, select, textarea)[aria-invalid="true"] {
+  border-color: #b42318 !important;
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, .18) !important;
+}
+
+.cf-field-error {
+  display: block;
+  margin-top: 5px;
+  color: #9a3412;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.progress[role="progressbar"] {
+  forced-color-adjust: auto;
+}
+
+.assessment-dialog {
+  max-height: calc(100dvh - max(24px, env(safe-area-inset-top)) - var(--cf-safe-bottom));
+  overflow: visible;
+}
+
+.assessment-dialog-card {
+  max-height: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.cf-trigger-visual {
+  contain: layout paint;
+}
+
+.result {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+
+@media (max-width: 700px) {
+  .assessment-shell :where(input, select, textarea) {
+    font-size: 16px !important;
+  }
+
+  .assessment-main .wrap {
+    width: min(calc(100% - 24px), 1160px);
+  }
+
+  .assessment-top-inner {
+    padding-right: max(0px, env(safe-area-inset-right));
+    padding-left: max(0px, env(safe-area-inset-left));
+  }
+
+  .assessment-shell .actions {
+    padding-bottom: calc(13px + env(safe-area-inset-bottom));
+  }
+
+  .assessment-dialog {
+    width: min(calc(100vw - 24px), 560px);
+  }
+}
+
+@media (max-width: 380px) {
+  .assessment-top img {
+    width: min(48vw, 168px);
+  }
+
+  .assessment-save-exit {
+    padding-inline: 10px;
+    font-size: 12px;
+  }
+
+  .tool-card.pilot-tool {
+    padding-inline: 14px;
+  }
+
+  .pilot-tool .question h2 {
+    font-size: 23px;
+  }
+
+  .assessment-shell .actions {
+    margin-inline: -14px;
+    padding-inline: 14px;
+  }
+
+  .assessment-dialog-card {
+    padding: 22px 17px;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .assessment-dialog-card {
+    padding-block: 20px;
+  }
+
+  .cf-trigger-visual {
+    display: none;
+  }
+
+  .assessment-main {
+    padding-top: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  body:is(.assessment-shell, .transition-page) :where(a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 3px solid Highlight !important;
+    box-shadow: none !important;
+  }
+
+  .answer.selected,
+  .answer[aria-pressed="true"] {
+    outline: 3px solid Highlight;
+  }
+
+  :where(input, select, textarea)[aria-invalid="true"] {
+    outline: 2px solid Mark;
+    box-shadow: none !important;
+  }
+}
