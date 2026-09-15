@@ -1,0 +1,15 @@
+(function(root,factory){'use strict';const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;root.CoverageFitHomeProfileContract=api;})(typeof window!=='undefined'?window:globalThis,function(){'use strict';
+  const VERSION='1.0.0',BUILD='CF-HOME-3.1',CONTRACT_ID='coveragefit-home-profile-v1';
+  const SECTIONS=Object.freeze(['propertyIdentity','occupancy','physicalCharacteristics','construction','foundation','roof','systemsAndUpdates','specialFeatures','householdExposures','claimsAndInsuranceHistory','safetyAndMitigation']);
+  const SOURCES=Object.freeze(['property_source_reported','customer_reported','customer_confirmed','producer_verified','unknown','conflict_needs_confirmation']);
+  const READINESS=Object.freeze(['not_started','ready_for_producer_review','needs_customer_information','needs_document','needs_property_verification','manual_review_required']);
+  const text=(value,max=240)=>String(value??'').trim().slice(0,max),clone=value=>value==null?value:JSON.parse(JSON.stringify(value));
+  function fact(value,{source='unknown',evidenceRef='',reportedAt='',confirmedAt='',verifiedAt='',conflicts=[]}={}){return{value:clone(value),source:SOURCES.includes(source)?source:'unknown',evidenceRef:text(evidenceRef,160),reportedAt:text(reportedAt,40),confirmedAt:text(confirmedAt,40),verifiedAt:text(verifiedAt,40),conflicts:Array.isArray(conflicts)?clone(conflicts).slice(0,5):[]}}
+  function create(seed={}){const result={schemaVersion:'1.0',contractId:CONTRACT_ID,profileId:text(seed.profileId,120),journeyId:text(seed.journeyId,120),sourceEvidence:Array.isArray(seed.sourceEvidence)?clone(seed.sourceEvidence):[],quoteReadiness:READINESS.includes(seed.quoteReadiness)?seed.quoteReadiness:'not_started',createdAt:text(seed.createdAt,40),updatedAt:text(seed.updatedAt,40)};for(const section of SECTIONS)result[section]=normalizeSection(seed[section]);return result}
+  function normalizeSection(section={}){return Object.fromEntries(Object.entries(section||{}).map(([key,value])=>[text(key,80),value&&typeof value==='object'&&'source'in value?fact(value.value,value):fact(value)]))}
+  function setFact(profile,section,key,value,meta={}){if(!SECTIONS.includes(section))throw new TypeError('Unknown Home Profile section.');const next=create(profile);next[section][text(key,80)]=fact(value,meta);next.updatedAt=text(meta.updatedAt,40)||new Date().toISOString();return next}
+  function needsConfirmation(value){return !value||['property_source_reported','unknown','conflict_needs_confirmation'].includes(value.source)}
+  function confirmFact(profile,section,key,value,at=new Date().toISOString()){return setFact(profile,section,key,value,{source:'customer_confirmed',evidenceRef:`homeProfile.${section}.${key}`,confirmedAt:at,updatedAt:at})}
+  function verifyFact(profile,section,key,value,at=new Date().toISOString()){return setFact(profile,section,key,value,{source:'producer_verified',evidenceRef:`homeProfile.${section}.${key}`,verifiedAt:at,updatedAt:at})}
+  return Object.freeze({VERSION,BUILD,CONTRACT_ID,SECTIONS,SOURCES,READINESS,fact,create,setFact,needsConfirmation,confirmFact,verifyFact});
+});
