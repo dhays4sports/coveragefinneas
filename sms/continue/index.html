@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0b2f57">
+  <title>Choose a Callback Time | CoverageFit</title>
+  <link rel="icon" href="/assets/images/coveragefit-mark.svg" type="image/svg+xml">
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#0d2742;background:#f7fafc}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px}.card{width:min(560px,100%);background:#fff;border:1px solid #dce5ed;border-radius:22px;padding:34px;box-shadow:0 18px 55px rgba(13,39,66,.10);text-align:center}.brand{width:190px;max-width:70%;height:auto;margin-bottom:24px}h1{font-size:clamp(1.65rem,5vw,2.35rem);line-height:1.08;margin:0 0 12px}p{color:#516579;line-height:1.55;margin:0 auto 18px}.spinner{width:38px;height:38px;border:4px solid #e4ebf1;border-top-color:#0d4f84;border-radius:50%;margin:22px auto;animation:spin .85s linear infinite}.fallback{display:none}.fallback[aria-hidden="false"]{display:block}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:12px;background:#0d4f84;color:#fff;text-decoration:none;font-weight:700}@keyframes spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.spinner{animation:none;border-top-color:#e4ebf1;background:#0d4f84}}
+  </style>
+</head>
+<body>
+  <main class="card" aria-live="polite">
+    <img class="brand" src="/assets/images/coveragefit-logo.svg" alt="CoverageFit">
+    <section id="loading">
+      <h1>Your appointment request is ready</h1>
+      <p>We’re securely carrying forward what you already shared and opening Dylan’s calendar.</p>
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="status">Loading your saved intake…</p>
+    </section>
+    <section class="fallback" id="fallback" aria-hidden="true">
+      <h1>Choose a time with Dylan</h1>
+      <p id="fallbackCopy">This secure appointment link is no longer available. Please return to your text conversation and reply CALLBACK for a new link.</p>
+      <a class="btn" href="sms:+14083276377?body=CALLBACK">Request a new link</a>
+    </section>
+  </main>
+  <script src="/assets/js/sms-handoff-resolver.js"></script>
+</body>
+</html>

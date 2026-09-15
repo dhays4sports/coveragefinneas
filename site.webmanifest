@@ -1,0 +1,18 @@
+{
+  "name": "CoverageFit",
+  "short_name": "CoverageFit",
+  "description": "A coverage discovery platform for better insurance consultations.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#0b2f57",
+  "icons": [
+    {
+      "src": "/assets/images/coveragefit-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://coveragefit.com/sitemap.xml
+
+# Internal producer surface
+Disallow: /agent/displacement-outreach.html

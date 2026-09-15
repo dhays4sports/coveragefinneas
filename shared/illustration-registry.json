@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "fallback": {
+    "src": "/assets/illustrations/default.svg",
+    "alt": "CoverageFit protection illustration"
+  },
+  "heroes": {
+    "home": {
+      "default": "home.svg",
+      "water_damage": "water.svg",
+      "umbrella": "umbrella.svg",
+      "personal_property": "personal-property.svg",
+      "ordinance_law": "ordinance-law.svg",
+      "earthquake": "earthquake.svg"
+    },
+    "business": {
+      "contractor": "contractor.svg",
+      "restaurant": "restaurant.svg",
+      "professional-office": "professional-office.svg",
+      "retail": "retail.svg",
+      "nonprofit": "nonprofit.svg",
+      "healthcare": "healthcare.svg",
+      "technology": "technology.svg",
+      "property-management": "property-management.svg",
+      "manufacturing": "manufacturing.svg",
+      "other": "other-business.svg"
+    }
+  },
+  "recommendations": {
+    "water damage": "water.svg",
+    "umbrella": "umbrella.svg",
+    "commercial umbrella": "commercial-umbrella.svg",
+    "personal property": "personal-property.svg",
+    "ordinance and law": "ordinance-law.svg",
+    "earthquake": "earthquake.svg",
+    "general liability": "general-liability.svg",
+    "inland marine": "inland-marine.svg",
+    "commercial auto": "commercial-auto.svg",
+    "hired & non-owned auto": "hired-non-owned-auto.svg",
+    "workers\u2019 compensation": "workers-comp.svg",
+    "workers compensation": "workers-comp.svg",
+    "business income": "business-income.svg",
+    "equipment breakdown": "equipment-breakdown.svg",
+    "spoilage": "spoilage.svg",
+    "liquor liability": "liquor-liability.svg",
+    "professional liability": "professional-liability.svg",
+    "cyber liability": "cyber-liability.svg",
+    "employment practices liability": "epli.svg",
+    "businessowners policy": "bop.svg",
+    "business property": "business-property.svg",
+    "crime / fidelity": "crime-fidelity.svg",
+    "directors & officers liability": "directors-officers.svg",
+    "volunteer accident": "volunteer-accident.svg",
+    "abuse & molestation": "abuse-molestation.svg",
+    "technology e&o": "technology-eo.svg",
+    "products liability": "products-liability.svg",
+    "product recall": "product-recall.svg",
+    "property management e&o": "property-management-eo.svg",
+    "contracts & additional insured requirements": "contracts-additional-insured.svg"
+  }
+}
