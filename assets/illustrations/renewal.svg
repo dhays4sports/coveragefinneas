@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="t d">
+<title id="t">Annual review illustration</title><desc id="d">A calendar, shield, and checklist.</desc>
+<defs><style>.l{fill:none;stroke:#0B5FFF;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}.f{fill:#EAF2FF}.g{fill:#EAF8F0;stroke:#218653;stroke-width:8}</style></defs>
+<rect x="90" y="90" width="300" height="250" rx="20" class="f"/>
+<path d="M90 155h300M145 60v70M335 60v70M90 110a20 20 0 0 1 20-20h260a20 20 0 0 1 20 20v210a20 20 0 0 1-20 20H110a20 20 0 0 1-20-20z" class="l"/>
+<path d="M145 215l22 22 42-50M145 285l22 22 42-50" class="l" style="stroke:#218653"/>
+<path d="M470 95c55 34 80 35 80 35v95c0 78-80 120-80 120s-80-42-80-120v-95s25-1 80-35z" class="g"/>
+<path d="m433 219 26 28 52-63" class="l" style="stroke:#218653"/>
+</svg>

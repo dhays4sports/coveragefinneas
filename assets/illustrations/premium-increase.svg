@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="t d">
+<title id="t">Premium review illustration</title><desc id="d">A policy document, rising line, and magnifying glass.</desc>
+<defs><style>.l{fill:none;stroke:#0B5FFF;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}.f{fill:#EAF2FF}.g{fill:#EAF8F0;stroke:#218653;stroke-width:8}</style></defs>
+<path d="M105 70h275l70 70v205H105z" class="f"/><path d="M105 70h275l70 70v205H105zM380 70v70h70" class="l"/>
+<path d="M155 200h175M155 245h130M155 290h110" class="l" style="stroke-width:8"/>
+<path d="M185 165 240 120l55 25 65-70" class="l" style="stroke:#218653"/>
+<path d="m334 76 27-2-2 27" class="l" style="stroke:#218653"/>
+<circle cx="475" cy="265" r="72" class="g"/><path d="m528 318 62 62" class="l"/><path d="M443 265h64M475 233v64" class="l" style="stroke:#218653"/>
+</svg>

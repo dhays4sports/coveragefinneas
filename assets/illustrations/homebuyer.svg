@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="t d">
+<title id="t">New home illustration</title><desc id="d">A house with moving boxes and a key.</desc>
+<defs><style>.l{fill:none;stroke:#0B5FFF;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}.f{fill:#EAF2FF}.g{fill:#EAF8F0;stroke:#218653;stroke-width:8}</style></defs>
+<rect x="150" y="130" width="340" height="220" rx="18" class="f"/>
+<path d="M120 190 320 55l200 135M175 165v185h290V165M275 350V235h90v115" class="l"/>
+<rect x="70" y="260" width="105" height="82" rx="8" class="g"/><path d="M70 286h105M122 260v82" class="l" style="stroke-width:7"/>
+<rect x="462" y="278" width="108" height="72" rx="8" class="g"/><path d="M462 302h108" class="l" style="stroke-width:7"/>
+<circle cx="520" cy="110" r="32" class="g"/><path d="M486 110h-62m20 0v48m-20-48 20-20" class="l" style="stroke-width:8"/>
+</svg>
