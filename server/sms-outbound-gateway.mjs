@@ -11,7 +11,7 @@ import {
   takeProducerOwnership
 } from './sms-orchestrator-core.mjs';
 
-export const SMS_OUTBOUND_GATEWAY_BUILD = 'RC-SMS-1.9.9';
+export const SMS_OUTBOUND_GATEWAY_BUILD = 'RC-SMS-1.9.10';
 export const SMS_OUTBOUND_REGISTRY_SCHEMA = '1.2';
 export const SMS_OUTBOUND_REGISTRY_PREFIX = 'sms-outbound-registry/provider/';
 export const SMS_OUTBOUND_FINGERPRINT_PREFIX = 'sms-outbound-registry/fingerprint/';
@@ -410,7 +410,7 @@ export function applyRegisteredOutboundToConversation(conversation, registration
     next.orchestration = normalizeSmsOrchestration(next, { occurredAt });
   }
 
-  if (descriptor.replyContext && !['coveragefit', 'none'].includes(descriptor.replyRoute)) {
+  if (descriptor.replyContext && descriptor.replyRoute !== 'none') {
     next.orchestration = setSmsReplyContext({ ...next, orchestration: next.orchestration }, {
       context: descriptor.replyContext,
       route: descriptor.replyRoute,

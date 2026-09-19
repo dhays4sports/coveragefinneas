@@ -1,0 +1,1130 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CoverageFit Agent Capability API",
+    "version": "1.0.0",
+    "description": "A bounded California insurance-assistance API for existing CoverageFit contacts. The API can request a coverage review, schedule a callback, or request a licensed-human connection. It does not bind insurance, quote carrier pricing, accept payments, or expose raw CRM data.",
+    "termsOfService": "https://coveragefit.com/terms/",
+    "contact": {
+      "name": "CoverageFit Support",
+      "url": "https://coveragefit.com/support/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://coveragefit.com",
+      "description": "CoverageFit production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Discovery",
+      "description": "Public API and capability metadata."
+    },
+    {
+      "name": "Agent capabilities",
+      "description": "Bounded agent-originated CoverageFit actions."
+    }
+  ],
+  "paths": {
+    "/api/agent": {
+      "get": {
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "Get CoverageFit agent API metadata",
+        "operationId": "getAgentApiMetadata",
+        "responses": {
+          "200": {
+            "description": "Public API metadata and links.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentApiMetadata"
+                }
+              }
+            }
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/agent/capabilities": {
+      "get": {
+        "tags": [
+          "Discovery"
+        ],
+        "summary": "Get the public capability manifest",
+        "operationId": "getAgentCapabilities",
+        "responses": {
+          "200": {
+            "description": "CoverageFit's current agent capability manifest.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CapabilityManifestResponse"
+                }
+              }
+            }
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          }
+        }
+      }
+    },
+    "/api/agent/invoke": {
+      "post": {
+        "tags": [
+          "Agent capabilities"
+        ],
+        "summary": "Invoke one bounded CoverageFit capability",
+        "description": "Requires a short-lived signed mesh-service-auth-v1 assertion in X-Mesh-Service-Auth, a fresh Mesh authority decision of ALLOW, an existing CoverageFit contact reference, and CoverageFit's own persisted contact/consent permission. The request body is limited to 32 KiB.",
+        "operationId": "invokeAgentCapability",
+        "security": [
+          {
+            "MeshServiceAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CoverageReviewInvocation"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CallbackScheduleInvocation"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AgentConnectInvocation"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "capabilityId",
+                  "mapping": {
+                    "insurance.coverage_review.request": "#/components/schemas/CoverageReviewInvocation",
+                    "insurance.callback.schedule": "#/components/schemas/CallbackScheduleInvocation",
+                    "insurance.agent.connect": "#/components/schemas/AgentConnectInvocation"
+                  }
+                }
+              },
+              "examples": {
+                "coverageReview": {
+                  "summary": "Request a home coverage review",
+                  "value": {
+                    "schemaVersion": "1.0",
+                    "invocationId": "inv:coveragefit:example-001",
+                    "capabilityId": "insurance.coverage_review.request",
+                    "issuedAt": "2026-09-19T22:30:00.000Z",
+                    "applicationRef": "application:coveragefit",
+                    "providerRef": "provider:coveragefit",
+                    "jurisdiction": "US-CA",
+                    "authority": {
+                      "decision": "ALLOW",
+                      "evaluationRef": "authority:evaluation:example-001",
+                      "evaluatedAt": "2026-09-19T22:30:00.000Z",
+                      "permissionRef": "permission:example-001"
+                    },
+                    "distribution": {
+                      "platform": "MUSE",
+                      "adapterRef": "adapter:coveragefit:muse",
+                      "experienceRef": "experience:example-001",
+                      "sourceSurface": "muse.connector"
+                    },
+                    "input": {
+                      "contactRef": "408d_2H7a9kLmNpQrStUvWxYz",
+                      "lineOfBusiness": "HOME",
+                      "state": "CA",
+                      "reason": "renewal review"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bounded live execution completed, alternatives are required, or an idempotent prior result is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvokeSuccessResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "PREPARE_ONLY accepted the request but did not execute a live action.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvokeSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "413": {
+            "$ref": "#/components/responses/PayloadTooLarge"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "MeshServiceAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Mesh-Service-Auth",
+        "description": "Custom signed short-lived mesh-service-auth-v1 service assertion. This is not a static user API key. Credentials are provisioned only to approved allowlisted service adapters. The assertion is audience-, method-, path-, body-, time-, and nonce-bound and is replay-protected."
+      }
+    },
+    "schemas": {
+      "OpaqueRef": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,191}$",
+        "maxLength": 192
+      },
+      "ContactRef": {
+        "type": "string",
+        "pattern": "^408d_[A-Za-z0-9_-]{16,80}$",
+        "description": "Existing opaque CoverageFit checkpoint/contact reference."
+      },
+      "Authority": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "decision",
+          "evaluationRef",
+          "evaluatedAt"
+        ],
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "ALLOW"
+            ]
+          },
+          "evaluationRef": {
+            "$ref": "#/components/schemas/OpaqueRef"
+          },
+          "evaluatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "permissionRef": {
+            "$ref": "#/components/schemas/OpaqueRef"
+          },
+          "mandateRef": {
+            "$ref": "#/components/schemas/OpaqueRef"
+          }
+        }
+      },
+      "Distribution": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "platform": {
+            "type": "string",
+            "maxLength": 40,
+            "example": "MUSE"
+          },
+          "adapterRef": {
+            "$ref": "#/components/schemas/OpaqueRef"
+          },
+          "experienceRef": {
+            "$ref": "#/components/schemas/OpaqueRef"
+          },
+          "sourceSurface": {
+            "type": "string",
+            "maxLength": 80,
+            "example": "muse.connector"
+          }
+        }
+      },
+      "InvocationCommon": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "invocationId",
+          "capabilityId",
+          "issuedAt",
+          "applicationRef",
+          "providerRef",
+          "jurisdiction",
+          "authority",
+          "input"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "enum": [
+              "1.0"
+            ],
+            "default": "1.0"
+          },
+          "invocationId": {
+            "$ref": "#/components/schemas/OpaqueRef"
+          },
+          "capabilityId": {
+            "type": "string"
+          },
+          "issuedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Must be fresh when accepted by CoverageFit."
+          },
+          "applicationRef": {
+            "type": "string",
+            "enum": [
+              "application:coveragefit"
+            ]
+          },
+          "providerRef": {
+            "type": "string",
+            "enum": [
+              "provider:coveragefit"
+            ]
+          },
+          "jurisdiction": {
+            "type": "string",
+            "enum": [
+              "US-CA"
+            ]
+          },
+          "authority": {
+            "$ref": "#/components/schemas/Authority"
+          },
+          "distribution": {
+            "$ref": "#/components/schemas/Distribution"
+          },
+          "input": {
+            "type": "object",
+            "description": "Capability-specific input object."
+          }
+        }
+      },
+      "CoverageReviewInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contactRef",
+          "lineOfBusiness",
+          "state"
+        ],
+        "properties": {
+          "contactRef": {
+            "$ref": "#/components/schemas/ContactRef"
+          },
+          "lineOfBusiness": {
+            "type": "string",
+            "enum": [
+              "HOME",
+              "AUTO",
+              "BUNDLE"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "CA"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 300
+          }
+        }
+      },
+      "CallbackScheduleInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contactRef",
+          "requestedStart",
+          "timezone"
+        ],
+        "properties": {
+          "contactRef": {
+            "$ref": "#/components/schemas/ContactRef"
+          },
+          "requestedStart": {
+            "type": "string",
+            "format": "date-time",
+            "description": "RFC 3339 timestamp including Z or an explicit numeric UTC offset."
+          },
+          "timezone": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 96,
+            "example": "America/Los_Angeles"
+          },
+          "topic": {
+            "type": "string",
+            "maxLength": 160
+          }
+        }
+      },
+      "AgentConnectInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contactRef",
+          "topic"
+        ],
+        "properties": {
+          "contactRef": {
+            "$ref": "#/components/schemas/ContactRef"
+          },
+          "topic": {
+            "type": "string",
+            "enum": [
+              "HOME",
+              "AUTO",
+              "BUNDLE",
+              "GENERAL"
+            ]
+          },
+          "urgency": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "RUSH"
+            ],
+            "default": "NORMAL"
+          }
+        }
+      },
+      "CoverageReviewInvocation": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InvocationCommon"
+          },
+          {
+            "type": "object",
+            "required": [
+              "capabilityId",
+              "input"
+            ],
+            "properties": {
+              "capabilityId": {
+                "type": "string",
+                "enum": [
+                  "insurance.coverage_review.request"
+                ]
+              },
+              "input": {
+                "$ref": "#/components/schemas/CoverageReviewInput"
+              }
+            }
+          }
+        ]
+      },
+      "CallbackScheduleInvocation": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InvocationCommon"
+          },
+          {
+            "type": "object",
+            "required": [
+              "capabilityId",
+              "input"
+            ],
+            "properties": {
+              "capabilityId": {
+                "type": "string",
+                "enum": [
+                  "insurance.callback.schedule"
+                ]
+              },
+              "input": {
+                "$ref": "#/components/schemas/CallbackScheduleInput"
+              }
+            }
+          }
+        ]
+      },
+      "AgentConnectInvocation": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InvocationCommon"
+          },
+          {
+            "type": "object",
+            "required": [
+              "capabilityId",
+              "input"
+            ],
+            "properties": {
+              "capabilityId": {
+                "type": "string",
+                "enum": [
+                  "insurance.agent.connect"
+                ]
+              },
+              "input": {
+                "$ref": "#/components/schemas/AgentConnectInput"
+              }
+            }
+          }
+        ]
+      },
+      "Capability": {
+        "type": "object",
+        "required": [
+          "capabilityId",
+          "description",
+          "jurisdiction",
+          "authorityRequirement",
+          "executionClass"
+        ],
+        "properties": {
+          "capabilityId": {
+            "type": "string",
+            "enum": [
+              "insurance.coverage_review.request",
+              "insurance.callback.schedule",
+              "insurance.agent.connect"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "jurisdiction": {
+            "type": "string",
+            "enum": [
+              "US-CA"
+            ]
+          },
+          "authorityRequirement": {
+            "type": "string",
+            "enum": [
+              "PERMISSION"
+            ]
+          },
+          "executionClass": {
+            "type": "string",
+            "enum": [
+              "CONSEQUENTIAL"
+            ]
+          }
+        }
+      },
+      "CapabilityManifestResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "schemaVersion",
+          "build",
+          "applicationRef",
+          "providerRef",
+          "jurisdiction",
+          "executionMode",
+          "capabilities"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "schemaVersion": {
+            "type": "string",
+            "enum": [
+              "1.0"
+            ]
+          },
+          "build": {
+            "type": "string",
+            "example": "CF-AGENT-CAPABILITY-1.0"
+          },
+          "applicationRef": {
+            "type": "string",
+            "enum": [
+              "application:coveragefit"
+            ]
+          },
+          "providerRef": {
+            "type": "string",
+            "enum": [
+              "provider:coveragefit"
+            ]
+          },
+          "jurisdiction": {
+            "type": "string",
+            "enum": [
+              "US-CA"
+            ]
+          },
+          "executionMode": {
+            "type": "string",
+            "enum": [
+              "PREPARE_ONLY",
+              "LIVE_BOUNDED"
+            ]
+          },
+          "authorityPolicy": {
+            "type": "string"
+          },
+          "serviceAuth": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "enum": [
+                  "mesh-service-auth-v1"
+                ]
+              },
+              "audience": {
+                "type": "string"
+              }
+            }
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Capability"
+            }
+          },
+          "contactRefPolicy": {
+            "type": "string"
+          },
+          "canonicalSystemOfRecord": {
+            "type": "string",
+            "enum": [
+              "COVERAGEFIT"
+            ]
+          }
+        }
+      },
+      "AgentApiMetadata": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CapabilityManifestResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "apiBase": {
+                "type": "string",
+                "format": "uri"
+              },
+              "documentation": {
+                "type": "string",
+                "format": "uri"
+              },
+              "openapi": {
+                "type": "string",
+                "format": "uri"
+              },
+              "endpoints": {
+                "type": "object",
+                "properties": {
+                  "capabilities": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "invoke": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              },
+              "support": {
+                "type": "string",
+                "format": "uri"
+              },
+              "privacy": {
+                "type": "string",
+                "format": "uri"
+              },
+              "terms": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        ]
+      },
+      "PreparedResult": {
+        "type": "object",
+        "required": [
+          "status",
+          "resourceRef",
+          "contactRef",
+          "capabilityId",
+          "executionStatus",
+          "nextRequiredBoundary",
+          "humanHandoffRequired"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "PREPARED"
+            ]
+          },
+          "resourceRef": {
+            "type": "string"
+          },
+          "contactRef": {
+            "$ref": "#/components/schemas/ContactRef"
+          },
+          "capabilityId": {
+            "type": "string"
+          },
+          "executionStatus": {
+            "type": "string",
+            "enum": [
+              "NOT_EXECUTED"
+            ]
+          },
+          "nextRequiredBoundary": {
+            "type": "string",
+            "enum": [
+              "COVERAGEFIT_AGENT_EXECUTION_ENABLEMENT"
+            ]
+          },
+          "coverageFitConsentState": {
+            "type": "string"
+          },
+          "humanHandoffRequired": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          }
+        }
+      },
+      "ScheduledResult": {
+        "type": "object",
+        "required": [
+          "status",
+          "resourceRef",
+          "capabilityId",
+          "contactRef",
+          "executionStatus"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SCHEDULED"
+            ]
+          },
+          "resourceRef": {
+            "type": "string"
+          },
+          "capabilityId": {
+            "type": "string",
+            "enum": [
+              "insurance.callback.schedule"
+            ]
+          },
+          "contactRef": {
+            "$ref": "#/components/schemas/ContactRef"
+          },
+          "scheduledStart": {
+            "type": "string"
+          },
+          "scheduledEnd": {
+            "type": "string"
+          },
+          "scheduledDisplay": {
+            "type": "string"
+          },
+          "calendarUrl": {
+            "type": "string"
+          },
+          "idempotent": {
+            "type": "boolean"
+          },
+          "humanHandoffRequired": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "executionStatus": {
+            "type": "string",
+            "enum": [
+              "BOUNDED_EXECUTION_COMPLETED"
+            ]
+          }
+        }
+      },
+      "AlternativesRequiredResult": {
+        "type": "object",
+        "required": [
+          "status",
+          "resourceRef",
+          "capabilityId",
+          "contactRef",
+          "alternatives",
+          "executionStatus"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ALTERNATIVES_REQUIRED"
+            ]
+          },
+          "resourceRef": {
+            "type": "string"
+          },
+          "capabilityId": {
+            "type": "string",
+            "enum": [
+              "insurance.callback.schedule"
+            ]
+          },
+          "contactRef": {
+            "$ref": "#/components/schemas/ContactRef"
+          },
+          "alternatives": {
+            "type": "array",
+            "items": {}
+          },
+          "executionStatus": {
+            "type": "string",
+            "enum": [
+              "BOUNDED_EXECUTION_ATTEMPTED"
+            ]
+          }
+        }
+      },
+      "HumanHandoffResult": {
+        "type": "object",
+        "required": [
+          "status",
+          "resourceRef",
+          "capabilityId",
+          "contactRef",
+          "humanHandoffRequired",
+          "executionStatus"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "HUMAN_HANDOFF_REQUESTED"
+            ]
+          },
+          "resourceRef": {
+            "type": "string"
+          },
+          "capabilityId": {
+            "type": "string",
+            "enum": [
+              "insurance.agent.connect"
+            ]
+          },
+          "contactRef": {
+            "$ref": "#/components/schemas/ContactRef"
+          },
+          "leadStage": {
+            "type": "string"
+          },
+          "humanHandoffRequired": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "executionStatus": {
+            "type": "string",
+            "enum": [
+              "BOUNDED_EXECUTION_COMPLETED"
+            ]
+          }
+        }
+      },
+      "ReviewRecordedResult": {
+        "type": "object",
+        "required": [
+          "status",
+          "resourceRef",
+          "capabilityId",
+          "contactRef",
+          "humanHandoffRequired",
+          "executionStatus"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "REVIEW_REQUEST_RECORDED"
+            ]
+          },
+          "resourceRef": {
+            "type": "string"
+          },
+          "capabilityId": {
+            "type": "string",
+            "enum": [
+              "insurance.coverage_review.request"
+            ]
+          },
+          "contactRef": {
+            "$ref": "#/components/schemas/ContactRef"
+          },
+          "leadStage": {
+            "type": "string"
+          },
+          "humanHandoffRequired": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "executionStatus": {
+            "type": "string",
+            "enum": [
+              "BOUNDED_EXECUTION_COMPLETED"
+            ]
+          }
+        }
+      },
+      "InvokeSuccessResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "idempotent",
+          "build",
+          "executionMode",
+          "result"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "idempotent": {
+            "type": "boolean"
+          },
+          "build": {
+            "type": "string",
+            "example": "CF-AGENT-CAPABILITY-1.0"
+          },
+          "executionMode": {
+            "type": "string",
+            "enum": [
+              "PREPARE_ONLY",
+              "LIVE_BOUNDED"
+            ]
+          },
+          "authorityEvaluationRef": {
+            "type": "string"
+          },
+          "distribution": {
+            "$ref": "#/components/schemas/Distribution"
+          },
+          "result": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PreparedResult"
+              },
+              {
+                "$ref": "#/components/schemas/ScheduledResult"
+              },
+              {
+                "$ref": "#/components/schemas/AlternativesRequiredResult"
+              },
+              {
+                "$ref": "#/components/schemas/HumanHandoffResult"
+              },
+              {
+                "$ref": "#/components/schemas/ReviewRecordedResult"
+              }
+            ]
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "error"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "enum": [
+              false
+            ]
+          },
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "The JSON body is unreadable or invalid.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "The signed Mesh service assertion is missing, invalid, expired, or not allowlisted.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Fresh Mesh ALLOW authority or CoverageFit contact/consent permission is missing.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The capability or existing CoverageFit contact reference was not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "The request is stale, a replay was detected, or an invocation identifier conflicts with prior data.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "PayloadTooLarge": {
+        "description": "The request body exceeds 32 KiB.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "UnsupportedMediaType": {
+        "description": "Content-Type must be application/json.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "UnprocessableEntity": {
+        "description": "The request shape or capability input failed validation.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "RateLimited": {
+        "description": "The endpoint rate limit was exceeded."
+      },
+      "ServiceUnavailable": {
+        "description": "CoverageFit storage, database, or service authentication is not configured or unavailable.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "MethodNotAllowed": {
+        "description": "The endpoint requires GET.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  }
+}

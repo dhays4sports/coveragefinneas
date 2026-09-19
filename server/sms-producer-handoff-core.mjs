@@ -15,7 +15,7 @@ import {
   takeProducerOwnership
 } from './sms-orchestrator-core.mjs';
 
-export const SMS_PRODUCER_HANDOFF_BUILD = 'RC-SMS-1.9.9';
+export const SMS_PRODUCER_HANDOFF_BUILD = 'RC-SMS-1.9.10';
 const LIVE_CONVERSATION_PREFIX = 'sms-live-conversations/';
 export const SMS_PRODUCER_ACTIONS = Object.freeze([
   'pause', 'resume', 'resend_handoff', 'complete', 'not_proceeding',
@@ -80,6 +80,15 @@ export function buildSmsProducerSummary(conversation = {}) {
     priority: answers.priority === 'rush' ? 'RUSH / time-sensitive' : 'Standard',
     coverageFit: handoff?.url ? 'Link delivered / available' : 'Not delivered',
     state: text(conversation.state, 'new'),
+    agedLead: conversation.agedLead && typeof conversation.agedLead === 'object' ? {
+      disposition: text(conversation.agedLead.disposition),
+      contactPreference: text(conversation.agedLead.contactPreference),
+      lineOfBusiness: text(conversation.agedLead.lineOfBusiness),
+      renewal: conversation.agedLead.renewal || null,
+      carrier: conversation.agedLead.carrier || null,
+      status: text(conversation.agedLead.status),
+      updatedAt: text(conversation.agedLead.updatedAt)
+    } : null,
     updatedAt: text(conversation.updatedAt)
   };
   const title = conversation.intent === 'buyer' ? 'NEW 408-FARMERS BUYER' : conversation.intent === 'home_review' ? 'NEW 408-FARMERS HOME REVIEW' : conversation.intent === 'bundle' ? 'NEW 408-FARMERS HOME + AUTO' : conversation.intent === 'auto' ? 'NEW 408-FARMERS AUTO' : conversation.intent === 'life' ? 'NEW 408-FARMERS LIFE' : conversation.intent === 'business' ? 'NEW 408-FARMERS BUSINESS' : conversation.intent === 'tech' ? 'NEW 408-FARMERS TECH' : 'NEW 408-FARMERS REQUEST';
@@ -100,6 +109,10 @@ export function buildSmsProducerSummary(conversation = {}) {
     ...(conversation.intent === 'business' ? [`Business type: ${summary.businessType}`, `Business need: ${summary.businessNeed}`] : []),
     ...(conversation.intent === 'tech' ? [`Technology role: ${summary.professionalRole}`, `Housing: ${summary.housing}`] : []),
     `Priority: ${summary.priority}`,
+    ...(conversation.agedLead?.disposition ? [`Aged lead: ${text(conversation.agedLead.disposition)}`] : []),
+    ...(conversation.agedLead?.contactPreference ? [`Contact preference: ${text(conversation.agedLead.contactPreference)}`] : []),
+    ...(conversation.agedLead?.renewal?.display ? [`Renewal: ${text(conversation.agedLead.renewal.display)}`] : []),
+    ...(conversation.agedLead?.carrier?.carrier ? [`Current carrier: ${text(conversation.agedLead.carrier.carrier)}`] : []),
     ...(conversation.callbackScheduling?.status === 'scheduled' ? [`Appointment: ${text(conversation.callbackScheduling.proposedDisplay)}`] : []),
     ...Object.entries(conversation.callbackPreparation?.answers || {}).map(([key, value]) => `Call preparation — ${key}: ${text(value)}`),
     `CoverageFit: ${summary.coverageFit}`

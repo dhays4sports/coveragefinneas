@@ -1,7 +1,8 @@
 import {pacificDay,pacificInputToISO} from '../assets/js/solo-desk-model.mjs';
 import {parse} from './solo-desk-repository.mjs';
+import {acquisitionMeasurement} from './acquisition-measurement.mjs';
 
-export const SHOTS_BUILD='408-SHOTS-1.1-SOLO';
+export const SHOTS_BUILD='408-SHOTS-1.2-PRODUCTION';
 export const SHOTS_TIME_ZONE='America/Los_Angeles';
 const DAY=86400000;
 const FIV_LABELS=Object.freeze({shoot_now:'🔥 Shoot now',quick_play:'⚡ Quick play',develop:'🏀 Develop',nurture:'🌱 Nurture',low_priority:'⬇ Low priority',unclassified:'Unclassified'});
@@ -39,11 +40,30 @@ function closingAction(row,task,summary){
 function appointmentPublic(row,opportunity){const s=parse(row.summary_json),start=safeTime(s.start||s.scheduledStart),end=safeTime(s.end||s.scheduledEnd);return start?{eventId:text(s.eventId||row.source_id,180),status:text(s.status||'scheduled',40),start,end,display:text(s.display,180),opportunityId:row.opportunity_id,contact:opportunity?contact(opportunity):{name:'Linked appointment'},products:text(opportunity?.products,160),workspaceUrl:openInWorkspace(row.opportunity_id)}:null;}
 function laneSort(a,b){return Number(b.rank||0)-Number(a.rank||0)||(Date.parse(a.dueAt||'9999-12-31')-Date.parse(b.dueAt||'9999-12-31'))||a.contact.name.localeCompare(b.contact.name);}
 
+function positiveTarget(value){const n=Number(value);return Number.isFinite(n)&&n>0?Math.round(n):null;}
+function pacificClock(date){const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:SHOTS_TIME_ZONE,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(date).map(x=>[x.type,x.value]));return Number(p.hour||0)*60+Number(p.minute||0);}
+function operatingProgress(date,env={}){const start=Math.max(0,Math.min(23,Number(env.COVERAGEFIT_PRODUCTION_DAY_START_HOUR)||9))*60,end=Math.max(start+60,Math.min(24*60,Math.max(0,Math.min(24,Number(env.COVERAGEFIT_PRODUCTION_DAY_END_HOUR)||18))*60)),now=pacificClock(date);return Math.max(0,Math.min(1,(now-start)/(end-start)));}
+function dailyTargets(env={}){return {opportunities:positiveTarget(env.COVERAGEFIT_DAILY_OPPORTUNITY_TARGET),contacts:positiveTarget(env.COVERAGEFIT_DAILY_CONTACT_TARGET),quotesPrepared:positiveTarget(env.COVERAGEFIT_DAILY_QUOTE_TARGET),bound:positiveTarget(env.COVERAGEFIT_DAILY_BIND_TARGET)};}
+function operatingConstraint(metrics,targets,progress){
+  const candidates=[
+    targets.opportunities?{key:'opportunities',ratio:metrics.opportunities/targets.opportunities,message:'Lead flow is behind pace. Work fresh possessions and protect speed-to-contact.'}:null,
+    targets.contacts?{key:'contacts',ratio:metrics.contacts/targets.contacts,message:'Contact pace is behind. Work new and Shoot Now possessions before adding deeper discovery.'}:null,
+    targets.quotesPrepared?{key:'quotesPrepared',ratio:metrics.quotesPrepared/targets.quotesPrepared,message:'Quote pace is behind. Move qualified conversations into quote preparation.'}:null,
+    targets.bound?{key:'bound',ratio:metrics.bound/targets.bound,message:'Closing pace is behind. Deliver recommendations, follow open decisions, and ask for the business.'}:null
+  ].filter(Boolean);
+  const behind=candidates.find(x=>x.ratio+0.12<progress);
+  if(behind)return {key:behind.key,state:'behind',message:behind.message};
+  if(candidates.length)return {key:'on_pace',state:'on_pace',message:'Production milestones are on pace. Keep working the highest-value next action.'};
+  return {key:'targets_not_configured',state:'neutral',message:'Daily targets are not configured. The board is showing truthful production counts only.'};
+}
+
 export function shotsBoard(repo,env={}){
   const workspace=repo.scope.workspace;
   return {
     async view(now=new Date()){
       const today=pacificDay(now),tomorrow=addDay(today,1),dayAfterTomorrow=addDay(today,2),todayStart=pacificInputToISO(`${today}T00:00`),tomorrowStart=pacificInputToISO(`${tomorrow}T00:00`),dayAfterTomorrowStart=pacificInputToISO(`${dayAfterTomorrow}T00:00`),{start:monthStartDay,next:nextMonthDay}=monthBounds(today),monthStart=pacificInputToISO(`${monthStartDay}T00:00`),nextMonth=pacificInputToISO(`${nextMonthDay}T00:00`);
+      let daily={opportunities:0,qualified:0,contacts:0,conversations:0,quoteable:0,quotesPrepared:0,recommendationsDelivered:0,closeAsked:0,bound:0,writtenPremiumCents:0,basis:'Acquisition measurement is not available yet.',setupRequired:true};
+      try{daily={...await acquisitionMeasurement(repo,env).daily(todayStart,tomorrowStart),setupRequired:false};}catch(error){if(!/no such table|no such column/i.test(String(error?.message||'')))throw error;}
       const [opRows,taskRows,closeRows,calendarRows,premiumRow]=await Promise.all([
         repo.rows(`SELECT o.*,f.fit AS fiv_fit,f.intent AS fiv_intent,f.value AS fiv_value,f.queue AS fiv_queue FROM cf_solo_opportunities o LEFT JOIN cf_fiv_projections f ON f.workspace_id=o.workspace_id AND f.opportunity_id=o.id WHERE o.workspace_id=? AND o.status!='closed' ORDER BY o.updated_at DESC LIMIT 180`,workspace),
         repo.rows("SELECT * FROM cf_solo_tasks WHERE workspace_id=? AND state IN ('open','in_progress','waiting') ORDER BY priority DESC,due_at,id",workspace),
@@ -63,7 +83,8 @@ export function shotsBoard(repo,env={}){
       const future=appointments.filter(a=>Date.parse(a.start)>=now.getTime());let nextUp=future.find(a=>Date.parse(a.start)<Date.parse(tomorrowStart))||future.find(a=>Date.parse(a.start)>=Date.parse(tomorrowStart)&&Date.parse(a.start)<Date.parse(dayAfterTomorrowStart))||future[0]||null;
       if(nextUp){const ts=Date.parse(nextUp.start);nextUp={...nextUp,day:ts<Date.parse(tomorrowStart)?'today':ts<Date.parse(dayAfterTomorrowStart)?'tomorrow':'future'};}
       const monthlyPremiumCents=cents(premiumRow?.premium_cents),targetCents=cents(env.COVERAGEFIT_MONTHLY_PREMIUM_TARGET_CENTS),remainingCents=targetCents?Math.max(0,targetCents-monthlyPremiumCents):null,remainingBusinessDays=businessDaysRemaining(today),requiredPerBusinessDayCents=remainingCents!=null&&remainingBusinessDays?Math.ceil(remainingCents/remainingBusinessDays):null;
-      return {build:SHOTS_BUILD,generatedAt:now.toISOString(),timeZone:SHOTS_TIME_ZONE,readOnly:true,truthBoundary:{calendar:'CoverageFit-linked scheduled appointments only. Direct Google Calendar changes still require reconciliation.',premium:'Verified written premium only; quoted or proceed-request premium is excluded.',priority:'Closing evidence and FIV guide producer attention; quick call/text links do not record contact and this board is not underwriting or eligibility.'},premium:{month:today.slice(0,7),verifiedWrittenPremiumCents:monthlyPremiumCents,boundComponents:Number(premiumRow?.bound_components||0),targetCents:targetCents||null,remainingCents,remainingBusinessDays,targetRequiredPerBusinessDayCents:requiredPerBusinessDayCents,targetConfigured:Boolean(targetCents)},lanes:{closing:closeLane.sort(laneSort).slice(0,6),shootNow:shootLane.sort(laneSort).slice(0,6),quickPlay:quickLane.sort(laneSort).slice(0,6),dueToday:dueToday.sort(laneSort).slice(0,8)},appointments:{today:appointmentsToday,nextUp},counts:{closing:closeLane.length,shootNow:shootLane.length,quickPlay:quickLane.length,dueToday:dueToday.length,appointmentsToday:appointmentsToday.length}};
+      const targets=dailyTargets(env),progress=operatingProgress(now,env),constraint=operatingConstraint(daily,targets,progress);
+      return {build:SHOTS_BUILD,generatedAt:now.toISOString(),timeZone:SHOTS_TIME_ZONE,readOnly:true,truthBoundary:{calendar:'CoverageFit-linked scheduled appointments only. Direct Google Calendar changes still require reconciliation.',premium:'Verified written premium only; quoted or proceed-request premium is excluded.',production:'Daily production counts use first recorded milestone transitions within the Pacific day. Call/text links and unanswered attempts never count as contact.',priority:'Closing evidence and FIV guide producer attention; quick call/text links do not record contact and this board is not underwriting or eligibility.'},production:{date:today,metrics:daily,targets,operatingDayProgress:Math.round(progress*1000)/10,constraint},premium:{month:today.slice(0,7),verifiedWrittenPremiumCents:monthlyPremiumCents,boundComponents:Number(premiumRow?.bound_components||0),targetCents:targetCents||null,remainingCents,remainingBusinessDays,targetRequiredPerBusinessDayCents:requiredPerBusinessDayCents,targetConfigured:Boolean(targetCents)},lanes:{closing:closeLane.sort(laneSort).slice(0,6),shootNow:shootLane.sort(laneSort).slice(0,6),quickPlay:quickLane.sort(laneSort).slice(0,6),dueToday:dueToday.sort(laneSort).slice(0,8)},appointments:{today:appointmentsToday,nextUp},counts:{closing:closeLane.length,shootNow:shootLane.length,quickPlay:quickLane.length,dueToday:dueToday.length,appointmentsToday:appointmentsToday.length}};
     }
   };
 }

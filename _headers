@@ -19,3 +19,10 @@
 
 /sitemap.xml
   Cache-Control: public, max-age=3600, must-revalidate
+
+/openapi.json
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: public, max-age=300, must-revalidate
+
+/docs/agent-api/*
+  Cache-Control: public, max-age=300, must-revalidate

@@ -189,6 +189,27 @@ export function acquisitionMeasurement(repo,env={}){
     async spend(value,requestId){const input=spendInput(value),prior=await repo.sql('SELECT * FROM cf_acq_spend WHERE workspace_id=? AND request_id=?',workspace,requestId).first();if(prior){const same=prior.campaign_id===input.campaignId&&prior.source_family===input.sourceFamily&&prior.source_key===input.sourceKey&&prior.partner_id===input.partnerId&&prior.batch_id===input.batchId&&prior.category===input.category&&Number(prior.amount_cents)===input.amountCents&&prior.incurred_on===input.incurredOn&&prior.note===input.note&&prior.evidence_ref===input.evidenceRef;if(!same)fail(409,'request_reused','That acquisition expense save request was already used. Reload before saving a different expense.');return input;}const id=`spend_${requestId}`,at=stamp();await repo.sql(`INSERT INTO cf_acq_spend(id,workspace_id,campaign_id,source_family,source_key,partner_id,batch_id,category,amount_cents,incurred_on,note,evidence_ref,request_id,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,id,workspace,input.campaignId,input.sourceFamily,input.sourceKey,input.partnerId,input.batchId,input.category,input.amountCents,input.incurredOn,input.note,input.evidenceRef,requestId,at).run();return input;},
     async campaigns(){return repo.rows('SELECT id,name,source_family,source_key,campaign_variant,partner_id,batch_id,status,created_at,updated_at FROM cf_acq_campaigns WHERE workspace_id=? ORDER BY status,name,id',workspace);},
     async reconcile(limit=250){const ids=await repo.rows(`SELECT o.id FROM cf_solo_opportunities o LEFT JOIN cf_acq_opportunity_attribution a ON a.workspace_id=o.workspace_id AND a.opportunity_id=o.id LEFT JOIN cf_acq_opportunity_measurements m ON m.workspace_id=o.workspace_id AND m.opportunity_id=o.id WHERE o.workspace_id=? AND (a.opportunity_id IS NULL OR m.opportunity_id IS NULL OR m.updated_at<o.updated_at OR EXISTS(SELECT 1 FROM cf_solo_sources s WHERE s.workspace_id=o.workspace_id AND s.opportunity_id=o.id AND s.updated_at>m.updated_at)) ORDER BY o.updated_at DESC LIMIT ?`,workspace,Math.max(1,Math.min(500,Number(limit)||250)));for(const row of ids)await refreshAcquisitionState(repo,row.id);return ids.length;},
+    async daily(fromIso,toIso){
+      await this.reconcile(300);
+      const row=await repo.sql(`SELECT
+        COUNT(CASE WHEN opportunity_created_at>=? AND opportunity_created_at<? THEN 1 END) AS opportunities,
+        COUNT(CASE WHEN qualified_possession_at>=? AND qualified_possession_at<? THEN 1 END) AS qualified,
+        COUNT(CASE WHEN contact_made_at>=? AND contact_made_at<? THEN 1 END) AS contacts,
+        COUNT(CASE WHEN meaningful_conversation_at>=? AND meaningful_conversation_at<? THEN 1 END) AS conversations,
+        COUNT(CASE WHEN quoteable_at>=? AND quoteable_at<? THEN 1 END) AS quoteable,
+        COUNT(CASE WHEN quote_prepared_at>=? AND quote_prepared_at<? THEN 1 END) AS quotes_prepared,
+        COUNT(CASE WHEN recommendation_delivered_at>=? AND recommendation_delivered_at<? THEN 1 END) AS recommendations_delivered,
+        COUNT(CASE WHEN close_asked_at>=? AND close_asked_at<? THEN 1 END) AS close_asked,
+        COUNT(CASE WHEN bound_at>=? AND bound_at<? THEN 1 END) AS bound,
+        COALESCE(SUM(CASE WHEN written_premium_recorded_at>=? AND written_premium_recorded_at<? THEN written_premium_cents ELSE 0 END),0) AS written_premium_cents
+      FROM cf_acq_opportunity_measurements WHERE workspace_id=?`,
+        fromIso,toIso,fromIso,toIso,fromIso,toIso,fromIso,toIso,fromIso,toIso,fromIso,toIso,fromIso,toIso,fromIso,toIso,fromIso,toIso,fromIso,toIso,workspace).first();
+      return {
+        from:fromIso,to:toIso,
+        opportunities:Number(row?.opportunities||0),qualified:Number(row?.qualified||0),contacts:Number(row?.contacts||0),conversations:Number(row?.conversations||0),quoteable:Number(row?.quoteable||0),quotesPrepared:Number(row?.quotes_prepared||0),recommendationsDelivered:Number(row?.recommendations_delivered||0),closeAsked:Number(row?.close_asked||0),bound:Number(row?.bound||0),writtenPremiumCents:Number(row?.written_premium_cents||0),
+        basis:'first recorded milestone transitions within the Pacific day; call attempts are not inferred'
+      };
+    },
     async summary(params=new URLSearchParams()){
       await this.reconcile(300);
       const days=Math.max(7,Math.min(365,Number(params.get?.('days')||30)||30)),until=new Date(),from=new Date(until.getTime()-days*86400000),fromIso=from.toISOString(),toIso=until.toISOString(),fromDay=fromIso.slice(0,10),toDay=toIso.slice(0,10),rate=moneyRate(env.COVERAGEFIT_FIRST_YEAR_COMMISSION_RATE);

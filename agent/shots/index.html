@@ -26,6 +26,24 @@
     </form>
   </section>
 
+  <section class="shots-production" aria-label="Today production scoreboard">
+    <div class="shots-production__head">
+      <div><span class="shots-kicker">TODAY · PRODUCTION</span><h2>Daily scoreboard</h2></div>
+      <div class="shots-constraint" id="shotsConstraint" data-state="neutral">Loading production pace…</div>
+    </div>
+    <div class="shots-production-grid">
+      <div class="shots-production-card"><span>New opportunities</span><strong id="shotsTodayOpportunities">—</strong><small id="shotsGoalOpportunities">Goal —</small></div>
+      <div class="shots-production-card"><span>Contacts</span><strong id="shotsTodayContacts">—</strong><small id="shotsGoalContacts">Goal —</small></div>
+      <div class="shots-production-card"><span>Conversations</span><strong id="shotsTodayConversations">—</strong><small>Recorded conversations</small></div>
+      <div class="shots-production-card"><span>Quoteable</span><strong id="shotsTodayQuoteable">—</strong><small>Reached quote-prep stage</small></div>
+      <div class="shots-production-card"><span>Quotes prepared</span><strong id="shotsTodayQuotes">—</strong><small id="shotsGoalQuotes">Goal —</small></div>
+      <div class="shots-production-card"><span>Recommendations</span><strong id="shotsTodayRecommendations">—</strong><small>Delivered today</small></div>
+      <div class="shots-production-card"><span>Close asks</span><strong id="shotsTodayCloseAsks">—</strong><small>Explicit asks</small></div>
+      <div class="shots-production-card shots-production-card--bind"><span>Binds</span><strong id="shotsTodayBinds">—</strong><small id="shotsGoalBinds">Goal —</small></div>
+    </div>
+    <p class="shots-production-note" id="shotsProductionNote">Recorded milestones only. Call/text links do not count as contact.</p>
+  </section>
+
   <section class="shots-scorebar" aria-label="Monthly premium progress">
     <div class="shots-score-card shots-score-card--premium"><span>Verified premium · MTD</span><strong id="shotsPremium">—</strong><small id="shotsPremiumNote">Verified written premium only</small></div>
     <div class="shots-score-card"><span>Monthly target</span><strong id="shotsTarget">—</strong><small id="shotsRemaining">Set target in CoverageFit configuration</small></div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0b2f57"><title>Agent API Documentation | CoverageFit</title><meta name="description" content="CoverageFit Agent Capability API documentation for approved agent and connector integrations."><link rel="canonical" href="https://coveragefit.com/docs/agent-api/"><link rel="icon" href="/assets/images/coveragefit-mark-board.png"><link rel="stylesheet" href="/assets/css/coveragefit.css"><link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/pilot.css"><link rel="stylesheet" href="/assets/css/trigger-illustrations.css">
+  <style>
+    .api-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:24px 0}.api-card{border:1px solid #d8e3ee;border-radius:16px;padding:18px;background:#fff}.api-card h3{margin-top:0}.api-code{background:#071c31;color:#eff7ff;border-radius:14px;padding:16px;overflow:auto;font-size:.9rem;line-height:1.55}.api-table{width:100%;border-collapse:collapse;margin:18px 0 28px}.api-table th,.api-table td{border-bottom:1px solid #dde6ef;padding:11px 8px;text-align:left;vertical-align:top}.api-table th{color:#0b2f57}.api-note{border-left:4px solid #2db56a;background:#f1faf5;padding:14px 16px;border-radius:8px;margin:18px 0}.api-warn{border-left:4px solid #1e6fb7;background:#f2f7fd;padding:14px 16px;border-radius:8px;margin:18px 0}code{overflow-wrap:anywhere}
+  </style>
+</head><body><header class="pilot-header"><div class="wrap pilot-nav"><a class="pilot-logo" href="/"><img src="/assets/images/coveragefit-logo-board.png" alt="CoverageFit"></a><nav class="pilot-links"><a href="/home/">Home</a><a href="/how-it-works/">How It Works</a><a href="/support/">Support</a><a href="/privacy/">Privacy</a><a class="btn primary" href="/home/">Start a Review</a></nav></div></header>
+<main><section class="content-section legal"><div class="wrap narrow"><span class="eyebrow-chip">CoverageFit Agent API · v1</span><h1>Agent Capability API</h1><p>CoverageFit exposes a narrow agent-facing API for approved service adapters. It can request a coverage review, schedule a callback, or request a licensed-human connection for an <strong>existing CoverageFit contact</strong> in California.</p>
+<div class="api-note"><strong>Boundary:</strong> This API does not bind insurance, cancel or replace a policy, return carrier pricing, accept payment information, expose raw CRM data, or authorize unrestricted marketing. CoverageFit remains the system of record and applies its own contact and consent checks.</div>
+<p><strong>API base:</strong> <code>https://coveragefit.com/api/agent</code><br><strong>OpenAPI:</strong> <a href="/openapi.json">https://coveragefit.com/openapi.json</a><br><strong>Capability manifest:</strong> <a href="/api/agent/capabilities">https://coveragefit.com/api/agent/capabilities</a></p>
+
+<h2>Capabilities</h2><div class="api-grid"><div class="api-card"><h3>Coverage review</h3><p><code>insurance.coverage_review.request</code></p><p>Records a structured home, auto, or bundle review request for an existing CoverageFit contact.</p></div><div class="api-card"><h3>Callback</h3><p><code>insurance.callback.schedule</code></p><p>Requests a callback at an explicit date/time for a contact whose CoverageFit record permits calls.</p></div><div class="api-card"><h3>Licensed-agent connection</h3><p><code>insurance.agent.connect</code></p><p>Requests a human handoff for home, auto, bundle, or general insurance assistance.</p></div></div>
+
+<h2>Access requirements</h2><ul><li>Jurisdiction is currently limited to <code>US-CA</code>.</li><li>The request must reference an existing CoverageFit checkpoint/contact ID matching <code>408d_...</code>. New-contact registration is not exposed in v1.</li><li>The calling service must be an approved, allowlisted adapter using CoverageFit's custom Mesh service authentication.</li><li>A fresh authenticated Mesh authority result with <code>decision: ALLOW</code> is required for each consequential invocation.</li><li>CoverageFit re-checks its own persisted contact and communication permissions before any live bounded action.</li></ul>
+
+<h2>Authentication</h2><p><code>POST /api/agent/invoke</code> requires:</p><pre class="api-code"><code>X-Mesh-Service-Auth: &lt;base64url signed mesh-service-auth-v1 assertion&gt;
+Content-Type: application/json</code></pre><p>The assertion is short-lived and bound to the calling service, audience, HTTP method, request path, body digest, timestamps, and a one-time nonce. It is replay-protected. <strong>This is not a static end-user API key.</strong> Credential provisioning for approved adapters is handled out of band.</p>
+<div class="api-warn"><strong>Authentication is not user authority.</strong> A valid service assertion does not by itself grant permission to perform an insurance-related action. The invocation must also carry a fresh Mesh <code>ALLOW</code> evaluation, and CoverageFit consent remains authoritative.</div>
+
+<h2>Endpoints</h2><table class="api-table"><thead><tr><th>Method</th><th>Path</th><th>Purpose</th><th>Auth</th></tr></thead><tbody><tr><td>GET</td><td><code>/api/agent</code></td><td>API discovery metadata and canonical links.</td><td>Public</td></tr><tr><td>GET</td><td><code>/api/agent/capabilities</code></td><td>Machine-readable capability manifest and current execution mode.</td><td>Public</td></tr><tr><td>POST</td><td><code>/api/agent/invoke</code></td><td>Invoke one of the three bounded capabilities.</td><td>Custom signed Mesh service assertion</td></tr></tbody></table>
+
+<h2>Invocation envelope</h2><p>Every invocation uses the same top-level envelope. Capability-specific fields belong only inside <code>input</code>. Unknown fields are rejected.</p><pre class="api-code"><code>{
+  "schemaVersion": "1.0",
+  "invocationId": "inv:coveragefit:example-001",
+  "capabilityId": "insurance.coverage_review.request",
+  "issuedAt": "2026-09-19T22:30:00.000Z",
+  "applicationRef": "application:coveragefit",
+  "providerRef": "provider:coveragefit",
+  "jurisdiction": "US-CA",
+  "authority": {
+    "decision": "ALLOW",
+    "evaluationRef": "authority:evaluation:example-001",
+    "evaluatedAt": "2026-09-19T22:30:00.000Z",
+    "permissionRef": "permission:example-001"
+  },
+  "distribution": {
+    "platform": "MUSE",
+    "adapterRef": "adapter:coveragefit:muse",
+    "experienceRef": "experience:example-001",
+    "sourceSurface": "muse.connector"
+  },
+  "input": {
+    "contactRef": "408d_2H7a9kLmNpQrStUvWxYz",
+    "lineOfBusiness": "HOME",
+    "state": "CA",
+    "reason": "renewal review"
+  }
+}</code></pre>
+
+<h2>Capability inputs</h2><h3>1. Coverage review</h3><table class="api-table"><thead><tr><th>Field</th><th>Required</th><th>Values / rules</th></tr></thead><tbody><tr><td><code>contactRef</code></td><td>Yes</td><td>Existing CoverageFit <code>408d_...</code> reference.</td></tr><tr><td><code>lineOfBusiness</code></td><td>Yes</td><td><code>HOME</code>, <code>AUTO</code>, or <code>BUNDLE</code>.</td></tr><tr><td><code>state</code></td><td>Yes</td><td><code>CA</code>.</td></tr><tr><td><code>reason</code></td><td>No</td><td>Short context, maximum 300 characters.</td></tr></tbody></table>
+<h3>2. Callback schedule</h3><table class="api-table"><thead><tr><th>Field</th><th>Required</th><th>Values / rules</th></tr></thead><tbody><tr><td><code>contactRef</code></td><td>Yes</td><td>Existing CoverageFit <code>408d_...</code> reference with call permission.</td></tr><tr><td><code>requestedStart</code></td><td>Yes</td><td>RFC 3339 date-time including <code>Z</code> or a numeric UTC offset.</td></tr><tr><td><code>timezone</code></td><td>Yes</td><td>Valid IANA time zone, for example <code>America/Los_Angeles</code>.</td></tr><tr><td><code>topic</code></td><td>No</td><td>Short callback context, maximum 160 characters.</td></tr></tbody></table>
+<h3>3. Agent connect</h3><table class="api-table"><thead><tr><th>Field</th><th>Required</th><th>Values / rules</th></tr></thead><tbody><tr><td><code>contactRef</code></td><td>Yes</td><td>Existing CoverageFit <code>408d_...</code> reference with at least one permitted contact channel.</td></tr><tr><td><code>topic</code></td><td>Yes</td><td><code>HOME</code>, <code>AUTO</code>, <code>BUNDLE</code>, or <code>GENERAL</code>.</td></tr><tr><td><code>urgency</code></td><td>No</td><td><code>NORMAL</code> (default) or <code>RUSH</code>.</td></tr></tbody></table>
+
+<h2>Execution modes</h2><p>The current mode is published by <code>GET /api/agent/capabilities</code>.</p><ul><li><strong>PREPARE_ONLY:</strong> CoverageFit validates authentication, authority, contact state, consent, jurisdiction, idempotency, and input, then returns a structured <code>PREPARED</code> result without performing a live action. Initial accepted requests return HTTP 202.</li><li><strong>LIVE_BOUNDED:</strong> The same validations apply, after which only the three documented bounded handlers may execute. Live enablement requires explicit CoverageFit configuration.</li></ul>
+
+<h2>Idempotency and replay protection</h2><p>Every request includes an opaque <code>invocationId</code>. Reusing the same ID with identical normalized data returns the prior result; reusing it with different data fails with HTTP 409. Service-auth nonces are one-time and replay-protected.</p>
+
+<h2>Responses and errors</h2><table class="api-table"><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody><tr><td>200</td><td>Live bounded result, alternatives-required result, or idempotent prior result.</td></tr><tr><td>202</td><td>Accepted in PREPARE_ONLY mode; no live action executed.</td></tr><tr><td>400</td><td>Unreadable or invalid JSON.</td></tr><tr><td>401</td><td>Missing or rejected signed service assertion.</td></tr><tr><td>403</td><td>Mesh authority or CoverageFit contact/consent permission is missing.</td></tr><tr><td>404</td><td>Capability or CoverageFit contact reference not found.</td></tr><tr><td>409</td><td>Stale request, replay, invocation conflict, or in-progress invocation.</td></tr><tr><td>413 / 415</td><td>Request too large or wrong content type.</td></tr><tr><td>422</td><td>Invalid request shape, jurisdiction, or capability input.</td></tr><tr><td>429</td><td>Rate limit exceeded.</td></tr><tr><td>503</td><td>Required CoverageFit storage/auth configuration is unavailable.</td></tr></tbody></table>
+
+<h2>Connector review resources</h2><p><a href="/support/">Support</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms of Use</a> · <a href="/openapi.json">OpenAPI specification</a></p><p>For integration questions or connector-review issues, use <a href="/support/">CoverageFit Support</a>. Do not send secrets, private keys, payment-card information, carrier credentials, or sensitive policy documents through the general support form.</p>
+</div></section></main><footer class="pilot-footer"><div class="wrap pilot-footer-inner"><img src="/assets/images/coveragefit-logo-dark-board.jpg" alt="CoverageFit"><p>CoverageFit is an educational self-assessment and insurance-assistance workflow, not a carrier or autonomous binding system. Actual coverage is governed by the issued policy, endorsements, exclusions, limits, deductibles, eligibility rules, underwriting requirements, and licensed review.</p></div></footer><script src="/assets/js/attribution.js"></script><script src="/assets/js/producer-config.js"></script><script src="/assets/js/producer-branding.js"></script><script src="/assets/js/trigger-illustrations.js"></script>
+</body></html>
