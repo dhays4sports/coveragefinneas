@@ -1,0 +1,23 @@
+{
+  "release": "CF-MUSE-API-DOCS-1.0",
+  "version": "3.20.254",
+  "baseline": "3.20.253",
+  "checks": {
+    "openapiJsonParsed": true,
+    "openapiRequestExamplesValidated": 3,
+    "runtimeCapabilityIdsMatched": true,
+    "runtimeContactRefPatternMatched": true,
+    "publicApiRootSmoke": "HTTP_200",
+    "publicApiRootDefaultExecutionMode": "PREPARE_ONLY",
+    "humanDocumentationHtmlParsed": true,
+    "canonicalReviewUrlsPresent": true,
+    "newDatabaseMigration": false
+  },
+  "behavior": {
+    "agentCapabilityBuildChanged": false,
+    "liveBoundedEnabledByRelease": false,
+    "newCapabilitiesAdded": false,
+    "authorityOrConsentRelaxed": false
+  },
+  "result": "PASS"
+}

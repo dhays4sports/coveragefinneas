@@ -73,6 +73,9 @@
     <loc>https://coveragefit.com/terms/</loc>
   </url>
   <url>
+    <loc>https://coveragefit.com/support/</loc>
+  </url>
+  <url>
     <loc>https://coveragefit.com/triggers/homebuyer/</loc>
   </url>
   <url>
@@ -93,4 +96,7 @@
   <url><loc>https://coveragefit.com/pvx/update/</loc></url>
   <url><loc>https://coveragefit.com/nonrenewal/</loc></url>
   <url><loc>https://coveragefit.com/nonrenewal/safeco/</loc></url>
+  <url>
+    <loc>https://coveragefit.com/docs/agent-api/</loc>
+  </url>
 </urlset>

@@ -6,7 +6,7 @@ import { timingSafeTextEqual } from './runtime-crypto.mjs';
 import {handlePreparation, preparationInvitation} from './callback-preparation-core.mjs';
 import {projectSoloDeskEventBestEffort} from './solo-desk-event-projection.mjs';
 
-export const SMS_CALLBACK_BUILD = 'RC-SMS-1.10.2';
+export const SMS_CALLBACK_BUILD = 'RC-SMS-1.10.3';
 export const CALLBACK_SEQUENCE_PREFIX = 'sms-callback-sequences/';
 export const CALLBACK_CALENDAR_PREFIX = 'sms-callback-calendar/';
 export const CALLBACK_WEB_BOOKING_PREFIX = 'callback-web-bookings/';
@@ -225,19 +225,59 @@ const callbackCommand = value => {
   if (/^(callback|schedule|schedule a call|book a call|call back)$/.test(normalized)) return 'callback';
   if (/^(anytime|call anytime|call me anytime|when available|call when available|call me when available)$/.test(normalized)) return 'anytime';
   if (/^(yes|y|confirm|book it|that works|works for me)$/.test(normalized)) return 'yes';
+  if (/^(keep|keep it|keep the time|keep my appointment|keep my call|same time)$/.test(normalized)) return 'keep';
   if (/^(change|reschedule|different time|another time)$/.test(normalized)) return 'change';
-  if (/^(cancel|cancel callback|cancel appointment)$/.test(normalized)) return 'cancel';
+  if (/^(cancel|cancel callback|cancel appointment|cancel call)$/.test(normalized)) return 'cancel';
   if (/^(status|appointment|when is my call)$/.test(normalized)) return 'status';
   return '';
 };
 
 const explicitNonCallback = value => /^(home|auto|life|business|buyer|text|email|stop|start|help|dylan|agent|human|not interested|no thanks|done)$/i.test(cleanLine(value, 100));
 const independentProducerRequest = value => /\b(?:text(?: me)?|email(?: me)?|call me now|quote|price|cost|premium|coverage|policy|claim|deductible|carrier)\b/i.test(cleanLine(value, 300));
+const naturalScheduledChange = value => /\b(?:reschedule|change (?:my |the )?(?:time|appointment|call)|move (?:my |the )?(?:time|appointment|call)|cancel (?:my |the )?(?:appointment|call))\b/i.test(cleanLine(value, 300));
+const scheduledStatusQuestion = value => /\b(?:when|what (?:day|time))\b.*\b(?:appointment|call|booked|scheduled)\b/i.test(cleanLine(value, 300));
+
+export function isScheduledCallbackAcknowledgement(value) {
+  const normalized = cleanLine(value, 180)
+    .toLowerCase()
+    .replace(/[’']/g, '')
+    .replace(/[^a-z0-9👍]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!normalized) return false;
+  // Do not swallow anything that might actually be a request, question,
+  // scheduling change, insurance topic, or negative instruction.
+  if (/\b(?:change|reschedule|move|cancel|instead|different|what|when|where|why|how|call me now|text|email|quote|price|cost|premium|coverage|policy|claim|deductible|carrier|not|dont|do not|cant|cannot)\b/.test(normalized)) return false;
+  const exact = new Set([
+    'yes', 'yeah', 'yep', 'yup', 'sure', 'ok', 'okay', 'sounds good', 'sound good',
+    'perfect', 'great', 'got it', 'will do', 'thanks', 'thank you', 'thanks so much',
+    'no problem', 'see you then', 'see you soon', 'talk soon', 'talk to you soon', '👍'
+  ]);
+  if (exact.has(normalized)) return true;
+  return /^(?:yes|yeah|yep|yup|ok|okay|sure) (?:sounds good|perfect|great|got it|thanks|thank you|see you then|see you soon|talk soon|talk to you soon|will do)$/.test(normalized);
+}
+
+function scheduledTimingCandidate(body, options = {}) {
+  const timing = parseCallbackDateTime(body, options);
+  return timing.ok || ['missing_day', 'missing_time', 'vague_time'].includes(timing.reason);
+}
 
 export function shouldHandleCallbackInbound(conversation = {}, body, options = {}) {
-  if (conversation.callbackScheduling?.status === 'scheduled' && (/^ready[.!?]*$/i.test(cleanLine(body, 100)) || conversation.callbackPreparation?.status === 'active') && !explicitNonCallback(body)) return true;
-  const command = callbackCommand(body);
   const callback = conversation.callbackScheduling && typeof conversation.callbackScheduling === 'object' ? conversation.callbackScheduling : {};
+  const scheduled = callback.status === 'scheduled';
+  const command = callbackCommand(body);
+  if (scheduled) {
+    if ((/^ready[.!?]*$/i.test(cleanLine(body, 100)) || conversation.callbackPreparation?.status === 'active') && !explicitNonCallback(body)) return true;
+    if (isScheduledCallbackAcknowledgement(body)) return true;
+    if (scheduledStatusQuestion(body) || naturalScheduledChange(body)) return true;
+    if (['yes', 'keep', 'change', 'cancel', 'status', 'call_now'].includes(command)) return true;
+    // A bare new day/time must never silently mutate an existing booking.
+    // Route it here only so we can ask whether the customer intends to reschedule.
+    if (scheduledTimingCandidate(body, options)) return true;
+    // Insurance/service questions and ordinary conversation should leave the
+    // locked appointment state alone and continue through normal routing.
+    return false;
+  }
   const active = callback.status && !TERMINAL_CALLBACK.has(callback.status);
   const replyContext = conversation.orchestration?.replyContext?.context === 'callback_time_request';
   if (command === 'callback' || command === 'anytime' || command === 'call_now') return true;
@@ -603,13 +643,27 @@ async function handleCallbackTurn(conversation = {}, body, options = {}) {
   const command = callbackCommand(body);
   // During preparation, dates answer the timing question unless the customer
   // explicitly asks to change/cancel their appointment.
-  const naturalChange = /\b(?:reschedule|change (?:my |the )?(?:time|appointment|call)|cancel (?:my |the )?(?:appointment|call))\b/i.test(body);
-  if (conversation.callbackScheduling?.status === 'scheduled' && /\b(?:when|what (?:day|time))\b.*\b(?:appointment|call|booked|scheduled)\b/i.test(body)) return handleCallbackInbound(conversation, 'status', options);
+  const naturalChange = naturalScheduledChange(body);
+  const scheduled = conversation.callbackScheduling?.status === 'scheduled';
+  if (scheduled && scheduledStatusQuestion(body)) return handleCallbackInbound(conversation, 'status', options);
+  if (scheduled && conversation.callbackPreparation?.status !== 'active' && isScheduledCallbackAcknowledgement(body)) {
+    return { handled: true, conversation, reply: '' };
+  }
   if (!command && !naturalChange) {
     const preparation = handlePreparation(conversation, body, at);
     if (preparation) return preparation;
   }
   if (naturalChange && !command) return handleCallbackInbound({...conversation, callbackPreparation: {...conversation.callbackPreparation, status: 'paused'}}, /\bcancel\b/i.test(body) ? 'cancel' : 'change', options);
+  if (scheduled && command === 'yes') return { handled: true, conversation, reply: '' };
+  if (scheduled && command === 'keep') return { handled: true, conversation, reply: `You’re still set for ${conversation.callbackScheduling.proposedDisplay}. Dylan will call you at this number.` };
+  if (scheduled && !command && conversation.callbackPreparation?.status !== 'active' && scheduledTimingCandidate(body, options)) {
+    const proposed = cleanLine(body, 120);
+    return {
+      handled: true,
+      conversation,
+      reply: `I still have you scheduled for ${conversation.callbackScheduling.proposedDisplay}. Did you want to move the call to ${proposed}? Reply CHANGE to reschedule, or KEEP to keep your current time.`
+    };
+  }
   let callback = conversation.callbackScheduling && typeof conversation.callbackScheduling === 'object'
     ? { ...conversation.callbackScheduling }
     : { schemaVersion: '1.0', build: SMS_CALLBACK_BUILD, status: 'callback_requested', createdAt: at, sequenceId: text(conversation.callbackSequence?.id), productType: safeProduct(conversation.callbackSequence?.productType) };

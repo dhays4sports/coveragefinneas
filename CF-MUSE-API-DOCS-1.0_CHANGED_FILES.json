@@ -1,0 +1,22 @@
+{
+  "release": "CF-MUSE-API-DOCS-1.0",
+  "baseline": "3.20.253",
+  "version": "3.20.254",
+  "added": [
+    "CF-MUSE-API-DOCS-1.0_CHANGED_FILES.json",
+    "CF-MUSE-API-DOCS-1.0_RELEASE_NOTES.md",
+    "CF-MUSE-API-DOCS-1.0_QA.json",
+    "MUSE_SUBMISSION_PACKAGE.md",
+    "docs/agent-api/index.html",
+    "functions/api/agent/index.js",
+    "openapi.json"
+  ],
+  "modified": [
+    "AGENT_NATIVE_CAPABILITY_API.md",
+    "COVERAGEFIT_NORTH_STAR.md",
+    "VERSION",
+    "_headers",
+    "sitemap.xml"
+  ],
+  "removed": []
+}

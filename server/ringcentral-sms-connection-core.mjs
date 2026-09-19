@@ -62,13 +62,14 @@ import {
   shouldHandleCallbackInbound
 } from './sms-callback-scheduling-core.mjs';
 import { sendProducerCallNowAlert } from './producer-booking-alert-core.mjs';
+import { applyAgedLeadReply, AGED_LEAD_REPLY_BUILD } from './aged-lead-reply-core.mjs';
 import {
   noteConfirmedRingCentralWebhookEvent,
   recoverMissedRingCentralSms,
   ringCentralRecoveryStatus
 } from './ringcentral-webhook-recovery-core.mjs';
 
-export const RC_SMS_CONNECTION_BUILD = 'RC-SMS-1.11.1';
+export const RC_SMS_CONNECTION_BUILD = 'RC-SMS-1.11.2';
 export const RC_SMS_WELCOME_MESSAGE = SMS_INTENT_MENU;
 export const LIVE_CONVERSATION_PREFIX = 'sms-live-conversations/';
 export const LIVE_EVENT_PREFIX = 'sms-live-events/';
@@ -549,6 +550,67 @@ export async function handleRingCentralWebhook(request, options = {}) {
       });
     }
 
+    // Aged-lead re-engagement replies are interpreted before the generic callback
+    // heuristic. This is essential for replies like "December", which should be
+    // captured as an x-date rather than mistaken for appointment scheduling.
+    const agedLeadResult = applyAgedLeadReply(conversation, event.body, { ...options, occurredAt, now: occurredAt });
+    if (agedLeadResult.handled && !agedLeadResult.bridgeToCoverageFit) {
+      await markCallbackSequenceReplied(conversation, event.body, { ...options, env, store, now: occurredAt });
+      conversation = agedLeadResult.conversation;
+      conversation.updatedAt = occurredAt;
+      let replied = false;
+      const replyBody = text(agedLeadResult.reply);
+      if (replyBody) {
+        try {
+          const agedReplyRoute = agedLeadResult.replyRoute || 'coveragefit';
+          const agedOrigin = agedReplyRoute === 'appointment' ? 'appointment' : 'coveragefit';
+          await sendSmsThroughGateway({
+            to: event.fromNumber,
+            message: replyBody,
+            origin: agedOrigin,
+            workflow: agedLeadResult.workflow || 'aged_lead_reengagement',
+            replyRoute: agedReplyRoute,
+            ownershipEffect: 'preserve',
+            replyContext: agedLeadResult.replyContext || '',
+            replyContextTtlSeconds: agedLeadResult.replyContext ? 21 * 86400 : 0,
+            idempotencyKey: `aged-lead:${event.messageId}`
+          }, { ...options, env, store, conversationSnapshot: conversation });
+          conversation = normalizeLiveConversation(await store.get(conversationKey)) || conversation;
+          conversation.deliveryFailure = null;
+          conversation.retryPending = false;
+          replied = true;
+        } catch (sendError) {
+          const retry = await queueSmsRetry(store, {
+            conversationId,
+            to: event.fromNumber,
+            body: replyBody,
+            sourceMessageId: event.messageId,
+            origin: (agedLeadResult.replyRoute || 'coveragefit') === 'appointment' ? 'appointment' : 'coveragefit',
+            workflow: agedLeadResult.workflow || 'aged_lead_reengagement',
+            replyRoute: agedLeadResult.replyRoute || 'coveragefit',
+            ownershipEffect: 'preserve',
+            replyContext: agedLeadResult.replyContext || '',
+            replyContextTtlSeconds: agedLeadResult.replyContext ? 21 * 86400 : 0,
+            error: sendError?.message
+          }, options);
+          conversation.deliveryFailure = { at: occurredAt, code: text(sendError?.code, 'ringcentral_send_failed'), message: 'Aged-lead SMS delivery failed and was queued for retry.' };
+          conversation.retryPending = Boolean(retry);
+        }
+      }
+      conversation.producerSummary = buildSmsProducerSummary(conversation);
+      await store.setJSON(conversationKey, conversation, { metadata: metadata(conversation) });
+      const processedAt = nowIso(options);
+      await store.setJSON(eventKey, {
+        status: 'processed', replied, conversationId, state: conversation.state, direction: 'inbound',
+        routedTo: agedLeadResult.replyRoute || 'coveragefit', routeReason: `aged_lead:${agedLeadResult.classification?.kind || 'reply'}`,
+        agedLeadBuild: AGED_LEAD_REPLY_BUILD, build: RC_SMS_CONNECTION_BUILD, occurredAt, processedAt
+      }, { metadata: { status: 'processed', replied, state: conversation.state, build: RC_SMS_CONNECTION_BUILD, createdAt: occurredAt, updatedAt: processedAt } });
+      await updateWebhookHealth(store, { success: true }, options);
+      return json({ ok: true, deduped: false, replied, deliveryQueued: Boolean(conversation.retryPending), state: conversation.state,
+        routedTo: agedLeadResult.replyRoute || 'coveragefit', routeReason: `aged_lead:${agedLeadResult.classification?.kind || 'reply'}`,
+        agedLead: conversation.agedLead || {}, orchestration: orchestrationSummary(conversation) });
+    }
+
     // A response to any callback invitation—including an AgencyZoom message
     // seen as an unregistered RingCentral outbound—stops the remaining callback
     // sequence. Date/time replies then enter the bounded appointment workflow.
@@ -661,7 +723,10 @@ export async function handleRingCentralWebhook(request, options = {}) {
       }
     }
 
-    const routeDecision = resolveSmsInboundRoute(conversation, event.body, { occurredAt, partnerRegistry });
+    const agedBridge = agedLeadResult.handled && agedLeadResult.bridgeToCoverageFit ? agedLeadResult : null;
+    if (agedBridge) conversation = agedBridge.conversation;
+    const inboundForRouting = agedBridge?.normalizedIntent || event.body;
+    const routeDecision = resolveSmsInboundRoute(conversation, inboundForRouting, { occurredAt, partnerRegistry });
     conversation.orchestration = routeDecision.orchestration;
     if (routeDecision.route !== 'coveragefit') {
       if (routeDecision.route === 'producer') {
@@ -720,7 +785,7 @@ export async function handleRingCentralWebhook(request, options = {}) {
       conversation.preTakeoverState = started.orchestration.workflow.state;
       workflowState = 'new';
     }
-    const routed = routeSmsInbound({ ...conversation, state: workflowState }, event.body, {
+    const routed = routeSmsInbound({ ...conversation, state: workflowState }, inboundForRouting, {
       mode: 'live',
       isFirstMessage: workflowReentry || (!conversation.welcomeSentAt && conversation.inboundCount === 1),
       now: options.now || occurredAt,

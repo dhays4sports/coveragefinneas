@@ -1,9 +1,9 @@
 # CoverageFit North Star
 
 **Document:** CF-NORTH-STAR-1.0  
-**CoverageFit baseline:** v3.20.238  
+**CoverageFit baseline:** v3.20.249  
 **Status:** Product North Star / long-range architectural reference  
-**Date:** 2026-09-13
+**Date:** 2026-09-17
 
 ## North Star
 
@@ -166,6 +166,11 @@ NBA answers a different question from FIV:
 > **What exactly should happen next?**
 
 Priority and next action must remain separate. Two opportunities in the same queue can have different NBAs.
+
+### Producer throughput principle
+Producer-facing workflows should collapse available intelligence into the clearest useful next action. FIV and NBA should prioritize scarce human attention without creating unnecessary intake friction or starving producers of workable opportunities. When an opportunity is not actionable now, CoverageFit should preserve context and create a dated return rather than repeatedly reworking the possession.
+
+The production surface should therefore favor truthful milestone measurement, fast disposition, and visible pace-to-goal while keeping the deeper customer intelligence available on demand. Activity that did not happen must never be inferred from a click; for example, opening a call link is not evidence of contact.
 
 ## Opportunity cost is a first-class product concern
 
@@ -357,4 +362,27 @@ If the answer to these questions is mostly no, the feature probably does not bel
 When future product work needs a concise statement of direction, use:
 
 > **CoverageFit is building a living protection profile for consumers and an intelligence layer for advisors. It should help people understand what they have, see what changed, know what deserves attention, and take the next useful action—without restarting the relationship every time.**
+
+
+
+## CF-AGED-LEAD-1.0.1 — Aged Lead SMS Reply Intelligence
+
+Added a bounded aged-lead reply layer ahead of generic callback heuristics. It recognizes AgencyZoom-style re-engagement prompts and safely interprets disposition replies, renewal/x-date timing, TEXT/CALL preference, carrier status, and AUTO/HOME/BOTH handoff. Negative/closed language wins over generic affirmation, so replies such as “Yeah, I’m all set” are never classified as open. Renewal-month replies are protected from callback-date routing. Explicit CoverageFit reply contexts are now preserved by the outbound gateway, including `aged_line_of_business`; CALL preference hands off to the existing `callback_time_request` workflow. Structured aged-lead fields are included in producer summaries.
+
+## CF-CALLBACK-ACK-GUARD-1.0 — Scheduled Callback Lock (v3.20.251)
+
+Scheduled callbacks are now treated as a locked booking state for inbound SMS routing. Benign acknowledgements such as “Yes, talk to you soon,” “Sounds good,” “Perfect,” “Thanks,” “See you then,” and 👍 are consumed without an automated reply and without reopening scheduling. Explicit status questions still return the booked time; explicit CHANGE/reschedule and CANCEL language still invoke the existing appointment controls. A bare new day/time while a callback is already scheduled no longer changes or re-enters scheduling automatically; CoverageFit asks whether the prospect intends to reschedule and preserves the existing booking until explicit confirmation. Insurance/service questions and ordinary conversation are allowed to leave the callback router and continue through normal routing. Callback runtime build: RC-SMS-1.10.3.
+
+## CF-AGENT-CAPABILITY-1.0 — Agent-Native Capability Facade (v3.20.252)
+
+CoverageFit now exposes a bounded canonical capability layer for agent-originated distribution while remaining the insurance system of record. The initial interface supports coverage-review requests, callback scheduling, and licensed-agent connection for existing CoverageFit contact references. External platforms such as Muse are distribution adapters rather than canonical business identity or authority sources. `mesh-service-auth-v1` authenticates the Mesh caller; a fresh Mesh `ALLOW` result is still required; and CoverageFit's persisted customer contact/consent state remains authoritative. The runtime defaults to `PREPARE_ONLY`, with `LIVE_BOUNDED` requiring both an explicit execution-mode setting and a second enablement flag after staging validation. Invocation IDs are digest-bound and idempotent, service-auth nonces are replay-protected in D1, and callback retries reuse CoverageFit's deterministic scheduling safeguards. New-contact registration, unrestricted CRM access, carrier quoting/binding, marketing automation, and payment handling remain outside this interface.
+
+
+## CF-MUSE-LEGAL-SUPPORT-1.0 — Muse Submission Legal + Support Readiness (v3.20.253)
+
+CoverageFit now exposes a public `/support/` destination suitable for third-party connector review and user support. The support page provides a monitored web form plus the existing agency call/text path without requiring a dedicated support inbox. The privacy policy now explicitly covers agent/connector-originated requests, third-party agent-platform privacy boundaries, contact consent, service-provider use, sensitive-information restrictions, and the rule that external platform metadata does not independently authorize insurance binding, payment, or unrelated contact. `/support/` is added to the public sitemap. The existing `/terms/` page remains the canonical Terms of Use.
+
+## CF-MUSE-API-DOCS-1.0 — Raw API Review Surface (v3.20.254)
+
+CoverageFit now exposes a public agent-API discovery endpoint at `/api/agent`, a human-readable `/docs/agent-api/` reference, and an OpenAPI 3.0.3 document at `/openapi.json`. These surfaces document the existing `CF-AGENT-CAPABILITY-1.0` contract for connector review without expanding its authority or capability set. The public docs identify the California-only jurisdiction, existing `408d_...` contact requirement, custom signed `X-Mesh-Service-Auth` boundary, fresh Mesh `ALLOW` requirement, CoverageFit consent checks, idempotency/replay protections, exact inputs for the three bounded capabilities, and the `PREPARE_ONLY` versus explicitly enabled `LIVE_BOUNDED` execution modes. This release does not enable live execution, add new-contact registration, expose CRM data, add quoting/binding, or treat a third-party platform as insurance authority.
 

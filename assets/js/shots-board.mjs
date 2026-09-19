@@ -14,13 +14,26 @@ function empty(message){return `<div class="shots-empty">${esc(message)}</div>`;
 function renderLane(id,countId,items,kind,message){$(countId).textContent=String(items.length);$(id).innerHTML=items.length?items.map(x=>card(x,kind)).join(''):empty(message);}
 function appointment(item){return `<a class="appointment-row" href="${esc(item.workspaceUrl)}"><time>${esc(time(item.start))}</time><div><strong>${esc(item.contact?.name||'Linked appointment')}</strong><span>${esc(item.products||item.display||'Insurance conversation')}</span></div></a>`;}
 function due(item){return `<a class="due-row" href="${esc(item.workspaceUrl)}"><div><strong>${esc(item.contact?.name||'Name not recorded')}</strong><span>${esc(item.action||item.task?.title||'Next action')}</span></div><time>${esc(time(item.dueAt))}</time></a>`;}
+function goalText(value){return value?`Goal ${Number(value)}`:'Goal —';}
+function renderProduction(data){
+  const production=data.production||{},m=production.metrics||{},t=production.targets||{},constraint=production.constraint||{};
+  $('shotsTodayOpportunities').textContent=String(Number(m.opportunities||0));$('shotsGoalOpportunities').textContent=goalText(t.opportunities);
+  $('shotsTodayContacts').textContent=String(Number(m.contacts||0));$('shotsGoalContacts').textContent=goalText(t.contacts);
+  $('shotsTodayConversations').textContent=String(Number(m.conversations||0));$('shotsTodayQuoteable').textContent=String(Number(m.quoteable||0));
+  $('shotsTodayQuotes').textContent=String(Number(m.quotesPrepared||0));$('shotsGoalQuotes').textContent=goalText(t.quotesPrepared);
+  $('shotsTodayRecommendations').textContent=String(Number(m.recommendationsDelivered||0));$('shotsTodayCloseAsks').textContent=String(Number(m.closeAsked||0));
+  $('shotsTodayBinds').textContent=String(Number(m.bound||0));$('shotsGoalBinds').textContent=goalText(t.bound);
+  const c=$('shotsConstraint');c.textContent=constraint.message||'Daily production counts are ready.';c.dataset.state=constraint.state||'neutral';
+  $('shotsProductionNote').textContent=m.setupRequired?'Acquisition measurement is not active yet. Apply the existing acquisition measurement migration; no new migration is required for Production Mode.':`${m.basis||'Recorded milestones only.'} Operating day ${Number(production.operatingDayProgress||0).toFixed(0)}% complete.`;
+}
 function render(data){
+  renderProduction(data);
   const p=data.premium||{};$('shotsPremium').textContent=money(p.verifiedWrittenPremiumCents);$('shotsPremiumNote').textContent=`${Number(p.boundComponents||0)} verified bound component${Number(p.boundComponents||0)===1?'':'s'} this month`;
   $('shotsTarget').textContent=p.targetConfigured?money(p.targetCents):'Not set';$('shotsRemaining').textContent=p.targetConfigured?`${money(p.remainingCents)} remaining`:'Configure COVERAGEFIT_MONTHLY_PREMIUM_TARGET_CENTS';$('shotsDaily').textContent=p.targetConfigured?money(p.targetRequiredPerBusinessDayCents):'—';$('shotsBusinessDays').textContent=`${Number(p.remainingBusinessDays||0)} business days remaining`;
   const n=data.appointments?.nextUp;$('shotsNextName').textContent=n?.contact?.name||'—';$('shotsNextTime').textContent=n?`${n.day==='tomorrow'?'Tomorrow':n.day==='today'?'Today':new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',month:'short',day:'numeric'}).format(new Date(n.start))} · ${time(n.start)}`:'No linked appointment ahead';
   const lanes=data.lanes||{};renderLane('shotsClosing','shotsClosingCount',lanes.closing||[],'closing','No active closing possession is waiting.');renderLane('shotsShoot','shotsShootCount',lanes.shootNow||[],'shoot','No FIV Shoot Now possession is waiting.');renderLane('shotsQuick','shotsQuickCount',lanes.quickPlay||[],'quick','No Quick Play possession is waiting.');
   const appts=data.appointments?.today||[];$('shotsAppointmentCount').textContent=String(appts.length);$('shotsAppointments').innerHTML=appts.length?appts.map(appointment).join(''):empty('No CoverageFit-linked appointments today.');const dueItems=lanes.dueToday||[];$('shotsDueCount').textContent=String(dueItems.length);$('shotsDue').innerHTML=dueItems.length?dueItems.map(due).join(''):empty('No additional recorded actions are due today.');
-  $('shotsDate').textContent=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(new Date(data.generatedAt));$('shotsStatus').textContent=`Read-only priority board · Call/text links do not record contact. ${data.truthBoundary?.premium||'Verified premium only.'} Updated ${time(data.generatedAt)}.`;showConnect(false);
+  $('shotsDate').textContent=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(new Date(data.generatedAt));$('shotsStatus').textContent=`Read-only priority board · ${data.truthBoundary?.production||'Call/text links do not record contact.'} ${data.truthBoundary?.premium||'Verified premium only.'} Updated ${time(data.generatedAt)}.`;showConnect(false);
 }
 async function load(){try{$('shotsStatus').textContent='Refreshing Today’s Shots…';render(await api());}catch(error){$('shotsStatus').textContent=error.message;if(error.code==='connect')showConnect(true);}}
 function tick(){const now=new Date();$('shotsClock').textContent=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',minute:'2-digit'}).format(now);}
